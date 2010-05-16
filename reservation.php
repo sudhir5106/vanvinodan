@@ -72,7 +72,7 @@ WHERE Room_id NOT IN (SELECT Room_Id FROM tbl_reserved_rooms WHERE Check_In_Date
             
             <div class="col-sm-6 col-xs-12 text-right backbtnblk padding-right-zero">
             	<a id="cancelBtn" class="btn btn-sm btn-danger"><i class="fa fa-times" aria-hidden="true"></i> CANCEL RESERVATION</a>
-                <a id="cancelBtn" class="btn btn-sm btn-info"><i class="fa fa-spinner" aria-hidden="true"></i> PENDING RESERVATION</a>
+                <a href="pending-reservation.php" id="cancelBtn" class="btn btn-sm btn-info"><i class="fa fa-spinner" aria-hidden="true"></i> PENDING RESERVATION</a>
                 <button type="button" id="backBtn" class="btn btn-sm btn-success"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> BACK</button>
             </div>
             <div class="clearfix"></div>

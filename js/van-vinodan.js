@@ -199,6 +199,7 @@ $(document).ready(function(){
 		$(".subtotal").each(function(){
 			invoicetotal = invoicetotal + parseFloat($(this).val());
 		});
+
 		
 		$(".totalRooms").each(function(){
 			noOfRooms = noOfRooms + parseInt($(this).val())
@@ -436,12 +437,74 @@ $(document).ready(function(){
 			   contentType: false,
 			   processData: false
 			});//eof ajax
-			
-			
-			
+		}//eof if condition
+		
+	});//eof click event
+	
+	
+	/////////////////////////////////////////
+	//validation for booking contact details
+	/////////////////////////////////////////
+	$("#searchReservFrm ").validate({
+	  rules: 
+		{   
+		  	rno: 
+			{ 
+				required: true,
+				RnoExist:true,
+			}
+		},
+		messages:
+		{
 			
 		}
+	});// eof validation
+	
+	///////////////////////////////////////////////////
+	// Method to check the data is valid or not
+	///////////////////////////////////////////////////
+	$.validator.addMethod('RnoExist', function(val, element)
+	{		
+		$.ajax({
+			 url:"global_curd.php",
+			 type: "POST",
+			 data: {type:"RnoExist",rno: $('#rno').val()},
+			 async:false,
+			 success:function(data){//alert(data);
+				 isSuccess=(data!=1)?true:false;
+			 }
+		});//eof ajax
+		return isSuccess ;				
+	}, 'Please Enter Valid Reservation Ref. No.');
+	
+	///////////////////////////////////////
+	//click on findReservationBtn button //
+	///////////////////////////////////////
+	$(document).on("click", "#findReservationBtn", function(){
 		
+		if($("#searchReservFrm").valid())
+		{
+			$('#loading').show();
+			
+			var formdata = new FormData();
+			formdata.append('type', "getReservationInfo");
+			formdata.append('rno', $("#rno").val());		
+						
+			$.ajax({
+			   type: "POST",
+			   url: "global_curd.php",
+			   data:formdata,
+			   success: function(data){ //alert(data);
+					
+					$("#reservation-details").html(data);
+					
+			   },
+			   cache: false,
+			   contentType: false,
+			   processData: false
+			});//eof ajax
+			
+		}
 	});
 	
 })//eof ready function
