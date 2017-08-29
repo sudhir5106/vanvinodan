@@ -97,6 +97,8 @@ li {
   color: #a6a6a6;
 }
 
+#ui-datepicker-div { z-index: 999 !important;}
+
 section p{ color:#2b2a2a; font-family:'OpenSans'; font-size:12.5pt; line-height:21px; margin-bottom:0; }
 a:hover{ text-decoration:none;}
 .text-white{color:#fff;}

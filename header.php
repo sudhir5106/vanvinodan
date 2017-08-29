@@ -1,3 +1,8 @@
+<?php require_once('config.php');
+$page = basename($_SERVER['REQUEST_URI'], '?' . $_SERVER['QUERY_STRING']);
+$pagename = basename($page, ".php"); // $file is set to "index"
+
+?>
 <!doctype html>
 <html>
     <head>
@@ -33,19 +38,22 @@
 		
     </head>
     <body>
-        
-        <div class="homeslider">
-            <!-- slides -->
-            <div class="slides">
-                <ul> <!-- slides -->
-                    <li><img src="images/slides/slide1.jpg"></li>
-                    <li><img src="images/slides/slide2.jpg"></li>
-                    <li><img src="images/slides/slide1.jpg"></li>
-                    <li><img src="images/slides/slide2.jpg"></li>
-                </ul>
+    <?php
+        if($pagename=='vanvinodan' || $pagename=='index'){ ?>
+        	<div class="homeslider">
+                <!-- slides -->
+                <div class="slides">
+                    <ul> <!-- slides -->
+                        <li><img src="images/slides/slide1.jpg"></li>
+                        <li><img src="images/slides/slide2.jpg"></li>
+                        <li><img src="images/slides/slide1.jpg"></li>
+                        <li><img src="images/slides/slide2.jpg"></li>
+                    </ul>
+                </div>
+                <!-- eof slides -->
             </div>
-            <!-- eof slides -->
-        </div>
+     <?php } ?>
+        
         
         <header>
             
@@ -53,23 +61,25 @@
             	<div class="closeBtn">X</div>
             	<div class="searchTitle">CHECK AVAILABILITY FOR ROOMS AT VANVINODAN RESORT</div>
                 <div class="searchFields">
-                	<form class="form-horizontal" role="form" id="searchFrm" name="searchFrm" method="post">
+                	<form class="form-horizontal" role="form" id="searchFrm" name="searchFrm" action="reservation.php" method="post">
                         <div class="col-sm-4 col-xs-6">
                         	<div class="input-group date" data-provide="datepicker">
-                                <input type="text" class="form-control datetimepicker">
+                                <input type="text" id="checkindate" name="checkindate" class="form-control input-lg datetimepicker" placeholder="check-in">
                                 <div class="input-group-addon">
-                                    <span class="glyphicon glyphicon-th"></span>
+                                    <i class="fa fa-calendar" aria-hidden="true"></i>
                                 </div>
                             </div>
                         </div>
-                        <div class="item form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="published_date">Date <span class="required">*</span> </label>
-                          <div class="col-md-3 col-sm-3 col-xs-12">
-                            <input type="text" id="published_date" name="published_date" required="required" class="form-control col-md-7 col-xs-12 datetimepicker" placeholder="DD/MM/YYYY">
-                          </div>
+                        
+                        <div class="col-sm-4 col-xs-6">
+                        	<div class="input-group date" data-provide="datepicker">
+                                <input type="text" id="checkoutdate" name="checkoutdate" class="form-control input-lg datetimepicker" placeholder="check-out">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-sm-4 col-xs-6"><input class="form-control input-lg" type="text" name=""></div>
-                        <div class="col-sm-4 col-xs-12 text-left text-center-xs"><button type="button" class="btn btn-lg btn-danger">BOOK NOW</button></div>
+                        <div class="col-sm-4 col-xs-12 text-left text-center-xs"><button type="submit" id="search" class="btn btn-lg btn-danger">BOOK NOW</button></div>
                     </form>
                 </div>
             </div>
