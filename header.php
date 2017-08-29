@@ -16,8 +16,10 @@
         <link rel="stylesheet" href="css/owl.carousel.css" type="text/css">
     	<link rel="stylesheet" href="css/owl.theme.default.min.css"  type="text/css" />
         <link rel="stylesheet" href="css/animate.min.css"  type="text/css" />
+        <link rel="stylesheet" href="css/jquery-ui.css">
         
         <script src="js/jquery.min.js"></script>
+        <script src="js/jquery-ui.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="js/owl.carousel.min.js"></script>
         
@@ -59,6 +61,12 @@
                                     <span class="glyphicon glyphicon-th"></span>
                                 </div>
                             </div>
+                        </div>
+                        <div class="item form-group">
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="published_date">Date <span class="required">*</span> </label>
+                          <div class="col-md-3 col-sm-3 col-xs-12">
+                            <input type="text" id="published_date" name="published_date" required="required" class="form-control col-md-7 col-xs-12 datetimepicker" placeholder="DD/MM/YYYY">
+                          </div>
                         </div>
                         <div class="col-sm-4 col-xs-6"><input class="form-control input-lg" type="text" name=""></div>
                         <div class="col-sm-4 col-xs-12 text-left text-center-xs"><button type="button" class="btn btn-lg btn-danger">BOOK NOW</button></div>

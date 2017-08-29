@@ -24,15 +24,16 @@
 				
 			});
 			
-			<!--Time Picker Show here -->
-			/*$(function () {
+
+		   <!--Time Picker Show here -->
+			$(function () {
 				$('.datetimepicker').datepicker({
 					orientation: "top auto",
 					forceParse: false,
 					autoclose: true,
 					dateFormat: 'dd-mm-yy'
 				});
-			});*/
+			});
 			<!--Datepicker Show here-->
 			
 			
