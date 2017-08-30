@@ -52,6 +52,37 @@ $pagename = basename($page, ".php"); // $file is set to "index"
                 </div>
                 <!-- eof slides -->
             </div>
+     <?php }else{ ?>
+     		
+            <div class="homeslider" style="background:#333; height:300px; width:100%;">
+            	<div style="display:table; height:100%;">
+                	<div style="display:table-cell; vertical-align:bottom; padding-bottom:30px;">
+                    	<?php if($pagename=='reservation'){ ?>
+                        <form class="form-horizontal" role="form" id="searchFrm" name="searchFrm" action="reservation.php" method="post">
+                            <div class="col-sm-4 col-xs-6">
+                                <div class="input-group date" data-provide="datepicker">
+                                    <input type="text" id="checkindate" name="checkindate" class="form-control input-lg datetimepicker" placeholder="check-in">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-sm-4 col-xs-6">
+                                <div class="input-group date" data-provide="datepicker">
+                                    <input type="text" id="checkoutdate" name="checkoutdate" class="form-control input-lg datetimepicker2" placeholder="check-out">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-xs-12 text-left text-center-xs"><button type="button" id="search" class="btn btn-lg btn-danger">BOOK NOW</button></div>
+                        </form>
+                        <?php } ?>
+                    </div>
+                </div>
+            </div>
+                 
      <?php } ?>
         
         
@@ -106,7 +137,9 @@ $pagename = basename($page, ".php"); // $file is set to "index"
                                 </ul>
                             </div>
                             <div class="pull-right emergencyNo">CALL US: <span>+91-77999 99565</span><span class="hidden-xs"> &nbsp;&nbsp;|</span></div>
+                            <?php if($pagename!='reservation'){ ?>
                             <div class="pull-right booknowBtn"><a class="bookBtn">BOOK NOW</a></div>
+                            <?php } ?>
                             <div class="clearfix"></div>
                        </div>
                        
