@@ -7,8 +7,8 @@
                 </div>
             </div>
         </footer>
-
-		<script type="text/javascript">
+        
+        <script type="text/javascript">
 			
 			$(window).scroll(function(){
 				if ($(document).scrollTop() > 700){	
@@ -24,14 +24,41 @@
 				
 			});
 			
-
+			// An array of dates
+			//var array = ["2017-08-31","2017-09-01","2017-09-02"];
+			
+			
 		   <!--Time Picker Show here -->
 			$(function () {
 				$('.datetimepicker').datepicker({
 					orientation: "top auto",
+					changeYear: true,
 					forceParse: false,
 					autoclose: true,
-					dateFormat: 'dd-mm-yy'
+					dateFormat: 'dd-mm-yy',
+					minDate: 0,
+					
+					/*beforeShowDay: function(date){
+						var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+						return [ array.indexOf(string) == -1 ]
+					},*/ // This is to show Booked Rooms Details
+					
+					//numberOfMonths: 2 // to display 2 months at a time
+				});
+			});
+			<!--Datepicker Show here-->
+			
+			 
+			<!--Time Picker Show here -->
+			$(function () {
+				$('.datetimepicker2').datepicker({
+					orientation: "top auto",
+					changeYear: true,
+					forceParse: false,
+					autoclose: true,
+					dateFormat: 'dd-mm-yy',
+					minDate: 1, // Disable Past Dates
+					//maxDate: new Date // Disable future dates
 				});
 			});
 			<!--Datepicker Show here-->

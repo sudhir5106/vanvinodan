@@ -73,7 +73,7 @@ $pagename = basename($page, ".php"); // $file is set to "index"
                         
                         <div class="col-sm-4 col-xs-6">
                         	<div class="input-group date" data-provide="datepicker">
-                                <input type="text" id="checkoutdate" name="checkoutdate" class="form-control input-lg datetimepicker" placeholder="check-out">
+                                <input type="text" id="checkoutdate" name="checkoutdate" class="form-control input-lg datetimepicker2" placeholder="check-out">
                                 <div class="input-group-addon">
                                     <i class="fa fa-calendar" aria-hidden="true"></i>
                                 </div>
