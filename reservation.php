@@ -38,7 +38,7 @@ WHERE Room_id NOT IN (SELECT Room_Id FROM tbl_reservation WHERE Check_In_Date <=
 					<?php foreach($res as $val){ ?>
                         <tr>
                             <td><img src="images/room-img.jpg" alt="" /></td>
-                            <td><?php echo $val['R_Category_Name']; ?></td>
+                            <td class="text-info"><?php echo $val['R_Category_Name']; ?></td>
                             <td><i class="fa fa-inr" aria-hidden="true"></i> <?php echo sprintf('%0.2f',$val['Base_Fare']); ?></td>
                             <td><span class="glyphicon glyphicon-user"></span> <?php echo $val['R_Capacity']; ?></td>
                             <td class="ddbtn">
@@ -78,6 +78,11 @@ WHERE R_Category_Id=".$val['R_Category_Id']." AND Room_id NOT IN (SELECT Room_Id
                                   <option value="<?php echo $val['Aircondition_Fare'] ?>" data-icon="glyphicon-asterisk">AC</option>
                                   <option value="<?php echo $val['Extra_Bed_Fare'] ?>" data-icon="glyphicon-asterisk">Extra Bed</option>
                                 </select>
+                            </td>
+                        </tr>
+                        <tr class="roomInfo" style="display:none; background:#f7f7f9;">
+                        	<td colspan="8">
+                            	<?php echo $val['Room_Info'] ?>
                             </td>
                         </tr>
                     <?php } ?>
