@@ -36,7 +36,7 @@
                 <div class="clearfix"></div>
                 
                 <div class="text-center welcomTxt">
-                    <h1>Welcom to<br>Van Vinodan Resort</h1>
+                    <h1>Welcome to<br>Van Vinodan Resort</h1>
                     <p>Near extinction. Stringent conservation programs for the overall protection of the Park's fauna and flora, makes Mangatta one of the most well maintained National Parks in Asia.<br>
     A heightened attraction within the Park is Bamni Dadar,  popularly known as Sunset Point that offers the most awe-inspiring backdrop of the sunset against grazing Sambhars and Gaurs, magnifying the natural splendor of the area. Aside from its diverse wildlife and bird population, the frequent sightings of Tigers roaming in the wild at Kanha Wildlife Sanctuary remain the most popular draw. </p>
                 </div>

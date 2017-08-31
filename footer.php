@@ -7,7 +7,8 @@
                 </div>
             </div>
         </footer>
-        
+        <script src="js/multi-select-1.js"></script>
+
         <script type="text/javascript">
 			
 			$(window).scroll(function(){
@@ -66,6 +67,8 @@
 			
 			$(document).ready(function(){
 				
+				$('.searchRooms').hide();
+				
 				$(document).on('click','.bookBtn', function(){
 					
 					var hasClass = $( ".searchRooms" ).hasClass( "animated" );
@@ -76,6 +79,7 @@
 					}
 
 					$('.searchRooms').addClass("fadeInDown").addClass("animated");
+					$('.searchRooms').show();
 					//$(".searchRooms").css({'z-index':'100'});
 					
 				});
@@ -90,11 +94,12 @@
 					}
 					
 					$('.searchRooms').addClass("fadeOutDown").addClass("animated");
+					$('.searchRooms').hide();
 					//$(".searchRooms").css({'z-index':'98'});
 					
 				});
 				
-			});
+			});//eof ready function
 			
 			
 			

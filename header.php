@@ -54,32 +54,9 @@ $pagename = basename($page, ".php"); // $file is set to "index"
             </div>
      <?php }else{ ?>
      		
-            <div class="homeslider" style="background:#333; height:300px; width:100%;">
+            <div class="homeslider" style="background:#333; height:106px; width:100%;">
             	<div style="display:table; height:100%;">
-                	<div style="display:table-cell; vertical-align:bottom; padding-bottom:30px;">
-                    	<?php if($pagename=='reservation'){ ?>
-                        <form class="form-horizontal" role="form" id="searchFrm" name="searchFrm" action="reservation.php" method="post">
-                            <div class="col-sm-4 col-xs-6">
-                                <div class="input-group date" data-provide="datepicker">
-                                    <input type="text" id="checkindate" name="checkindate" class="form-control input-lg datetimepicker" placeholder="check-in">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-calendar" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="col-sm-4 col-xs-6">
-                                <div class="input-group date" data-provide="datepicker">
-                                    <input type="text" id="checkoutdate" name="checkoutdate" class="form-control input-lg datetimepicker2" placeholder="check-out">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-calendar" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-4 col-xs-12 text-left text-center-xs"><button type="button" id="search" class="btn btn-lg btn-danger">BOOK NOW</button></div>
-                        </form>
-                        <?php } ?>
-                    </div>
+                	
                 </div>
             </div>
                  
@@ -118,7 +95,7 @@ $pagename = basename($page, ".php"); // $file is set to "index"
             <div class="headTop">
             	<div class="container-fluid">
                     <div class="col-xs-12 col-sm-4 col-md-4 padding-left-zero">
-                        <div class="logo"><a href=""><img width="100%" src="images/logo.png" alt="SA Global India Financial Services"></a></div>
+                        <div class="logo"><a href="index.php"><img width="100%" src="images/logo.png" alt="SA Global India Financial Services"></a></div>
                     </div>
                     <div class="navbar-header hidden-md">
                       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
@@ -148,7 +125,7 @@ $pagename = basename($page, ".php"); // $file is set to "index"
                             <nav class="navbar navbar-default navbar-static-top navBg" role="navigation">
                             	<div class="collapse navbar-collapse in" id="navbar-collapse-1">
                                 <ul class="nav navbar-nav navigation">
-                                  <li class="active"><a class="homelink" href="#">Home</a></li>
+                                  <li class="active"><a class="homelink" href="index.php">Home</a></li>
                                   <li><a href="#">About us</a></li>
                                   <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Accommodation <b class="caret"></b></a>
                                      <ul class="dropdown-menu">
