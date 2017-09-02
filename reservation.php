@@ -6,6 +6,15 @@ $db = new DBConn();
 $checkindate = date('Y-m-d',strtotime($_POST['checkindate']));
 $checkoutdate = date('Y-m-d',strtotime($_POST['checkoutdate']));
 
+/////////////////////////////////////////
+//Get Total No of Nights
+$date1 = new DateTime($checkindate);
+$date2 = new DateTime($checkoutdate);
+
+// this calculates the diff between two dates, which is the number of nights
+$numberOfNights= $date2->diff($date1)->format("%a"); 
+/////////////////////////////////////////
+
 $res = $db->ExecuteQuery("SELECT R_Category_Id, R_Category_Name, R_Capacity, Base_Fare, Aircondition_Fare, Extra_Bed_Fare, Room_Info, Amenities FROM tbl_rooms_category
 
 WHERE R_Category_Id IN (SELECT R_Category_Id FROM tbl_room_master 
@@ -19,7 +28,12 @@ WHERE Room_id NOT IN (SELECT Room_Id FROM tbl_reservation WHERE Check_In_Date <=
     <div class="middle-container">
     	
         <div class="container page-content">
-        	<div class="col-sm-8">
+        	<form class="form-horizontal" role="form" id="reservationFrm" method="post">
+            	<input type="hidden" id="checkindate" value="<?php echo $checkindate; ?>" />
+                <input type="hidden" id="checkoutdate" value="<?php echo $checkoutdate; ?>" />
+                <input type="hidden" id="totalNights" value="<?php echo $numberOfNights; ?>" />
+                
+        	<div class="col-sm-9 table-responsive">
             	<table class="table table-hover roomTypeList">
                 	<thead>
                         <tr class="bg-default">
@@ -38,23 +52,33 @@ WHERE Room_id NOT IN (SELECT Room_Id FROM tbl_reservation WHERE Check_In_Date <=
 					<?php foreach($res as $val){ ?>
                         <tr>
                             <td><img src="images/room-img.jpg" alt="" /></td>
-                            <td class="text-info"><?php echo $val['R_Category_Name']; ?></td>
+                            <td class="text-info">
+								<?php echo $val['R_Category_Name']; ?>
+                                <input type="hidden" id="roomType-<?php echo $val['R_Category_Id']; ?>" value="<?php echo $val['R_Category_Id']; ?>" />
+                            </td>
                             <td><i class="fa fa-inr" aria-hidden="true"></i> <?php echo sprintf('%0.2f',$val['Base_Fare']); ?></td>
-                            <td><span class="glyphicon glyphicon-user"></span> <?php echo $val['R_Capacity']; ?></td>
+                            <td>
+                            	<span class="glyphicon glyphicon-user"></span> <?php echo $val['R_Capacity']; ?>
+                            	<input type="hidden" id="capacity-<?php echo $val['R_Category_Id']; ?>" value="<?php echo $val['R_Capacity']; ?>" />
+                            </td>
                             <td class="ddbtn">
-                                <select id="adult-<?php echo $val['R_Category_Id']; ?>" type="text" class="form-control multiselect multiselect-icon " role="multiselect">          
-                                  <option value="1" selected="selected">1</option>
-                                  <option value="2">2</option>
-                                  <option value="3">3</option>
-                                  <option value="4">4</option>
+                                <select id="adult-<?php echo $val['R_Category_Id']; ?>" type="text" class="form-control adultdd">          
+                                  <?php 
+								  $i=1;
+								  while($i<=$val['R_Capacity']){ ?>
+                                  <option value="<?php echo $i ?>"><?php echo $i ?></option>
+                                  <?php $i++; } ?>
+                                  
                                 </select>
                             </td>
                             <td class="ddbtn">
-                                <select id="child-<?php echo $val['R_Category_Id']; ?>" type="text" class="form-control multiselect multiselect-icon" role="multiselect">          
-                                  <option value="0" selected="selected">0</option>          
-                                  <option value="1">1</option>
-                                  <option value="2">2</option>
-                                  <option value="3">3</option>
+                                <select id="child-<?php echo $val['R_Category_Id']; ?>" type="text" class="form-control childdd">          
+                                  <?php 
+								  $i=0;
+								  while($i<$val['R_Capacity']){ ?>
+                                  <option value="<?php echo $i ?>"><?php echo $i ?></option>
+                                  <?php $i++; } ?>
+                                  
                                 </select>
                             </td>
                             <td class="rooms">
@@ -62,7 +86,7 @@ WHERE Room_id NOT IN (SELECT Room_Id FROM tbl_reservation WHERE Check_In_Date <=
 WHERE R_Category_Id=".$val['R_Category_Id']." AND Room_id NOT IN (SELECT Room_Id FROM tbl_reservation WHERE Check_In_Date <= '".$checkindate."' AND Check_Out_Date > '".$checkindate."' )"); 
 
 ?>
-                            	<select id="room-<?php echo $val['R_Category_Id']; ?>" type="text" class="form-control multiselect multiselect-icon" role="multiselect">          
+                            	<select id="room-<?php echo $val['R_Category_Id']; ?>" type="text" class="form-control totalRooms">          
                                   <option value="0" selected="selected">0</option>          
                                   <?php 
 								  $i=1;
@@ -74,10 +98,11 @@ WHERE R_Category_Id=".$val['R_Category_Id']." AND Room_id NOT IN (SELECT Room_Id
                                 
                             </td>
                             <td class="extraItems">
-                            	<select type="text" class="form-control multiselect multiselect-icon" multiple="multiple" role="multiselect">          
-                                  <option value="<?php echo $val['Aircondition_Fare'] ?>" data-icon="glyphicon-asterisk">AC</option>
-                                  <option value="<?php echo $val['Extra_Bed_Fare'] ?>" data-icon="glyphicon-asterisk">Extra Bed</option>
-                                </select>
+                            	<input type="checkbox" class="acAmt" id="acAmt-<?php echo $val['R_Category_Id']; ?>" name="" value="<?php echo $val['Aircondition_Fare'] ?>" /> AC ( <i class="fa fa-inr" aria-hidden="true"></i> <?php echo $val['Aircondition_Fare']; ?> )<br />
+                                <input type="checkbox" class="extraBedAmt" id="extraBedAmt-<?php echo $val['R_Category_Id']; ?>" name="" value="<?php echo $val['Extra_Bed_Fare'] ?>" /> Extra Bed ( <i class="fa fa-inr" aria-hidden="true"></i> <?php echo $val['Extra_Bed_Fare']; ?> )<br />
+                                
+                                <input type="hidden" class="subtotal" id="subTotal-<?php echo $val['R_Category_Id']; ?>" value="" />
+                                
                             </td>
                         </tr>
                         <tr class="roomInfo" style="display:none; background:#f7f7f9;">
@@ -87,11 +112,17 @@ WHERE R_Category_Id=".$val['R_Category_Id']." AND Room_id NOT IN (SELECT Room_Id
                         </tr>
                     <?php } ?>
                 	</tbody>
+                    
                 </table>
             </div>
-            <div class="col-sm-4 text-center">
-            	<div class="bg-info"><strong>3 Accommodation(s) for</strong></div>
+            <div class="col-sm-3 text-center">
+            	<div class="bg-info calculationBox">
+                	<h5><span id="noOfRooms">0</span> Accommodation(s) for</h5>
+                	<div class="Totalprice"><i class="fa fa-inr" aria-hidden="true"></i> <span id="displayTotalAmt">0.00</span></div>
+                    <div><button type="button" class="btn btn-lg btn-danger">BOOK NOW</button></div>
+                </div>
             </div>
+            </form>
             <div class="clearfix"></div>
         	
         </div>

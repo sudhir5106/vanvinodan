@@ -584,6 +584,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a108c7', end
 	background:#333333;	
 }
 .roomTypeList td{vertical-align:middle!important;}
+.calculationBox{padding:20px 15px; margin-top:30px;}
+.calculationBox h5{font-size:18px;}
+.Totalprice{font-size:20px; color:#DD2024; padding-bottom:10px;}
 
 
 

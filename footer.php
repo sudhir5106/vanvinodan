@@ -8,6 +8,7 @@
             </div>
         </footer>
         <script src="js/multi-select-1.js"></script>
+        <script src="js/van-vinodan.js"></script>
 
         <script type="text/javascript">
 			
@@ -33,7 +34,7 @@
 			$(function () {
 				$('.datetimepicker').datepicker({
 					orientation: "top auto",
-					changeYear: true,
+					//changeYear: true,
 					forceParse: false,
 					autoclose: true,
 					dateFormat: 'dd-mm-yy',
@@ -54,7 +55,7 @@
 			$(function () {
 				$('.datetimepicker2').datepicker({
 					orientation: "top auto",
-					changeYear: true,
+					//changeYear: true,
 					forceParse: false,
 					autoclose: true,
 					dateFormat: 'dd-mm-yy',
