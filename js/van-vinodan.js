@@ -217,14 +217,41 @@ $(document).ready(function(){
 	}//eof function
 	
 	
-	////////////////
-	//click event
-	///////////////////
+	//////////////////////////////////////////////
+	// Get total nights on change of checkout date 
+	//////////////////////////////////////////////
+	$(document).on("change", "#chckout", function(){
+		
+		var formdata = new FormData();
+		formdata.append('type', "getTotalNights");
+		formdata.append('chckin', $("#chckin").val());
+		formdata.append('chckout', $("#chckout").val());
+		
+		$.ajax({
+		   type: "POST",
+		   url: "global_curd.php",
+		   data:formdata,
+		   success: function(data){ //alert(data);
+		   		
+				$("#totalNights").val(data);
+		   },
+		   cache: false,
+		   contentType: false,
+		   processData: false
+		});//eof ajax
+	});
+	
+	/////////////////////////
+	//Get the search results
+	/////////////////////////
 	$(document).on("click", "#searchRoomsBtn", function(){
-				
+		
+		alert($("#chckin").val());		
+		
 		var formdata = new FormData();
 		formdata.append('type', "getRooms");
-		formdata.append('chckin', $("#chckin").val());		
+		formdata.append('chckin', $("#chckin").val());
+		formdata.append('totalNights', $("#totalNights").val());
 		
 		$.ajax({
 		   type: "POST",

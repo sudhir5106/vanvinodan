@@ -3,27 +3,29 @@ include('header.php');
 require_once(PATH_LIBRARIES.'/classes/DBConn.php');
 $db = new DBConn();
 
-if(!empty($checkindate)){
-	$checkindate = date('Y-m-d',strtotime($_POST['checkindate']));
-	$checkoutdate = date('Y-m-d',strtotime($_POST['checkoutdate']));
-	
-	$checkin = $_POST['checkindate'];
-	$checkout = $_POST['checkoutdate'];
-}
-else{
+$checkindate = date('Y-m-d',strtotime($_POST['checkindate']));
+$checkoutdate = date('Y-m-d',strtotime($_POST['checkoutdate']));
+
+$checkin = date('d-m-Y',strtotime($_POST['checkindate']));
+$checkout = date('d-m-Y',strtotime($_POST['checkoutdate']));
+
+/*if(empty($checkindate) && empty($checkin)){
 	$checkindate = date("Y-m-d");
 	$checkoutdate = date("Y-m-d",strtotime($checkindate.'+1 day'));//It will adding 1 day
 	
 	$checkin = date("d-m-Y");
 	$checkout = date("d-m-Y",strtotime($checkin.'+1 day'));//It will adding 1 day
-}
+}*/
 
-/////////////////////////////////////////
+/////////////////////////////
 //Get Total No of Nights
+/////////////////////////////
 $date1 = new DateTime($checkindate);
 $date2 = new DateTime($checkoutdate);
 
+///////////////////////////////////////////////////////////////////////////////////////
 // this calculates the diff between two dates, which is the number of nights
+///////////////////////////////////////////////////////////////////////////////////////
 $numberOfNights= $date2->diff($date1)->format("%a"); 
 /////////////////////////////////////////
 
@@ -31,7 +33,6 @@ $res = $db->ExecuteQuery("SELECT R_Category_Id, R_Category_Name, R_Capacity, Bas
 
 WHERE R_Category_Id IN (SELECT R_Category_Id FROM tbl_room_master 
 WHERE Room_id NOT IN (SELECT Room_Id FROM tbl_reservation WHERE Check_In_Date <= '".$checkindate."' AND Check_Out_Date > '".$checkindate."' ))");
-
 ?>
 
 
@@ -59,16 +60,18 @@ WHERE Room_id NOT IN (SELECT Room_Id FROM tbl_reservation WHERE Check_In_Date <=
                     </div>
                 </div>
             </div>
-            <div class="col-sm-4 col-xs-12 text-left text-center-xs"><button type="submit" id="searchRoomsBtn" class="btn btn-sm btn-danger">SEARCH</button></div>
+            <div class="col-sm-4 col-xs-12 text-left text-center-xs"><button type="button" id="searchRoomsBtn" class="btn btn-sm btn-danger">SEARCH</button></div>
             <div class="clearfix"></div>
         
     	</form>
         </div>
-        <div class="container page-content">
-        	<form class="form-horizontal" role="form" id="reservationFrm" method="post">
+        
+        <div id="Tab1">
+        <form class="form-horizontal" role="form" id="reservationFrm" method="post">
             	<input type="hidden" id="checkindate" value="<?php echo $checkindate; ?>" />
                 <input type="hidden" id="checkoutdate" value="<?php echo $checkoutdate; ?>" />
                 <input type="hidden" id="totalNights" value="<?php echo $numberOfNights; ?>" />
+        <div class="container page-content">
                 
         	<div class="col-sm-9 table-responsive">
             	<table class="table table-hover roomTypeList">
@@ -162,17 +165,18 @@ WHERE R_Category_Id=".$val['R_Category_Id']." AND Room_id NOT IN (SELECT Room_Id
                     </div>
                 </div>
             </div>
-            </form>
+            
             <div class="clearfix"></div>
         	
         </div>
+        </form>
+        </div>
         
-        <!--<div class="text-info" style="padding-top:20px;">
-        <?php foreach($res2 as $val2){ 
-			echo $val2['Room_Name'].'<br>'; 
-		} ?>
-        </div>-->
-        
+        <div id="Tab2" class="container checkout-tab">
+        	<div>
+            	<h2>CONTACT INFORMATION</h2>
+            </div>
+        </div>
     </div>  	
 </main>
 

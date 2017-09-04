@@ -589,6 +589,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a108c7', end
 .Totalprice{font-size:20px; color:#DD2024; padding-bottom:10px;}
 .searchFrm{margin-top:30px;}
 
+.checkout-tab{background:#fff; margin:20px auto; padding:20px 20px;}
+
 
 
 @media (min-width: 768px) {
