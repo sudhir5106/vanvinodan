@@ -52,10 +52,12 @@ if($_POST['type']=="getTotalNights")
 ///*******************************************************
 if($_POST['type']=="getRooms"){
 	
-	$res = $db->ExecuteQuery("SELECT R_Category_Id, R_Category_Name, R_Capacity, Base_Fare, Aircondition_Fare, Extra_Bed_Fare, Room_Info, Amenities FROM tbl_rooms_category
+	$checkinDate = date('Y-m-d',strtotime($_REQUEST['chckin']));
+	
+	$res = $db->ExecuteQuery("SELECT R_Category_Id, R_Category_Name, R_Capacity, Base_Fare, Room_Info, Amenities FROM tbl_rooms_category
 	
 	WHERE R_Category_Id IN (SELECT R_Category_Id FROM tbl_room_master 
-	WHERE Room_id NOT IN (SELECT Room_Id FROM tbl_reservation WHERE Check_In_Date <= '".$_REQUEST['chckin']."' AND Check_Out_Date > '".$_REQUEST['chckin']."' ))");?>
+	WHERE Room_id NOT IN (SELECT Room_Id FROM tbl_reserved_rooms WHERE Check_In_Date <= '".$checkinDate."' AND Check_Out_Date > '".$checkinDate."' AND Reservation_Status<>3 AND Reservation_Status<>4 AND Reservation_Status<>5 ))");?>
 	
     <div class="col-sm-9 table-responsive">
         <table class="table table-hover roomTypeList">
@@ -64,11 +66,11 @@ if($_POST['type']=="getRooms"){
                     <th>Room Photo</th>
                     <th>Room Type</th>
                     <th>Price/Night</th>
+                    <th>Price for <?php echo $_REQUEST['totalNights']; ?> Night(s)</th>
                     <th>Max</th>
                     <th>Adults</th>
                     <th>Children</th>
                     <th>Rooms</th>
-                    <th>Extra Facility</th>
                 </tr>
             </thead>
             <tbody>
@@ -81,6 +83,7 @@ if($_POST['type']=="getRooms"){
                         <input type="hidden" id="roomType-<?php echo $val['R_Category_Id']; ?>" value="<?php echo $val['R_Category_Id']; ?>" />
                     </td>
                     <td><i class="fa fa-inr" aria-hidden="true"></i> <?php echo sprintf('%0.2f',$val['Base_Fare']); ?></td>
+                    <td><?php echo sprintf('%0.2f', ($_REQUEST['totalNights'] * $val['Base_Fare'])); ?></td>
                     <td>
                         <span class="glyphicon glyphicon-user"></span> <?php echo $val['R_Capacity']; ?>
                         <input type="hidden" id="capacity-<?php echo $val['R_Category_Id']; ?>" value="<?php echo $val['R_Capacity']; ?>" />
@@ -107,7 +110,7 @@ if($_POST['type']=="getRooms"){
                     </td>
                     <td class="rooms">
                     <?php $roomCount = $db->ExecuteQuery("SELECT COUNT(Room_Id) AS RID FROM tbl_room_master 
-WHERE R_Category_Id=".$val['R_Category_Id']." AND Room_id NOT IN (SELECT Room_Id FROM tbl_reservation WHERE Check_In_Date <= '".$_REQUEST['chckin']."' AND Check_Out_Date > '".$_REQUEST['chckin']."' )"); 
+WHERE R_Category_Id=".$val['R_Category_Id']." AND Room_id NOT IN (SELECT Room_Id FROM tbl_reserved_rooms WHERE Check_In_Date <= '".$checkinDate."' AND Check_Out_Date > '".$checkinDate."' AND Reservation_Status<>3 AND Reservation_Status<>4 AND Reservation_Status<>5)"); 
 
 ?>
                         <select id="room-<?php echo $val['R_Category_Id']; ?>" type="text" class="form-control totalRooms">          
@@ -122,9 +125,6 @@ WHERE R_Category_Id=".$val['R_Category_Id']." AND Room_id NOT IN (SELECT Room_Id
                         
                     </td>
                     <td class="extraItems">
-                        <input type="checkbox" class="acAmt" id="acAmt-<?php echo $val['R_Category_Id']; ?>" name="" value="<?php echo $val['Aircondition_Fare'] ?>" /> AC ( <i class="fa fa-inr" aria-hidden="true"></i> <?php echo $val['Aircondition_Fare']; ?> )<br />
-                        <input type="checkbox" class="extraBedAmt" id="extraBedAmt-<?php echo $val['R_Category_Id']; ?>" name="" value="<?php echo $val['Extra_Bed_Fare'] ?>" /> Extra Bed ( <i class="fa fa-inr" aria-hidden="true"></i> <?php echo $val['Extra_Bed_Fare']; ?> )<br />
-                        
                         <input type="hidden" class="subtotal" id="subTotal-<?php echo $val['R_Category_Id']; ?>" value="0.00" />
                         
                     </td>

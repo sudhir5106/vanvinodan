@@ -159,28 +159,6 @@ $(document).ready(function(){
 		
 	});
 	
-	////////////////////////////////////////////
-	// on change of .acAmt checkbox
-	////////////////////////////////////////////
-	$(document).on("click", ".acAmt", function(){
-		
-		////////////////////////
-		// calls a function
-		reCalulate();		
-		
-	});
-	
-	////////////////////////////////////////////
-	// on change of .extraBedAmt checkbox
-	////////////////////////////////////////////
-	$(document).on("click", ".extraBedAmt", function(){
-		
-		////////////////////////
-		// calls a function
-		reCalulate();		
-		
-	});
-	
 	///////////////////////////////////////
 	//Function for calculating the amount
 	///////////////////////////////////////
@@ -198,23 +176,9 @@ $(document).ready(function(){
 			noOfRooms = noOfRooms + parseInt($(this).val())
 		});
 		
-		$(".acAmt").each(function(){
-			if($(this).prop('checked') == true)
-			{
-				acAmt = acAmt + parseInt($(this).val())
-			}
-		});
-		
-		$(".extraBedAmt").each(function(){
-			if($(this).prop('checked') == true)
-			{
-				extraBedAmt = extraBedAmt + parseInt($(this).val())
-			}
-		});
-		
 		$("#noOfRooms").html(noOfRooms);
 		
-		var FinalAmt = parseInt(acAmt) + parseInt(extraBedAmt) + (parseInt($("#totalNights").val()) * invoicetotal);
+		var FinalAmt = parseInt($("#totalNights").val()) * invoicetotal;
 		$("#displayTotalAmt").html(Math.round(parseFloat(FinalAmt)).toFixed(2));
 		$("#TotalAmt").val(Math.round(parseFloat(FinalAmt)).toFixed(2))
 	}//eof function

@@ -33,10 +33,10 @@ $date2 = new DateTime($checkoutdate);
 $numberOfNights= $date2->diff($date1)->format("%a"); 
 /////////////////////////////////////////
 
-$res = $db->ExecuteQuery("SELECT R_Category_Id, R_Category_Name, R_Capacity, Base_Fare, Aircondition_Fare, Extra_Bed_Fare, Room_Info, Amenities FROM tbl_rooms_category
+$res = $db->ExecuteQuery("SELECT R_Category_Id, R_Category_Name, R_Capacity, Base_Fare, Room_Info, Amenities FROM tbl_rooms_category
 
 WHERE R_Category_Id IN (SELECT R_Category_Id FROM tbl_room_master 
-WHERE Room_id NOT IN (SELECT Room_Id FROM tbl_reservation WHERE Check_In_Date <= '".$checkindate."' AND Check_Out_Date > '".$checkindate."' ))");
+WHERE Room_id NOT IN (SELECT Room_Id FROM tbl_reserved_rooms WHERE Check_In_Date <= '".$checkindate."' AND Check_Out_Date > '".$checkindate."' AND Reservation_Status<>3 AND Reservation_Status<>4 AND Reservation_Status<>5 ))");
 ?>
 
 
@@ -84,11 +84,11 @@ WHERE Room_id NOT IN (SELECT Room_Id FROM tbl_reservation WHERE Check_In_Date <=
                             <th>Room Photo</th>
                             <th>Room Type</th>
                             <th>Price/Night</th>
+                            <th>Price for <?php echo $numberOfNights;?> Night(s)</th>
                             <th>Max</th>
                             <th>Adults</th>
                             <th>Children</th>
                             <th>Rooms</th>
-                            <th>Extra Facility</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -100,6 +100,7 @@ WHERE Room_id NOT IN (SELECT Room_Id FROM tbl_reservation WHERE Check_In_Date <=
 								<?php echo $val['R_Category_Name']; ?>
                                 <input type="hidden" id="roomType-<?php echo $val['R_Category_Id']; ?>" value="<?php echo $val['R_Category_Id']; ?>" />
                             </td>
+                            <td><?php echo sprintf('%0.2f', ($numberOfNights * $val['Base_Fare']));?></td>
                             <td><i class="fa fa-inr" aria-hidden="true"></i> <?php echo sprintf('%0.2f',$val['Base_Fare']); ?></td>
                             <td>
                             	<span class="glyphicon glyphicon-user"></span> <?php echo $val['R_Capacity']; ?>
@@ -127,7 +128,7 @@ WHERE Room_id NOT IN (SELECT Room_Id FROM tbl_reservation WHERE Check_In_Date <=
                             </td>
                             <td class="rooms">
                             <?php $roomCount = $db->ExecuteQuery("SELECT COUNT(Room_Id) AS RID FROM tbl_room_master 
-WHERE R_Category_Id=".$val['R_Category_Id']." AND Room_id NOT IN (SELECT Room_Id FROM tbl_reservation WHERE Check_In_Date <= '".$checkindate."' AND Check_Out_Date > '".$checkindate."' )"); 
+WHERE R_Category_Id=".$val['R_Category_Id']." AND Room_id NOT IN (SELECT Room_Id FROM tbl_reserved_rooms WHERE Check_In_Date <= '".$checkindate."' AND Check_Out_Date > '".$checkindate."' AND Reservation_Status<>3 AND Reservation_Status<>4 AND Reservation_Status<>5)"); 
 
 ?>
                             	<select id="room-<?php echo $val['R_Category_Id']; ?>" type="text" class="form-control totalRooms">          
@@ -142,11 +143,7 @@ WHERE R_Category_Id=".$val['R_Category_Id']." AND Room_id NOT IN (SELECT Room_Id
                                 
                             </td>
                             <td class="extraItems">
-                            	<input type="checkbox" class="acAmt" id="acAmt-<?php echo $val['R_Category_Id']; ?>" name="" value="<?php echo $val['Aircondition_Fare'] ?>" /> AC ( <i class="fa fa-inr" aria-hidden="true"></i> <?php echo $val['Aircondition_Fare']; ?> )<br />
-                                <input type="checkbox" class="extraBedAmt" id="extraBedAmt-<?php echo $val['R_Category_Id']; ?>" name="" value="<?php echo $val['Extra_Bed_Fare'] ?>" /> Extra Bed ( <i class="fa fa-inr" aria-hidden="true"></i> <?php echo $val['Extra_Bed_Fare']; ?> )<br />
-                                
-                                <input type="hidden" class="subtotal" id="subTotal-<?php echo $val['R_Category_Id']; ?>" value="0.00" />
-                                
+                            	<input type="hidden" class="subtotal" id="subTotal-<?php echo $val['R_Category_Id']; ?>" value="0.00" />
                             </td>
                         </tr>
                         <tr class="roomInfo" style="display:none; background:#f7f7f9;">

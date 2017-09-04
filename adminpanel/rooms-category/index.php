@@ -58,16 +58,9 @@ $db = new DBConn();
                 </div>
                 
                 <div class="item form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="airconditionfare">Aircondition Fare <span class="required">*</span> </label>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="extraguestfare">Extra Guest Fare <span class="required">*</span> </label>
                   <div class="col-md-2 col-sm-2 col-xs-12">
-                    <input type="text" id="airconditionfare" name="airconditionfare" required class="form-control col-md-7 col-xs-12 " placeholder="Rs.">
-                  </div>
-                </div>
-                
-                <div class="item form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="extrabedfare">Extra Bed Fare <span class="required">*</span> </label>
-                  <div class="col-md-2 col-sm-2 col-xs-12">
-                    <input type="text" id="extrabedfare" name="extrabedfare" required class="form-control col-md-7 col-xs-12 " placeholder="Rs.">
+                    <input type="text" id="extraguestfare" name="extraguestfare" required class="form-control col-md-7 col-xs-12 " placeholder="Rs.">
                   </div>
                 </div>
                 

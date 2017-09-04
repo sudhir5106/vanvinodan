@@ -5,7 +5,7 @@ require_once(PATH_ADMIN_INCLUDE.'/header.php');
 $db = new DBConn();
 
 //Get Here Category List
-$getCategory=$db->ExecuteQuery("SELECT R_Category_Name, R_Capacity, Base_Fare, Aircondition_Fare, Extra_Bed_Fare, Room_Info, Amenities FROM tbl_rooms_category WHERE R_Category_Id=".$_REQUEST['id']);
+$getCategory=$db->ExecuteQuery("SELECT R_Category_Name, R_Capacity, Base_Fare, Extra_Guest_Fare, Room_Info, Amenities FROM tbl_rooms_category WHERE R_Category_Id=".$_REQUEST['id']);
 
 ?>
 <script type="text/javascript" src="roomcategory.js"></script>
@@ -60,16 +60,9 @@ $getCategory=$db->ExecuteQuery("SELECT R_Category_Name, R_Capacity, Base_Fare, A
                 </div>
                 
                 <div class="item form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="airconditionfare">Aircondition Fare <span class="required">*</span> </label>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="extraguestfare">Extra Guest Fare <span class="required">*</span> </label>
                   <div class="col-md-2 col-sm-2 col-xs-12">
-                    <input type="text" id="airconditionfare" name="airconditionfare" required class="form-control col-md-7 col-xs-12 " placeholder="Rs." value="<?php echo $getCategory[1]['Aircondition_Fare']; ?>">
-                  </div>
-                </div>
-                
-                <div class="item form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="extrabedfare">Extra Bed Fare <span class="required">*</span> </label>
-                  <div class="col-md-2 col-sm-2 col-xs-12">
-                    <input type="text" id="extrabedfare" name="extrabedfare" required class="form-control col-md-7 col-xs-12 " placeholder="Rs." value="<?php echo $getCategory[1]['Extra_Bed_Fare']; ?>">
+                    <input type="text" id="extraguestfare" name="extraguestfare" required class="form-control col-md-7 col-xs-12 " placeholder="Rs." value="<?php echo $getCategory[1]['Extra_Guest_Fare']; ?>">
                   </div>
                 </div>
                 

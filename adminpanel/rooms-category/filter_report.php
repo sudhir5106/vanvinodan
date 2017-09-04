@@ -10,7 +10,7 @@ $rows_per_page=ROWS_PER_PAGE;
 $totpagelink=PAGELINK_PER_PAGE;
 
 //Get Rooms Category list
-$sql="SELECT R_Category_Id, R_Category_Name, R_Capacity, Base_Fare, Aircondition_Fare, Extra_Bed_Fare FROM tbl_rooms_category ORDER BY R_Category_Id DESC";
+$sql="SELECT R_Category_Id, R_Category_Name, R_Capacity, Base_Fare, Extra_Guest_Fare FROM tbl_rooms_category ORDER BY R_Category_Id DESC";
 $getCategory=$db->ExecuteQuery($sql);
 
 if(isset($_REQUEST['page']) && $_REQUEST['page']>1)
@@ -59,8 +59,7 @@ $(document).ready(function() {
               <th>Room Category</th>
               <th>Capacity</th>
               <th>Base Fare</th>
-              <th>Aircondition Fare</th>
-              <th>Extra Bed Fare</th>
+              <th>Extra Guest Fare</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -74,8 +73,7 @@ $(document).ready(function() {
               <td><?php echo $val['R_Category_Name'];?></td>
               <td><?php echo $val['R_Capacity'];?></td>
               <td><?php echo $val['Base_Fare'];?></td>
-              <td><?php echo $val['Aircondition_Fare'];?></td>
-              <td><?php echo $val['Extra_Bed_Fare'];?></td>
+              <td><?php echo $val['Extra_Guest_Fare'];?></td>
               
               <td>
               	<a class="btn btn-success btn-xs" href="edit.php?id=<?php echo $val['R_Category_Id'];?>">Edit</a>

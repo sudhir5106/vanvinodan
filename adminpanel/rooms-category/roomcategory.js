@@ -24,12 +24,7 @@ $(document).ready(function(){
 				required:true,
 				number:true
 			},
-			airconditionfare:
-			{
-				required:true,
-				number:true
-			},
-			extrabedfare:
+			extraguestfare:
 			{
 				required:true,
 				number:true
@@ -68,8 +63,7 @@ $(document).ready(function(){
 			formdata.append('rcatname', $("#rcatname").val());
 			formdata.append('capacity', $("#capacity").val());
 			formdata.append('basefare', $("#basefare").val());
-			formdata.append('airconditionfare', $("#airconditionfare").val());
-			formdata.append('extrabedfare', $("#extrabedfare").val());
+			formdata.append('extraguestfare', $("#extraguestfare").val());
 			formdata.append('desc', $("#desc").val());
 			formdata.append('amenities', $("#amenities").val());
 
@@ -133,8 +127,7 @@ $(document).ready(function(){
 			formdata.append('rcatname', $("#rcatname").val());
 			formdata.append('capacity', $("#capacity").val());
 			formdata.append('basefare', $("#basefare").val());
-			formdata.append('airconditionfare', $("#airconditionfare").val());
-			formdata.append('extrabedfare', $("#extrabedfare").val());
+			formdata.append('extraguestfare', $("#extraguestfare").val());
 			formdata.append('desc', $("#desc").val());
 			formdata.append('amenities', $("#amenities").val());
 			

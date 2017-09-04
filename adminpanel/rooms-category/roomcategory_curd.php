@@ -13,8 +13,8 @@ if($_POST['type']=="addRoomCategory")
 		$amenities = mysql_real_escape_string($_POST['amenities']);
 		
 		$tblname = "tbl_rooms_category";
-		$tblfield=array('R_Category_Name', 'R_Capacity', 'Base_Fare', 'Aircondition_Fare', 'Extra_Bed_Fare', 'Room_Info', 'Amenities');
-		$tblvalues=array($rcatname, $_POST['capacity'], $_POST['basefare'], $_POST['airconditionfare'], $_POST['extrabedfare'], $desc, 
+		$tblfield=array('R_Category_Name', 'R_Capacity', 'Base_Fare', 'Extra_Guest_Fare', 'Room_Info', 'Amenities');
+		$tblvalues=array($rcatname, $_POST['capacity'], $_POST['basefare'], $_POST['extraguestfare'], $desc, 
 		$amenities);
 		$res=$db->valInsert($tblname, $tblfield, $tblvalues);
 		if(empty($res))
@@ -38,8 +38,8 @@ if($_POST['type']=="editRoomCategory")
 	$amenities = mysql_real_escape_string($_POST['amenities']);
 		
 	$tblname = "tbl_rooms_category";
-	$tblfield=array('R_Category_Name', 'R_Capacity', 'Base_Fare', 'Aircondition_Fare', 'Extra_Bed_Fare', 'Room_Info', 'Amenities');
-	$tblvalues=array($rcatname, $_POST['capacity'], $_POST['basefare'], $_POST['airconditionfare'], $_POST['extrabedfare'], $desc, $amenities);
+	$tblfield=array('R_Category_Name', 'R_Capacity', 'Base_Fare', 'Extra_Guest_Fare', 'Room_Info', 'Amenities');
+	$tblvalues=array($rcatname, $_POST['capacity'], $_POST['basefare'], $_POST['extraguestfare'], $desc, $amenities);
 	$condition="R_Category_Id=".$_POST['id'];
 	
 	$res=$db->updateValue($tblname,$tblfield,$tblvalues,$condition);

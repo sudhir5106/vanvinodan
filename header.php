@@ -31,8 +31,13 @@ $pagename = basename($page, ".php"); // $file is set to "index"
 		<script>
         $(document).ready(function() {
             $(".bottom-slider").owlCarousel();
-			interval: 1200
+			interval: 1200;
+
+            $('.innerPageTxt').addClass("fadeIn").addClass("animated");
+
 		});
+
+
         
         </script>
 		
