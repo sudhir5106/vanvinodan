@@ -26,4 +26,16 @@ if($_POST['type']=="getACAmt")
 	echo $res[1]['Aircondition_Fare'];	
 	
 }
+
+///*******************************************************
+/// Get list of available room type
+///*******************************************************
+if($_POST['type']=="getRooms"){
+	
+	$res = $db->ExecuteQuery("SELECT R_Category_Id, R_Category_Name, R_Capacity, Base_Fare, Aircondition_Fare, Extra_Bed_Fare, Room_Info, Amenities FROM tbl_rooms_category
+	
+	WHERE R_Category_Id IN (SELECT R_Category_Id FROM tbl_room_master 
+	WHERE Room_id NOT IN (SELECT Room_Id FROM tbl_reservation WHERE Check_In_Date <= '".$checkindate."' AND Check_Out_Date > '".$checkindate."' ))");
+	
+}
 ?>

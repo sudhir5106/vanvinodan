@@ -3,8 +3,20 @@ include('header.php');
 require_once(PATH_LIBRARIES.'/classes/DBConn.php');
 $db = new DBConn();
 
-$checkindate = date('Y-m-d',strtotime($_POST['checkindate']));
-$checkoutdate = date('Y-m-d',strtotime($_POST['checkoutdate']));
+if(!empty($checkindate)){
+	$checkindate = date('Y-m-d',strtotime($_POST['checkindate']));
+	$checkoutdate = date('Y-m-d',strtotime($_POST['checkoutdate']));
+	
+	$checkin = $_POST['checkindate'];
+	$checkout = $_POST['checkoutdate'];
+}
+else{
+	$checkindate = date("Y-m-d");
+	$checkoutdate = date("Y-m-d",strtotime($checkindate.'+1 day'));//It will adding 1 day
+	
+	$checkin = date("d-m-Y");
+	$checkout = date("d-m-Y",strtotime($checkin.'+1 day'));//It will adding 1 day
+}
 
 /////////////////////////////////////////
 //Get Total No of Nights
@@ -24,9 +36,34 @@ WHERE Room_id NOT IN (SELECT Room_Id FROM tbl_reservation WHERE Check_In_Date <=
 
 
 <main> 
-        
+    
     <div class="middle-container">
     	
+        <div class="container searchFrm padding-left-zero">
+        <form class="form-horizontal" role="form" id="searchRoomsFrm" method="post">
+        
+        	<div class="col-sm-2 col-xs-6 padding-left-zero">
+                <div class="input-group date" data-provide="datepicker">
+                    <input type="text" id="chckin" name="chckin" class="form-control input-sm datetimepicker" placeholder="check-in" value="<?php echo $checkin; ?>">
+                    <div class="input-group-addon">
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-sm-2 col-xs-6">
+                <div class="input-group date" data-provide="datepicker">
+                    <input type="text" id="chckout" name="chckout" class="form-control input-sm datetimepicker2" placeholder="check-out" value="<?php echo $checkout; ?>">
+                    <div class="input-group-addon">
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 col-xs-12 text-left text-center-xs"><button type="submit" id="searchRoomsBtn" class="btn btn-sm btn-danger">SEARCH</button></div>
+            <div class="clearfix"></div>
+        
+    	</form>
+        </div>
         <div class="container page-content">
         	<form class="form-horizontal" role="form" id="reservationFrm" method="post">
             	<input type="hidden" id="checkindate" value="<?php echo $checkindate; ?>" />
@@ -101,7 +138,7 @@ WHERE R_Category_Id=".$val['R_Category_Id']." AND Room_id NOT IN (SELECT Room_Id
                             	<input type="checkbox" class="acAmt" id="acAmt-<?php echo $val['R_Category_Id']; ?>" name="" value="<?php echo $val['Aircondition_Fare'] ?>" /> AC ( <i class="fa fa-inr" aria-hidden="true"></i> <?php echo $val['Aircondition_Fare']; ?> )<br />
                                 <input type="checkbox" class="extraBedAmt" id="extraBedAmt-<?php echo $val['R_Category_Id']; ?>" name="" value="<?php echo $val['Extra_Bed_Fare'] ?>" /> Extra Bed ( <i class="fa fa-inr" aria-hidden="true"></i> <?php echo $val['Extra_Bed_Fare']; ?> )<br />
                                 
-                                <input type="hidden" class="subtotal" id="subTotal-<?php echo $val['R_Category_Id']; ?>" value="" />
+                                <input type="hidden" class="subtotal" id="subTotal-<?php echo $val['R_Category_Id']; ?>" value="0.00" />
                                 
                             </td>
                         </tr>
@@ -119,7 +156,10 @@ WHERE R_Category_Id=".$val['R_Category_Id']." AND Room_id NOT IN (SELECT Room_Id
             	<div class="bg-info calculationBox">
                 	<h5><span id="noOfRooms">0</span> Accommodation(s) for</h5>
                 	<div class="Totalprice"><i class="fa fa-inr" aria-hidden="true"></i> <span id="displayTotalAmt">0.00</span></div>
-                    <div><button type="button" class="btn btn-lg btn-danger">BOOK NOW</button></div>
+                    <div>
+                    	<input type="hidden" id="TotalAmt" value="0.00" />
+                        <button type="button" id="bookRoomBtn" class="btn btn-lg btn-danger">BOOK NOW</button>
+                    </div>
                 </div>
             </div>
             </form>

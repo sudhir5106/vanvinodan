@@ -109,6 +109,9 @@ $(document).ready(function(){
 		
 	});
 	
+	//By default Book Now button will be disabled
+	$("#bookRoomBtn").prop("disabled",true);
+	
 	// set 0 .subtotal value
 	$(".subtotal").val("0");	
 	
@@ -137,6 +140,13 @@ $(document).ready(function(){
 				////////////////////////
 				// calls a function
 				reCalulate();
+				
+				if($("#subTotal-"+uniqueId[1]).val()=="0"){
+					$("#bookRoomBtn").prop("disabled",true);
+				}
+				else{
+					$("#bookRoomBtn").prop("disabled",false);
+				}
 		   },
 		   cache: false,
 		   contentType: false,
@@ -203,6 +213,33 @@ $(document).ready(function(){
 		
 		var FinalAmt = parseInt(acAmt) + parseInt(extraBedAmt) + (parseInt($("#totalNights").val()) * invoicetotal);
 		$("#displayTotalAmt").html(Math.round(parseFloat(FinalAmt)).toFixed(2));
-	}
+		$("#TotalAmt").val(Math.round(parseFloat(FinalAmt)).toFixed(2))
+	}//eof function
+	
+	
+	////////////////
+	//click event
+	///////////////////
+	$(document).on("click", "#searchRoomsBtn", function(){
+				
+		var formdata = new FormData();
+		formdata.append('type', "getRooms");
+		formdata.append('chckin', $("#chckin").val());		
+		
+		$.ajax({
+		   type: "POST",
+		   url: "global_curd.php",
+		   data:formdata,
+		   success: function(data){ //alert(data);
+		   		
+				$(".page-content").html(data);
+		   },
+		   cache: false,
+		   contentType: false,
+		   processData: false
+		});//eof ajax
+		
+	});
+	
 	
 })//eof ready function
