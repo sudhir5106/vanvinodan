@@ -99,8 +99,10 @@ li {
 
 #ui-datepicker-div { z-index: 999 !important;}
 
-section p{ color:#2b2a2a; font-family:'OpenSans'; font-size:12.5pt; line-height:21px; margin-bottom:0; }
+section p{ font-family:'OpenSans'; margin-bottom:0; }
 a:hover{ text-decoration:none;}
+span.required{color:#ff0000; font-size:10px;}
+
 .text-white{color:#fff;}
 .padding-left-zero{padding-left:0;}
 .padding-right-zero{padding-right:0;}
@@ -110,7 +112,14 @@ a:hover{ text-decoration:none;}
 .emergencyNo{font-size:11px; font-family:'OpenSans';}
 .emergencyNo span{font-size:15px; font-family:'OpenSansBold';}
 
-.headTop{padding-top:16px;}
+.headTop{padding-top:16px; padding-bottom:7px; 
+/*-webkit-box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.75);
+box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.75);*/
+}
+.pageinheader{background:#333; height:106px; width:100%;}
+.pageinheader div.div-table{display:table; height:100%;}
+
 .topmenu{width:66.66666667%; padding-top:10px;}
 a.bookBtn{background:#ff2400; transition: background-color 0.6s ease-out; color:#fff; padding:6px 25px 7px 25px; border-radius:30px; margin-right:20px;}
 a.bookBtn:hover{background:#2c96ed; transition: background-color 0.6s ease-in; text-decoration:none;}
@@ -155,8 +164,10 @@ animation-direction:alternate;
     background-color: transparent;
 }
 
-.navBg .navbar-nav>li>a{color:#fff;}
-.navBg .navbar-nav>li>a:hover{color:#ff891e!important; background:none!important; border-bottom:solid 1px #fff; transition: border-bottom 0.6s ease-in;}
+.navBg .navbar-nav>li>a{color:#fff; transition: color 0.2s ease-out;}
+.navBg .navbar-nav>li>a:hover{color:#ff891e!important; transition: color 0.2s ease-in; background:none!important; 
+/*border-bottom:solid 1px #fff; transition: border-bottom 0.6s ease-in;*/
+}
 .navBg .navbar-nav>li>a{padding-top:5px; padding-bottom:7px; }
 .navBg .dropdown-menu>li>a{font:10pt 'OpenSans-Regular',Arial, Helvetica, sans-serif;}
 .navBg .dropdown-menu>li>a i{color:#ff6d10;}
@@ -589,8 +600,147 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a108c7', end
 .Totalprice{font-size:20px; color:#DD2024; padding-bottom:10px;}
 .searchFrm{margin-top:30px;}
 
-.checkout-tab{background:#fff; margin:20px auto; padding:20px 20px;}
+.checkout-tab{background:#fff; margin:20px auto; padding:20px;}
+.reservation-info{padding:15px;}
+.contact-info{margin-top:30px;}
 
+.innerPageTxt{background:#fff; padding:20px 0;}
+
+.innerPageTxt h1{ font-size: 3em; font-family: 'Gabriola';}
+.innerPageTxt p{ font-size: 1.2em; line-height: 30px;}
+
+.partners-bg3, .partners-bg4{padding:50px 0 50px 0; position:relative;
+background: rgba(161,8,199,1);
+background: -moz-linear-gradient(left, rgba(161,8,199,0.75) 0%, rgba(0,45,113,0.75) 100%);
+background: -webkit-gradient(left top, right top, color-stop(0%, rgba(161,8,199,0.75)), color-stop(100%, rgba(0,45,113,0.75)));
+background: -webkit-linear-gradient(left, rgba(161,8,199,0.75) 0%, rgba(0,45,113,0.75) 100%);
+background: -o-linear-gradient(left, rgba(161,8,199,0.75) 0%, rgba(0,45,113,0.75) 100%);
+background: -ms-linear-gradient(left, rgba(161,8,199,0.75) 0%, rgba(0,45,113,0.75) 100%);
+background: linear-gradient(to right, rgba(161,8,199,0.75) 0%, rgba(0,45,113,0.75) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a108c7', endColorstr='#002d71', GradientType=1 );
+}
+.partner-head3{width:577px; margin:0 auto; padding:0 0 20px 0;}
+.partners-bg3 .title{font:2em 'OpenSans'; color:#fff; text-align:center; padding-left:30px; padding-right:30px;}
+.double-border3{width:60px; border-bottom:double 4px #fff; height:22px;}
+.partners-bg3 .title span{font-size:0.8em;}
+.msgBlk{background:#fff; padding-top:15px; padding-bottom:15px;}
+.msgBlk h3 span{font-size:17px; color:orange;}
+
+.partner-head4{width:390px; margin:0 auto; padding:0 0 20px 0;}
+.partners-bg4 .title{font:2em 'OpenSans'; color:#fff; text-align:center; padding-left:30px; padding-right:30px;}
+.double-border4{width:60px; border-bottom:double 4px #fff; height:22px;}
+.partners-bg4 .title span{font-size:0.8em;}
+.msgBlk{background:#fff; padding-top:15px; padding-bottom:15px;}
+.msgBlk h3 span{font-size:17px; color:orange;}
+
+.room-gallery [class*=col-sm-]{margin-bottom:20px;}
+.room-gallery .thumbnail{height:auto!important; border-radius: 0px; border:0; margin-bottom:0;}
+
+thumbnail .image {
+  height: 120px;
+  overflow: hidden;
+}
+.caption {
+  padding: 9px 5px;
+  background: #F7F7F7;
+}
+.caption p {
+  margin-bottom: 5px;
+}
+.thumbnail {
+  height: 190px;
+  overflow: hidden;
+}
+.view {
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+  box-shadow: 1px 1px 2px #e6e6e6;
+  cursor: default;
+}
+.view .mask, .view .content {
+  position: absolute;
+  width: 100%;
+  overflow: hidden;
+  top: 0;
+  left: 0
+}
+.view img {
+  display: block;
+  position: relative
+}
+.view .tools {
+  text-transform: uppercase;
+  color: #fff;
+  text-align: center;
+  position: relative;
+  font-size: 17px;
+  padding: 3px;
+  background: rgba(0, 0, 0, 0.35);
+  margin: 43px 0 0 0;
+}
+.mask.no-caption .tools {
+  margin: 45px 0 0 0;
+}
+.view .tools a {
+  display: inline-block;
+  color: #FFF;
+  font-size: 18px;
+  font-weight: 400;
+  padding: 0 4px;
+}
+.view p {
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-size: 12px;
+  position: relative;
+  color: #fff;
+  padding: 10px 20px 20px;
+  text-align: center
+}
+.view a.info {
+  display: inline-block;
+  text-decoration: none;
+  padding: 7px 14px;
+  background: #000;
+  color: #fff;
+  text-transform: uppercase;
+  box-shadow: 0 0 1px #000
+}
+.view-first img {
+  transition: all 0.2s linear;
+}
+.view-first .mask {
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: all 0.4s ease-in-out;
+  height:120px;
+}
+.view-first .tools {
+  transform: translateY(-100px);
+  opacity: 0;
+  transition: all 0.2s ease-in-out;
+}
+.view-first p {
+  transform: translateY(100px);
+  opacity: 0;
+  transition: all 0.2s linear;
+}
+.view-first:hover img {
+  transform: scale(1.1);
+}
+.view-first:hover .mask {
+  opacity: 1;
+}
+.view-first:hover .tools, .view-first:hover p {
+  opacity: 1;
+  transform: translateY(0px);
+}
+.view-first:hover p {
+  transition-delay: 0.1s;
+}
+
+/* *********  /media gallery  **************************** */
 
 
 @media (min-width: 768px) {

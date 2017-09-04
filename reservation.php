@@ -3,19 +3,23 @@ include('header.php');
 require_once(PATH_LIBRARIES.'/classes/DBConn.php');
 $db = new DBConn();
 
-$checkindate = date('Y-m-d',strtotime($_POST['checkindate']));
-$checkoutdate = date('Y-m-d',strtotime($_POST['checkoutdate']));
 
-$checkin = date('d-m-Y',strtotime($_POST['checkindate']));
-$checkout = date('d-m-Y',strtotime($_POST['checkoutdate']));
+if(!empty($_POST['checkindate']) && !empty($_POST['checkoutdate'])){
+	
+	$checkindate = date('Y-m-d',strtotime($_POST['checkindate']));
+	$checkoutdate = date('Y-m-d',strtotime($_POST['checkoutdate']));
+	
+	$checkin = date('d-m-Y',strtotime($_POST['checkindate']));
+	$checkout = date('d-m-Y',strtotime($_POST['checkoutdate']));
+}
 
-/*if(empty($checkindate) && empty($checkin)){
+else{
 	$checkindate = date("Y-m-d");
 	$checkoutdate = date("Y-m-d",strtotime($checkindate.'+1 day'));//It will adding 1 day
 	
 	$checkin = date("d-m-Y");
 	$checkout = date("d-m-Y",strtotime($checkin.'+1 day'));//It will adding 1 day
-}*/
+}
 
 /////////////////////////////
 //Get Total No of Nights
@@ -173,8 +177,63 @@ WHERE R_Category_Id=".$val['R_Category_Id']." AND Room_id NOT IN (SELECT Room_Id
         </div>
         
         <div id="Tab2" class="container checkout-tab">
-        	<div>
-            	<h2>CONTACT INFORMATION</h2>
+        	<div class="col-sm-9">
+            	<h2><strong>CONTACT INFORMATION</strong></h2>
+                
+                <div class="contact-info">
+                	<form class="form-horizontal" role="form" id="reservationFrm" method="post">
+                    	<div>
+                        	<div class="item form-group col-md-5 col-sm-5 col-xs-12">
+                              <label class="control-label" for="fullname">Full Name <span class="required">*</span> </label>
+                              <div>
+                                <input type="text" id="fullname" name="fullname" required="required" class="form-control col-md-7 col-xs-12 " placeholder="Enter Your Name">
+                              </div>
+                            </div>
+                            <div class="item col-md-5 col-sm-5 col-xs-12">
+                              <label class="control-label" for="fullname">Email <span class="required">*</span> </label>
+                              <div>
+                                <input type="email" id="email" name="email" required="required" class="form-control col-md-7 col-xs-12 " placeholder="Enter Your Name">
+                              </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        
+                        <div>
+                        	<div class="item form-group col-md-5 col-sm-5 col-xs-12">
+                              <label class="control-label" for="phone">Phone <span class="required">*</span> </label>
+                              <div>
+                                <input type="text" id="phone" name="phone" required="required" class="form-control col-md-7 col-xs-12 " placeholder="Enter Your Name">
+                              </div>
+                            </div>
+                            <div class="item col-md-5 col-sm-5 col-xs-12">
+                              <label class="control-label" for="fullname">Id Proof <span class="required">*</span> </label>
+                              <div>
+                                <input type="file" id="idprof" name="idprof" required="required" class="form-control col-md-7 col-xs-12 " placeholder="Enter Your Name">
+                              </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        
+                        <div>
+                        	<div class="item form-group col-md-5 col-sm-5 col-xs-12">
+                              <label class="control-label" for="phone">Your estimated arrival time <span class="required">*</span> </label>
+                              <div>
+                                <input type="text" id="phone" name="phone" required="required" class="form-control col-md-7 col-xs-12 " placeholder="Enter Your Name">
+                              </div>
+                            </div>
+                            
+                            <div class="clearfix"></div>
+                        </div>
+                        
+                        <div>
+                        	<input type="checkbox" id="iagree" name="iagree" required="required" /> I agree with the terms and conditions of Van Vinodan Resort
+                        </div>
+                    </form>
+                </div>
+                
+            </div>
+            <div class="col-sm-3 bg-success reservation-info">
+            	<h2><strong>Your Reservation</strong></h2>
             </div>
         </div>
     </div>  	

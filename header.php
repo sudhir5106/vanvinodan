@@ -19,10 +19,10 @@ $pagename = basename($page, ".php"); // $file is set to "index"
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/owl.carousel.css" type="text/css">
-    	<link rel="stylesheet" href="css/owl.theme.default.min.css"  type="text/css" />
+    	  <link rel="stylesheet" href="css/owl.theme.default.min.css"  type="text/css" />
         <link rel="stylesheet" href="css/animate.min.css"  type="text/css" />
         <link rel="stylesheet" href="css/jquery-ui.css">
-        
+
         <script src="js/jquery.min.js"></script>
         <script src="js/jquery-ui.js"></script>
         <script src="js/bootstrap.min.js"></script>
@@ -54,10 +54,8 @@ $pagename = basename($page, ".php"); // $file is set to "index"
             </div>
      <?php }else{ ?>
      		
-            <div class="homeslider" style="background:#333; height:106px; width:100%;">
-            	<div style="display:table; height:100%;">
-                	
-                </div>
+            <div class="homeslider pageinheader">
+            	<div class="div-table"></div>
             </div>
                  
      <?php } ?>
@@ -95,7 +93,7 @@ $pagename = basename($page, ".php"); // $file is set to "index"
             <div class="headTop">
             	<div class="container-fluid">
                     <div class="col-xs-12 col-sm-4 col-md-4 padding-left-zero">
-                        <div class="logo"><a href="index.php"><img width="100%" src="images/logo.png" alt="SA Global India Financial Services"></a></div>
+                        <div class="logo"><a href="index.php"><img class="img-responsive" src="images/logo.png" alt="SA Global India Financial Services"></a></div>
                     </div>
                     <div class="navbar-header hidden-md">
                       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
@@ -126,12 +124,12 @@ $pagename = basename($page, ".php"); // $file is set to "index"
                             	<div class="collapse navbar-collapse in" id="navbar-collapse-1">
                                 <ul class="nav navbar-nav navigation">
                                   <li class="active"><a class="homelink" href="index.php">Home</a></li>
-                                  <li><a href="#">About us</a></li>
+                                  <li><a href="about-us.php">About us</a></li>
                                   <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Accommodation <b class="caret"></b></a>
                                      <ul class="dropdown-menu">
-                                        <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Super Deluxe Room</a></li>
-                                        <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Deluxe Room</a></li>
-                                        <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Tent Room</a></li>
+                                        <li><a href="super-deluxe.php"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Super Deluxe Room</a></li>
+                                        <li><a href="deluxe.php"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Deluxe Room</a></li>
+                                        <li><a href="tent.php"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Tent Room</a></li>
                                      </ul>
                                   </li>
                                   <li><a href="#" class="dropdown-toggle" data-toggle="dropdown">Places to visit <b class="caret"></b></a>
@@ -155,7 +153,7 @@ $pagename = basename($page, ".php"); // $file is set to "index"
                                   	<ul class="dropdown-menu">
                                         <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Package Tour</a></li>
                                         <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Tariff</a></li>
-                                        <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Online Reservation</a></li>
+                                        <li><a href="reservation.php"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Online Reservation</a></li>
                                      </ul>
                                   </li>
                                   <li><a href="#">Contact us</a></li>

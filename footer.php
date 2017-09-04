@@ -12,20 +12,6 @@
 
         <script type="text/javascript">
 			
-			$(window).scroll(function(){
-				if ($(document).scrollTop() > 700){	
-					$('.homeslider').hide();
-					
-					var imageUrl = "images/Dining.jpg";
-					$("body").css({'background-image':'url(' + imageUrl + ')', 'background-position':'bottom', 'background-attachment':'fixed'});
-				} 
-				else{
-					$('.homeslider').show();
-					$("body").removeAttr( "style" );
-				}
-				
-			});
-			
 			// An array of dates
 			//var array = ["2017-08-31","2017-09-01","2017-09-02"];
 			

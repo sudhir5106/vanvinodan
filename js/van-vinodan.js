@@ -1,5 +1,8 @@
 // JavaScript Document
 $(document).ready(function(){
+	
+	//$("#Tab2").hide();	
+	
 	$(document).on("change", ".adultdd", function(){
 		
 		var Id = $(this).attr("id");		
@@ -245,8 +248,6 @@ $(document).ready(function(){
 	//Get the search results
 	/////////////////////////
 	$(document).on("click", "#searchRoomsBtn", function(){
-		
-		alert($("#chckin").val());		
 		
 		var formdata = new FormData();
 		formdata.append('type', "getRooms");

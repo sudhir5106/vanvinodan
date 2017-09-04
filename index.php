@@ -246,7 +246,7 @@
                                     <div class="visitorName">Ms. Rajini's</div>
                                     <div class="testimonial-review">
                                         <p class="testimonial-description">
-                                            "This is my 2nd visit to Svasara Jungle Lodge and I think it was as good if not better than my 1st visit. I received a very warm welcome on my arrival and was shown to Room 112. which is a twin bedded airy room and very comfortable. They have ceiling fans and A/C which I hardly used. Although it was very hot when the sun was shining at night I was very comfortable with just the ceiling fan. The food was just as good as i remembered and the care and friendliness of Ranjit and Nandita along with their staff have made my stays here so memorable."
+                                            "This is my 2nd visit to Van Vinodan Resort and I think it was as good if not better than my 1st visit. I received a very warm welcome on my arrival and was shown to Room 112. which is a twin bedded airy room and very comfortable. They have ceiling fans and A/C which I hardly used. Although it was very hot when the sun was shining at night I was very comfortable with just the ceiling fan. The food was just as good as i remembered and the care and friendliness of Ranjit and Nandita along with their staff have made my stays here so memorable."
                                         </p>
                                         
                                     </div>
@@ -259,7 +259,7 @@
                                     <div class="visitorName">Ms. Rajini's</div>
                                     <div class="testimonial-review">
                                         <p class="testimonial-description">
-                                            "This is my 2nd visit to Svasara Jungle Lodge and I think it was as good if not better than my 1st visit. I received a very warm welcome on my arrival and was shown to Room 112. which is a twin bedded airy room and very comfortable. They have ceiling fans and A/C which I hardly used. Although it was very hot when the sun was shining at night I was very comfortable with just the ceiling fan. The food was just as good as i remembered and the care and friendliness of Ranjit and Nandita along with their staff have made my stays here so memorable."
+                                            "This is my 2nd visit to Van Vinodan Resort and I think it was as good if not better than my 1st visit. I received a very warm welcome on my arrival and was shown to Room 112. which is a twin bedded airy room and very comfortable. They have ceiling fans and A/C which I hardly used. Although it was very hot when the sun was shining at night I was very comfortable with just the ceiling fan. The food was just as good as i remembered and the care and friendliness of Ranjit and Nandita along with their staff have made my stays here so memorable."
                                         </p>
                                         
                                     </div>
@@ -341,5 +341,21 @@
         </div>
     </div>  	
 </main>
+<script type="text/javascript">
+            
+            $(window).scroll(function(){
+                if ($(document).scrollTop() > 700){ 
+                    $('.homeslider').hide();
+                    
+                    var imageUrl = "images/Dining.jpg";
+                    $("body").css({'background-image':'url(' + imageUrl + ')', 'background-position':'bottom', 'background-attachment':'fixed'});
+                } 
+                else{
+                    $('.homeslider').show();
+                    $("body").removeAttr( "style" );
+                }
+                
+            });
 
+</script>
 <?php include('footer.php'); ?>
