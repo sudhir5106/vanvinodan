@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 04, 2017 at 07:27 PM
+-- Generation Time: Sep 05, 2017 at 04:57 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.6.24
 
@@ -47,6 +47,7 @@ INSERT INTO `tbl_admin_login` (`Login_Id`, `Login_Name`, `Login_Password`) VALUE
 
 CREATE TABLE `tbl_reservation` (
   `Reservation_Id` int(11) NOT NULL,
+  `Reservation_Ref_No` varchar(75) NOT NULL,
   `Check_In_Date` date NOT NULL,
   `Check_Out_Date` date NOT NULL,
   `Arrival_Time` time NOT NULL,
@@ -67,14 +68,14 @@ CREATE TABLE `tbl_reservation` (
 -- Dumping data for table `tbl_reservation`
 --
 
-INSERT INTO `tbl_reservation` (`Reservation_Id`, `Check_In_Date`, `Check_Out_Date`, `Arrival_Time`, `Client_Name`, `Email`, `Phone`, `ID_Proof_Image`, `Total_Rooms_Amt`, `Total_Guests_Amt`, `Subtotal_Amt`, `SGST_Amt`, `CGST_Amt`, `Grand_Total_Amt`, `Reservation_Status`) VALUES
-(1, '2017-08-29', '2017-08-31', '12:00:00', 'sudhir', 'sudhir5106@gmail.com', '9826396462', '123456789.jpg', 0, 0, 3000, 270, 270, 3540, 1),
-(2, '2017-08-29', '2017-08-30', '12:00:00', 'Rejith', 'rejith@gmail.com', '9826233257', '321654987.jpg', 0, 0, 3500, 315, 315, 4130, 1),
-(3, '2017-08-29', '2017-08-30', '12:00:00', 'Rakesh', 'rakesh@gmail.com', '9826233253', '321654977.jpg', 0, 0, 4000, 360, 360, 4720, 1),
-(4, '2017-08-28', '2017-08-29', '12:00:00', 'Khalid', 'khalid@gmail.com', '9826233253', '321654977.jpg', 0, 0, 4000, 360, 360, 4720, 1),
-(5, '2017-08-29', '2017-08-30', '12:00:00', 'ss', 'ss@gmail.com', '9826233257', '321654987.jpg', 0, 0, 3500, 315, 315, 4130, 1),
-(6, '2017-08-29', '2017-08-30', '12:00:00', 'rr', 'rr@gmail.com', '9826233257', '321654987.jpg', 0, 0, 3500, 315, 315, 4130, 1),
-(7, '2017-09-03', '2017-09-05', '12:00:00', 'kk', 'kk@gmail.com', '9826233257', '321654987.jpg', 0, 0, 3500, 315, 315, 4130, 1);
+INSERT INTO `tbl_reservation` (`Reservation_Id`, `Reservation_Ref_No`, `Check_In_Date`, `Check_Out_Date`, `Arrival_Time`, `Client_Name`, `Email`, `Phone`, `ID_Proof_Image`, `Total_Rooms_Amt`, `Total_Guests_Amt`, `Subtotal_Amt`, `SGST_Amt`, `CGST_Amt`, `Grand_Total_Amt`, `Reservation_Status`) VALUES
+(1, '', '2017-08-29', '2017-08-31', '12:00:00', 'sudhir', 'sudhir5106@gmail.com', '9826396462', '123456789.jpg', 0, 0, 3000, 270, 270, 3540, 1),
+(2, '', '2017-08-29', '2017-08-30', '12:00:00', 'Rejith', 'rejith@gmail.com', '9826233257', '321654987.jpg', 0, 0, 3500, 315, 315, 4130, 1),
+(3, '', '2017-08-29', '2017-08-30', '12:00:00', 'Rakesh', 'rakesh@gmail.com', '9826233253', '321654977.jpg', 0, 0, 4000, 360, 360, 4720, 1),
+(4, '', '2017-08-28', '2017-08-29', '12:00:00', 'Khalid', 'khalid@gmail.com', '9826233253', '321654977.jpg', 0, 0, 4000, 360, 360, 4720, 1),
+(5, '', '2017-08-29', '2017-08-30', '12:00:00', 'ss', 'ss@gmail.com', '9826233257', '321654987.jpg', 0, 0, 3500, 315, 315, 4130, 1),
+(6, '', '2017-08-29', '2017-08-30', '12:00:00', 'rr', 'rr@gmail.com', '9826233257', '321654987.jpg', 0, 0, 3500, 315, 315, 4130, 1),
+(7, '', '2017-09-03', '2017-09-05', '12:00:00', 'kk', 'kk@gmail.com', '9826233257', '321654987.jpg', 0, 0, 3500, 315, 315, 4130, 1);
 
 -- --------------------------------------------------------
 
