@@ -101,7 +101,9 @@ li {
 
 section p{ font-family:'OpenSans'; margin-bottom:0; }
 a:hover{ text-decoration:none;}
-span.required{color:#ff0000; font-size:10px;}
+span.required, .error{color:#ff0000;}
+span.required{font-size:10px;}
+.error{font-size:12px;}
 
 .text-white{color:#fff;}
 .padding-left-zero{padding-left:0;}
@@ -595,13 +597,13 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a108c7', end
 	background:#333333;	
 }
 .roomTypeList td{vertical-align:middle!important;}
-.calculationBox{padding:20px 15px; margin-top:30px;}
+.calculationBox{padding:20px 15px; margin-top:30px; border-radius:3px;}
 .calculationBox h5{font-size:18px;}
-.Totalprice{font-size:20px; color:#DD2024; padding-bottom:10px;}
+.Totalprice{font-size:20px; color:#DD2024; padding-bottom:10px; font-weight:bold;}
 .searchFrm{margin-top:30px;}
 
 .checkout-tab{background:#fff; margin:20px auto; padding:20px;}
-.reservation-info{padding:15px;}
+.reservation-info{padding:15px; background:#F2F2F2; border-radius:3px;}
 .contact-info{margin-top:30px;}
 
 .innerPageTxt{background:#fff; padding:20px 0;}
@@ -742,6 +744,20 @@ thumbnail .image {
 
 /* *********  /media gallery  **************************** */
 
+#tab1{display:none;}
+
+.roomBg{background:#fff; color:#333; padding:8px 10px; border-radius:3px; margin-bottom:5px; font-size:16px;}
+.dates{margin:20px 0;}
+.nightsBlk{padding:15px 0 15px 15px;}
+.amtRow{padding-bottom:5px;}
+.grandTotalBlk{border-top:solid 1px #CCCCCC; border-bottom:solid 1px #CCCCCC; margin-top:5px; padding:5px 0;}
+.grandTotal{font-size:18px; font-weight:bold; color:#c9302c;}
+.termsBlk{border-top:solid 1px #F2F2F2; margin-top:50px; padding-top:10px;}
+.termsBlk h5{font-size:18px;}
+.termsBlk p, .termsBlk ul{padding-bottom:20px;}
+.termsBlk ul li{list-style:decimal;}
+.compltBtn{padding:15px 0;}
+#backBtn{display:none;}
 
 @media (min-width: 768px) {
 	
@@ -836,7 +852,7 @@ thumbnail .image {
 	.social-icons li {float: none; display:inline-block;}
 	a.bookBtn {	margin-right: 0;}
 	.topimpinfo{padding-bottom:10px;}
-	.searchRooms{top:25%; background:rgba(46, 119 , 110, 1)}
+	.searchRooms{top:25%; background:rgba(46, 119 , 110, 1);}
 	.searchTitle{font-size:1.2em;}
 	.searchFields{width:100%; margin:0 auto; padding-top:20px;}
 	.text-center-xs{text-align:center; padding-top:15px;}

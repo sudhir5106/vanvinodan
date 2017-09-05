@@ -64,7 +64,12 @@ WHERE Room_id NOT IN (SELECT Room_Id FROM tbl_reserved_rooms WHERE Check_In_Date
                     </div>
                 </div>
             </div>
-            <div class="col-sm-4 col-xs-12 text-left text-center-xs"><button type="button" id="searchRoomsBtn" class="btn btn-sm btn-danger">SEARCH</button></div>
+            <div class="col-sm-4 col-xs-12 text-left text-center-xs"><button type="button" id="searchRoomsBtn" class="btn btn-sm btn-info"><i class="fa fa-search" aria-hidden="true"></i> SEARCH</button></div>
+            
+            <div class="col-sm-4 col-xs-12 text-right backbtnblk">
+            	<button type="button" id="cancelBtn" class="btn btn-sm btn-danger"><i class="fa fa-times" aria-hidden="true"></i> CANCEL RESERVATION</button>
+                <button type="button" id="backBtn" class="btn btn-sm btn-success"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> BACK</button>
+            </div>
             <div class="clearfix"></div>
         
     	</form>
@@ -98,9 +103,10 @@ WHERE Room_id NOT IN (SELECT Room_Id FROM tbl_reserved_rooms WHERE Check_In_Date
                             <td><img src="images/room-img.jpg" alt="" /></td>
                             <td class="text-info">
 								<?php echo $val['R_Category_Name']; ?>
+                                <input type="hidden" id="room-name-<?php echo $val['R_Category_Id']; ?>" value="<?php echo $val['R_Category_Name']; ?>" />
                                 <input type="hidden" id="roomType-<?php echo $val['R_Category_Id']; ?>" value="<?php echo $val['R_Category_Id']; ?>" />
                             </td>
-                            <td><?php echo sprintf('%0.2f', ($numberOfNights * $val['Base_Fare']));?></td>
+                            <td><i class="fa fa-inr" aria-hidden="true"></i> <?php echo sprintf('%0.2f', ($numberOfNights * $val['Base_Fare']));?></td>
                             <td><i class="fa fa-inr" aria-hidden="true"></i> <?php echo sprintf('%0.2f',$val['Base_Fare']); ?></td>
                             <td>
                             	<span class="glyphicon glyphicon-user"></span> <?php echo $val['R_Capacity']; ?>
@@ -174,48 +180,76 @@ WHERE R_Category_Id=".$val['R_Category_Id']." AND Room_id NOT IN (SELECT Room_Id
         </div>
         
         <div id="Tab2" class="container checkout-tab">
-        	<div class="col-sm-9">
+        	<form class="form-horizontal" role="form" id="contactFrm" method="post">
+            <div class="col-sm-8">
             	<h2><strong>CONTACT INFORMATION</strong></h2>
                 
                 <div class="contact-info">
-                	<form class="form-horizontal" role="form" id="reservationFrm" method="post">
+                	
                     	<div>
-                        	<div class="item form-group col-md-5 col-sm-5 col-xs-12">
+                        	<div class="item form-group col-md-6 col-sm-6 col-xs-12">
                               <label class="control-label" for="fullname">Full Name <span class="required">*</span> </label>
                               <div>
                                 <input type="text" id="fullname" name="fullname" required="required" class="form-control col-md-7 col-xs-12 " placeholder="Enter Your Name">
                               </div>
                             </div>
-                            <div class="item col-md-5 col-sm-5 col-xs-12">
-                              <label class="control-label" for="fullname">Email <span class="required">*</span> </label>
+                            <div class="item col-md-6 col-sm-6 col-xs-12">
+                              <label class="control-label" for="email">Email <span class="required">*</span> </label>
                               <div>
-                                <input type="email" id="email" name="email" required="required" class="form-control col-md-7 col-xs-12 " placeholder="Enter Your Name">
+                                <input type="email" id="email" name="email" required="required" class="form-control col-md-7 col-xs-12 " placeholder="Enter Your Email Id">
                               </div>
                             </div>
                             <div class="clearfix"></div>
                         </div>
                         
                         <div>
-                        	<div class="item form-group col-md-5 col-sm-5 col-xs-12">
+                        	<div class="item form-group col-md-6 col-sm-6 col-xs-12">
                               <label class="control-label" for="phone">Phone <span class="required">*</span> </label>
                               <div>
-                                <input type="text" id="phone" name="phone" required="required" class="form-control col-md-7 col-xs-12 " placeholder="Enter Your Name">
+                                <input type="text" id="phone" name="phone" required="required" class="form-control col-md-7 col-xs-12 " placeholder="Enter Your Phone No.">
                               </div>
                             </div>
-                            <div class="item col-md-5 col-sm-5 col-xs-12">
-                              <label class="control-label" for="fullname">Id Proof <span class="required">*</span> </label>
+                            <div class="item col-md-6 col-sm-6 col-xs-12">
+                              <label class="control-label" for="idprof">Id Proof <span class="required">*</span></label>
                               <div>
-                                <input type="file" id="idprof" name="idprof" required="required" class="form-control col-md-7 col-xs-12 " placeholder="Enter Your Name">
+                                <input type="file" id="idprof" name="idprof" required="required" class="form-control col-md-7 col-xs-12 " placeholder="Enter Your Name"> (Ex: Aadhaar Card, Voter Id, Passport etc.)
                               </div>
                             </div>
                             <div class="clearfix"></div>
                         </div>
                         
                         <div>
-                        	<div class="item form-group col-md-5 col-sm-5 col-xs-12">
-                              <label class="control-label" for="phone">Your estimated arrival time <span class="required">*</span> </label>
+                        	<div class="item form-group col-md-4 col-sm-4 col-xs-12">
+                              <label class="control-label" for="phone">Your estimated arrival time</label>
                               <div>
-                                <input type="text" id="phone" name="phone" required="required" class="form-control col-md-7 col-xs-12 " placeholder="Enter Your Name">
+                                <select name="arrTime" id="arrTime" class="form-control input-sm" >
+                                  <option value="">-- Select --</option>
+                                  <option value="">01:00</option>
+                                  <option value="">02:00</option>
+                                  <option value="">03:00</option>
+                                  <option value="">04:00</option>
+                                  <option value="">05:00</option>
+                                  <option value="">06:00</option>
+                                  <option value="">07:00</option>
+                                  <option value="">08:00</option>
+                                  <option value="">09:00</option>
+                                  <option value="">10:00</option>
+                                  <option value="">11:00</option>
+                                  <option value="">12:00</option>
+                                  
+                                  <option value="">13:00</option>
+                                  <option value="">14:00</option>
+                                  <option value="">15:00</option>
+                                  <option value="">16:00</option>
+                                  <option value="">17:00</option>
+                                  <option value="">18:00</option>
+                                  <option value="">19:00</option>
+                                  <option value="">20:00</option>
+                                  <option value="">21:00</option>
+                                  <option value="">22:00</option>
+                                  <option value="">23:00</option>
+                                  <option value="">00:00</option>
+                                </select>
                               </div>
                             </div>
                             
@@ -225,13 +259,41 @@ WHERE R_Category_Id=".$val['R_Category_Id']." AND Room_id NOT IN (SELECT Room_Id
                         <div>
                         	<input type="checkbox" id="iagree" name="iagree" required="required" /> I agree with the terms and conditions of Van Vinodan Resort
                         </div>
-                    </form>
+                    
+                </div>
+                
+                <div class="termsBlk">
+                	<h5>Check-In / Check-Out Policies</h5>
+                    <p>This property has the following check-in and check-out times and policies. </p>
+                    
+                    <p><strong>Check-In</strong>: 10:00 AM<br>
+                    <strong>Check-Out</strong>: 08:00 AM</p>
+                    
+                    <h5>Property and Cancellation Policies:</h5>
+                    <p>CANCELLATION POLICY</p>
+                    <ul>
+                        <li>No refund against confirmed booking, when cancelled within 14 days prior to arrival date.</li>
+                        <li>One day’s room rent will be the cancellation charge for confirmed booking when cancelled minimum 15 days prior to arrival date.</li>
+                    </ul>
+                    <p>NO-SHOW POLICY</p>
+                    <ul>
+                        <li>Guest should check-in before 6 P.M. of the arrival date, else will be treated as no-show to the Hotel.</li>
+                        <li>For late check-in, guest must intimate to the Hotel.</li>
+                        <li>In case of no-show, there will be no-refund of the advance paid.</li>
+                    </ul>
+                    
+                    <h5>Terms and Conditions</h5>
+                    <p>As a guest at Van Vinodan Resort, our policies are designed to enhance your stay and ensure maximum comfort and convenience throughout. Please be advised that all guests including children staying at Holiday Resort are required to present valid identification upon check-in which may be either a passport or National ID. *Passport is mandatory for all foreign nationals. Please be aware of the following policies:</p>
                 </div>
                 
             </div>
-            <div class="col-sm-3 bg-success reservation-info">
+            <div class="col-sm-4 reservation-info">
             	<h2><strong>Your Reservation</strong></h2>
+                <div id="checkout-info">
+                
+                </div>
             </div>
+            </form>
         </div>
     </div>  	
 </main>

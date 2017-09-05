@@ -1,7 +1,7 @@
 // JavaScript Document
 $(document).ready(function(){
 	
-	//$("#Tab2").hide();	
+	$("#Tab2").hide();
 	
 	$(document).on("change", ".adultdd", function(){
 		
@@ -141,11 +141,39 @@ $(document).ready(function(){
 				$("#subTotal-"+uniqueId[1]).val(totalAmt);
 				
 				////////////////////////
-				// calls a function
+				// call a function
 				reCalulate();
 				
 				if($("#subTotal-"+uniqueId[1]).val()=="0"){
-					$("#bookRoomBtn").prop("disabled",true);
+					
+					var stotal = new Array();
+					
+					$(".subtotal").each(function(){
+						stotal.push($(this).val());
+					});
+					
+					//call a function
+					//this function checks that
+					//all subtotal is equals to 0(zero)
+					checkIsZero();
+					
+					function checkSubtotal(subtotal) {
+						return subtotal == 0;
+					}
+					
+					function checkIsZero() {
+						var result = stotal.every(checkSubtotal);
+						
+						//if all subtotal is equals to 0(zero)
+						//then disable the #bookRoomBtn button
+						if(result==true){
+							$("#bookRoomBtn").prop("disabled",true);
+						}
+						else{
+							$("#bookRoomBtn").prop("disabled",false);
+						}
+					}
+					
 				}
 				else{
 					$("#bookRoomBtn").prop("disabled",false);
@@ -233,5 +261,117 @@ $(document).ready(function(){
 		
 	});
 	
+	//////////////////////////////
+	//Get the reservation details
+	//////////////////////////////
+	$(document).on("click", "#bookRoomBtn", function(){
+		
+		$("#Tab2").show();
+		$("#Tab1").hide();
+		$("#backBtn").show();
+		
+		var roomsTypeArray = new Array();
+		var adultArray = new Array();
+		var childArray = new Array();
+		var TotalroomsArray = new Array();
+		
+		
+		$(".totalRooms").each(function(){
+			if($(this).val()!='0'){
+				var Id = $(this).attr("id");		
+				var uniqueId = Id.split("-");
+				
+				roomsTypeArray.push( $("#room-name-"+uniqueId[1]).val() );
+				adultArray.push( $("#adult-"+uniqueId[1]).val() );
+				childArray.push( $("#child-"+uniqueId[1]).val() );
+				TotalroomsArray.push( $("#room-"+uniqueId[1]).val() );
+			}
+		});
+		
+		var formdata = new FormData();
+		formdata.append('type', "getCheckoutDisplay");
+		formdata.append('checkindate', $("#chckin").val());
+		formdata.append('checkoutdate', $("#chckout").val());		
+		formdata.append('totalNights', $("#totalNights").val());
+		formdata.append('roomsTypeArray', roomsTypeArray);
+		formdata.append('adultArray', adultArray);
+		formdata.append('childArray', childArray);
+		formdata.append('TotalroomsArray', TotalroomsArray);
+		formdata.append('TotalAmt', $("#TotalAmt").val());
+		
+		$.ajax({
+		   type: "POST",
+		   url: "global_curd.php",
+		   data:formdata,
+		   success: function(data){ //alert(data);
+		   		
+				$("#checkout-info").html(data);
+		   },
+		   cache: false,
+		   contentType: false,
+		   processData: false
+		});//eof ajax
+		
+	});
+	
+	///////////////////////////////////
+	//Get Back to the #Tab1
+	///////////////////////////////////
+	$(document).on("click", "#backBtn", function(){
+		$("#Tab2").hide();
+		$("#Tab1").show();
+		$("#backBtn").hide();
+	});
+	
+	
+	/////////////////////////////////////////
+	//validation for booking contact details
+	/////////////////////////////////////////
+	$("#contactFrm ").validate({
+	  rules: 
+		{   
+		  	fullname: 
+			{ 
+				required: true,
+			},
+			email:
+			{
+				required: true,
+				email:true
+			},
+		   phone:
+			{
+				required: true,
+				number:true,
+				minlength: 10,
+				maxlength: 11
+			},
+			idprof:
+			{
+				required: true,
+			},
+			iagree:
+			{
+				required: true,
+			}
+		   
+		},
+		messages:
+		{
+			iagree:"Please agree our terms & conditions to proceed."
+		}
+	});// eof validation
+	
+	///////////////////////////////////////
+	//click on complete reservation button
+	///////////////////////////////////////
+	$(document).on("click", "#completeReservBtn", function(){
+		
+		if ($("#contactFrm").valid())
+		{
+			
+		}
+		
+	});
 	
 })//eof ready function

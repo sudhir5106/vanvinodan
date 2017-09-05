@@ -27,6 +27,7 @@ $pagename = basename($page, ".php"); // $file is set to "index"
         <script src="js/jquery-ui.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="js/owl.carousel.min.js"></script>
+        <script src="js/jquery.validate.js"></script>
         
 		<script>
         $(document).ready(function() {

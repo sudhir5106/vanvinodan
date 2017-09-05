@@ -155,7 +155,69 @@ WHERE R_Category_Id=".$val['R_Category_Id']." AND Room_id NOT IN (SELECT Room_Id
 	
 <?php }
 
-
+///*******************************************************
+/// Get the selected rooms detail to display items
+///*******************************************************
+if($_POST['type']=="getCheckoutDisplay"){ 
+	
+	$roomsTypeArray = explode(',',$_POST['roomsTypeArray']);
+	$adultArray = explode(',',$_POST['adultArray']);
+	$childArray = explode(',',$_POST['childArray']);
+	$TotalroomsArray = explode(',',$_POST['TotalroomsArray']);
+	
+	$gst = ($_POST['TotalAmt']*9)/100;
+	$grandtotal = $_POST['TotalAmt'] + ($gst*2);
+	
+	$i=0;
+	$roomCount = count($roomsTypeArray);
+	
+	while(($roomCount-1) >= $i){
+		echo '<div class="roomBg"><p><strong>'.$roomsTypeArray[$i].'</strong> <span class="label label-info">'.$TotalroomsArray[$i].' Room (s)</span></p><p>Adult(s): '.$adultArray[$i].' &nbsp;&nbsp;&nbsp;Children(s): '.$childArray[$i].'</p></div>';
+		$i++;
+	}
+	
+	echo '<div class="dates">
+		<div class="col-sm-6"><strong>Check-In Date:</strong><br>'.$_POST['checkindate'].'</div>
+		<div class="col-sm-6"><strong>Check-Out Date:</strong><br>'.$_POST['checkoutdate'].'</div>
+		<div class="clearfix"></div>
+		<div class="nightsBlk"><strong>Total Nights:</strong> '.$_POST['totalNights'].'</div>
+	</div>
+	<div>
+		<div class="amtRow">
+			<div class="col-sm-6">Total Room Amt.:</div>
+			<div class="col-sm-6 text-right"><i class="fa fa-inr" aria-hidden="true"></i> '.sprintf('%0.2f',$_POST['TotalAmt']).'</div>
+			<div class="clearfix"></div>
+		</div>
+		<div class="amtRow">
+			<div class="col-sm-6">Extra Guest:</div>
+			<div class="col-sm-6 text-right"><i class="fa fa-inr" aria-hidden="true"></i> 0.00</div>
+			<div class="clearfix"></div>
+		</div>
+		<div class="amtRow">
+			<div class="col-sm-6">SGST(9%):</div>
+			<div class="col-sm-6 text-right"><i class="fa fa-inr" aria-hidden="true"></i> '.sprintf('%0.2f',$gst).'</div>
+			<div class="clearfix"></div>
+		</div>
+		<div class="amtRow">
+			<div class="col-sm-6">CGST(9%):</div>
+			<div class="col-sm-6 text-right"><i class="fa fa-inr" aria-hidden="true"></i> '.sprintf('%0.2f',$gst).'</div>
+			<div class="clearfix"></div>
+		</div>
+		<div class="grandTotalBlk">
+			<div class="col-sm-6"><strong>GRAND TOTAL:</strong></div>
+			<div class="col-sm-6 text-right grandTotal"><i class="fa fa-inr" aria-hidden="true"></i> '.sprintf('%0.2f',$grandtotal).'</div>
+			<div class="clearfix"></div>
+		</div>
+		<div class="text-center compltBtn">
+			<button id="completeReservBtn" type="button" class="btn btn-danger btn-lg">COMPLETE RESERVATION</button>
+		</div>
+	</div>
+	';
+?>
+	
+    
+    
+<?php }
 
 
 
