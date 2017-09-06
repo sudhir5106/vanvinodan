@@ -243,6 +243,7 @@ $(document).ready(function(){
 		
 		$("#Tab1").show();
 		$("#Tab2").hide();
+		$("#backBtn").hide();
 		
 		var formdata = new FormData();
 		formdata.append('type', "getRooms");
