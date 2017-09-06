@@ -746,6 +746,7 @@ thumbnail .image {
 
 #tab1{display:none;}
 
+.roomInfo{display:none; background:#f7f7f9;}
 .roomBg{background:#fff; color:#333; padding:8px 10px; border-radius:3px; margin-bottom:5px; font-size:16px;}
 .dates{margin:20px 0;}
 .nightsBlk{padding:15px 0 15px 15px;}

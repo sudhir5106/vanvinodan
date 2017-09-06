@@ -153,7 +153,7 @@ WHERE R_Category_Id=".$val['R_Category_Id']." AND Room_id NOT IN (SELECT Room_Id
                             	<input type="hidden" class="subtotal" id="subTotal-<?php echo $val['R_Category_Id']; ?>" value="0.00" />
                             </td>
                         </tr>
-                        <tr class="roomInfo" style="display:none; background:#f7f7f9;">
+                        <tr class="roomInfo">
                         	<td colspan="8">
                             	<?php echo $val['Room_Info'] ?>
                             </td>
@@ -169,7 +169,7 @@ WHERE R_Category_Id=".$val['R_Category_Id']." AND Room_id NOT IN (SELECT Room_Id
                 	<div class="Totalprice"><i class="fa fa-inr" aria-hidden="true"></i> <span id="displayTotalAmt">0.00</span></div>
                     <div>
                     	<input type="hidden" id="TotalAmt" value="0.00" />
-                        <button type="button" id="bookRoomBtn" class="btn btn-lg btn-danger">BOOK NOW</button>
+                        <button type="button" id="bookRoomBtn" class="btn btn-lg btn-danger" disabled="disabled">BOOK NOW</button>
                     </div>
                 </div>
             </div>

@@ -80,10 +80,11 @@ if($_POST['type']=="getRooms"){
                     <td><img src="images/room-img.jpg" alt="" /></td>
                     <td class="text-info">
                         <?php echo $val['R_Category_Name']; ?>
+                        <input type="hidden" id="room-name-<?php echo $val['R_Category_Id']; ?>" value="<?php echo $val['R_Category_Name']; ?>" />
                         <input type="hidden" id="roomType-<?php echo $val['R_Category_Id']; ?>" value="<?php echo $val['R_Category_Id']; ?>" />
                     </td>
                     <td><i class="fa fa-inr" aria-hidden="true"></i> <?php echo sprintf('%0.2f',$val['Base_Fare']); ?></td>
-                    <td><?php echo sprintf('%0.2f', ($_REQUEST['totalNights'] * $val['Base_Fare'])); ?></td>
+                    <td><i class="fa fa-inr" aria-hidden="true"></i> <?php echo sprintf('%0.2f', ($_REQUEST['totalNights'] * $val['Base_Fare'])); ?></td>
                     <td>
                         <span class="glyphicon glyphicon-user"></span> <?php echo $val['R_Capacity']; ?>
                         <input type="hidden" id="capacity-<?php echo $val['R_Category_Id']; ?>" value="<?php echo $val['R_Capacity']; ?>" />
@@ -129,7 +130,7 @@ WHERE R_Category_Id=".$val['R_Category_Id']." AND Room_id NOT IN (SELECT Room_Id
                         
                     </td>
                 </tr>
-                <tr class="roomInfo" style="display:none; background:#f7f7f9;">
+                <tr class="roomInfo">
                     <td colspan="8">
                         <?php echo $val['Room_Info'] ?>
                     </td>
@@ -145,7 +146,7 @@ WHERE R_Category_Id=".$val['R_Category_Id']." AND Room_id NOT IN (SELECT Room_Id
             <div class="Totalprice"><i class="fa fa-inr" aria-hidden="true"></i> <span id="displayTotalAmt">0.00</span></div>
             <div>
                 <input type="hidden" id="TotalAmt" value="0.00" />
-                <button type="button" id="bookRoomBtn" class="btn btn-lg btn-danger">BOOK NOW</button>
+                <button type="button" id="bookRoomBtn" class="btn btn-lg btn-danger" disabled="disabled">BOOK NOW</button>
             </div>
         </div>
     </div>
