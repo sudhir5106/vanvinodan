@@ -373,6 +373,71 @@ $(document).ready(function(){
 		
 		if ($("#contactFrm").valid())
 		{
+			var roomsTypeArray = new Array();
+			var adultArray = new Array();
+			var childArray = new Array();
+			var TotalroomsArray = new Array();
+			var SubtotalArray = new Array();
+			
+			
+			$(".totalRooms").each(function(){
+				if($(this).val()!='0'){
+					var Id = $(this).attr("id");		
+					var uniqueId = Id.split("-");
+					
+					roomsTypeArray.push( $("#roomType-"+uniqueId[1]).val() );
+					adultArray.push( $("#adult-"+uniqueId[1]).val() );
+					childArray.push( $("#child-"+uniqueId[1]).val() );
+					TotalroomsArray.push( $("#room-"+uniqueId[1]).val() );
+					SubtotalArray.push( $("#subTotal-"+uniqueId[1]).val() );
+				}
+			});
+			
+			var gst = ($("#TotalAmt").val()*9)/100;
+			var grandTotal = parseInt($("#TotalAmt").val()) + (gst * 2);
+			
+			
+			var formdata = new FormData();
+			formdata.append('type', "insertReservationInfo");
+			formdata.append('checkindate', $("#chckin").val());
+			formdata.append('checkoutdate', $("#chckout").val());
+			formdata.append('roomsTypeArray', roomsTypeArray);
+			formdata.append('adultArray', adultArray);
+			formdata.append('childArray', childArray);
+			formdata.append('clientname', $("#fullname").val());
+			formdata.append('email', $("#email").val());
+			formdata.append('phone', $("#phone").val());
+			formdata.append('arrTime', $("#arrTime").val());
+			formdata.append('file', $('input[id=idprof]')[0].files[0]);
+			formdata.append('TotalAmt', $("#TotalAmt").val());
+			formdata.append('TotalroomsArray', TotalroomsArray);
+			formdata.append('SubtotalArray', SubtotalArray);
+			formdata.append('gst', gst);
+			formdata.append('grandTotal', grandTotal);			
+						
+			$.ajax({
+			   type: "POST",
+			   url: "global_curd.php",
+			   data:formdata,
+			   success: function(data){ //alert(data);
+					
+					if(data==1){
+						alert("success");
+						window.location.replace("reservation.php");
+					}
+					else{ 
+						alert("fail");
+						window.location.replace("reservation.php");
+					}
+					
+			   },
+			   cache: false,
+			   contentType: false,
+			   processData: false
+			});//eof ajax
+			
+			
+			
 			
 		}
 		

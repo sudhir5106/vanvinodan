@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 05, 2017 at 04:57 PM
+-- Generation Time: Sep 06, 2017 at 05:04 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.6.24
 
@@ -61,21 +61,8 @@ CREATE TABLE `tbl_reservation` (
   `SGST_Amt` float NOT NULL,
   `CGST_Amt` float NOT NULL,
   `Grand_Total_Amt` float NOT NULL,
-  `Reservation_Status` tinyint(4) NOT NULL COMMENT '1 confirmed, 2 arrived, 3 checked-out, 4 cancelled, 5 failed'
+  `Reservation_Status` tinyint(4) NOT NULL COMMENT '1 confirmed, 2 arrived, 3 checked-out, 4 cancelled, 5 pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tbl_reservation`
---
-
-INSERT INTO `tbl_reservation` (`Reservation_Id`, `Reservation_Ref_No`, `Check_In_Date`, `Check_Out_Date`, `Arrival_Time`, `Client_Name`, `Email`, `Phone`, `ID_Proof_Image`, `Total_Rooms_Amt`, `Total_Guests_Amt`, `Subtotal_Amt`, `SGST_Amt`, `CGST_Amt`, `Grand_Total_Amt`, `Reservation_Status`) VALUES
-(1, '', '2017-08-29', '2017-08-31', '12:00:00', 'sudhir', 'sudhir5106@gmail.com', '9826396462', '123456789.jpg', 0, 0, 3000, 270, 270, 3540, 1),
-(2, '', '2017-08-29', '2017-08-30', '12:00:00', 'Rejith', 'rejith@gmail.com', '9826233257', '321654987.jpg', 0, 0, 3500, 315, 315, 4130, 1),
-(3, '', '2017-08-29', '2017-08-30', '12:00:00', 'Rakesh', 'rakesh@gmail.com', '9826233253', '321654977.jpg', 0, 0, 4000, 360, 360, 4720, 1),
-(4, '', '2017-08-28', '2017-08-29', '12:00:00', 'Khalid', 'khalid@gmail.com', '9826233253', '321654977.jpg', 0, 0, 4000, 360, 360, 4720, 1),
-(5, '', '2017-08-29', '2017-08-30', '12:00:00', 'ss', 'ss@gmail.com', '9826233257', '321654987.jpg', 0, 0, 3500, 315, 315, 4130, 1),
-(6, '', '2017-08-29', '2017-08-30', '12:00:00', 'rr', 'rr@gmail.com', '9826233257', '321654987.jpg', 0, 0, 3500, 315, 315, 4130, 1),
-(7, '', '2017-09-03', '2017-09-05', '12:00:00', 'kk', 'kk@gmail.com', '9826233257', '321654987.jpg', 0, 0, 3500, 315, 315, 4130, 1);
 
 -- --------------------------------------------------------
 
@@ -93,15 +80,8 @@ CREATE TABLE `tbl_reserved_rooms` (
   `Children` tinyint(4) NOT NULL,
   `Base_Fare` float NOT NULL,
   `Extra_Guest_Amt` float NOT NULL,
-  `Reservation_Status` tinyint(4) NOT NULL COMMENT '1 confirmed, 2 arrived, 3 checked-out, 4 cancelled, 5 failed'
+  `Reservation_Status` tinyint(4) NOT NULL COMMENT '1 confirmed, 2 arrived, 3 checked-out, 4 cancelled, 5 pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tbl_reserved_rooms`
---
-
-INSERT INTO `tbl_reserved_rooms` (`RB_Id`, `Reservation_Id`, `Room_Id`, `Check_In_Date`, `Check_Out_Date`, `Adult`, `Children`, `Base_Fare`, `Extra_Guest_Amt`, `Reservation_Status`) VALUES
-(1, 7, 5, '2017-09-03', '2017-09-05', 2, 0, 3000, 0, 2);
 
 -- --------------------------------------------------------
 
@@ -204,12 +184,12 @@ ALTER TABLE `tbl_room_master`
 -- AUTO_INCREMENT for table `tbl_reservation`
 --
 ALTER TABLE `tbl_reservation`
-  MODIFY `Reservation_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `Reservation_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `tbl_reserved_rooms`
 --
 ALTER TABLE `tbl_reserved_rooms`
-  MODIFY `RB_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `RB_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `tbl_rooms_category`
 --

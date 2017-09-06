@@ -220,9 +220,126 @@ if($_POST['type']=="getCheckoutDisplay"){
     
 <?php }
 
+///*******************************************************
+/// Get the selected rooms detail to display items
+///*******************************************************
+if($_POST['type']=="insertReservationInfo"){ 
 
+	$path = ROOT."/images/upload-proof/";
+	$paththumb = ROOT."/images/upload-proof/thumb/";
+	
+	$con= mysql_connect(SERVER,DBUSER,DBPASSWORD);
+	mysql_query('SET AUTOCOMMIT=0',$con);
+	mysql_query('START TRANSACTION',$con);
+	
+	try{
+	
+		$roomsTypeArray = explode(',',$_POST['roomsTypeArray']);
+		$adultArray = explode(',',$_POST['adultArray']);
+		$childArray = explode(',',$_POST['childArray']);
+		$TotalroomsArray = explode(',',$_POST['TotalroomsArray']);
+		$SubtotalArray = explode(',',$_POST['SubtotalArray']);
+		
+		
+		$name = $_FILES['file']['name'];
+		$image=explode('.',$name);
+		$actual_image_name = time().'.'.$image[1]; // rename the file name
+		$tmp = $_FILES['file']['tmp_name'];
+		
+		
+		if(move_uploaded_file($tmp, $path.$actual_image_name))
+		{
+			
+			/////////////////////////////////////////////////////////////
+			// move the image in the /images/upload-proof/ thumb folder
+			/////////////////////////////////////////////////////////////
+			$resizeObj1 = new resize($path.$actual_image_name);
+			$resizeObj1 -> resizeImage(200, 200, 'auto');
+			$resizeObj1 -> saveImage($paththumb.$actual_image_name, 100);
+			
+			//************************************************************
+			$checkindate=date('y-m-d',strtotime($_POST['checkindate']));
+			$checkoutdate=date('y-m-d',strtotime($_POST['checkoutdate']));
+			//************************************************************			
+			$refNo = 'REF'.time(); //Generate Unique Reservation ref no.
+			//************************************************************
+			
+			///////////////////////////////////////////////////////////
+			// SQL Query to insert the data into tbl_reservation table
+			///////////////////////////////////////////////////////////
+			$tblfield=array('Reservation_Ref_No','Check_In_Date','Check_Out_Date','Arrival_Time','Client_Name','Email','Phone','ID_Proof_Image','Total_Rooms_Amt','Total_Guests_Amt','Subtotal_Amt','SGST_Amt','CGST_Amt','Grand_Total_Amt','Reservation_Status');
+			
+			$tblvalues=array($refNo,$checkindate,$checkoutdate,$_POST['arrTime'],$_POST['clientname'],$_POST['email'],$_POST['phone'],$actual_image_name,$_POST['TotalAmt'],0,$_POST['TotalAmt'],$_POST['gst'],$_POST['gst'],$_POST['grandTotal'],5);
+			
+			$res=$db->valInsert("tbl_reservation",$tblfield,$tblvalues);
+			
+			if(!$res)
+			{
+				throw new Exception('a');
+			}
+			//*************************
+			//Get the Inserted Last Id
+			//*************************
+	 		$last_Id=mysql_insert_id();
+			//*************************
+			////////////////////////////////////////////////
+			// SQL Query to get the remain unreserved rooms 
+			////////////////////////////////////////////////
+			$i=0;
+			$roomCount = count($roomsTypeArray);
+			
+			while(($roomCount-1) >= $i){
+				
+				//////////////////////////////////////////
+				// SELECT Query to get the remaining rooms
+				// which are not reserved
+				//////////////////////////////////////////				
+				$getrooms = $db->ExecuteQuery("SELECT Room_Id FROM tbl_room_master 
+WHERE R_Category_Id=".$roomsTypeArray[$i]." AND Room_id NOT IN (SELECT Room_Id FROM tbl_reserved_rooms WHERE Check_In_Date <= '".$checkindate."' AND Check_Out_Date > '".$checkindate."' AND Reservation_Status<>3 AND Reservation_Status<>4 AND Reservation_Status<>5) LIMIT ".$TotalroomsArray[$i]);
+				
+				//Get the singal room fare their room category wise
+				//**************************************************
+				$basefare = $SubtotalArray[$i]/$TotalroomsArray[$i];
+				//**************************************************
 
+				foreach($getrooms as $getroomsVal){					
+					/////////////////////////////////////////////////////////////
+					// SQL Query to insert the data into tbl_reserved_rooms table
+					/////////////////////////////////////////////////////////////
+					$tblfield=array('Reservation_Id','Room_Id','Check_In_Date','Check_Out_Date','Adult','Children','Base_Fare','Extra_Guest_Amt','Reservation_Status');
+					
+					$tblvalues=array($last_Id,$getroomsVal['Room_Id'],$checkindate,$checkoutdate,$adultArray[$i],$childArray[$i],$basefare,0,5);
+					
+					$res=$db->valInsert("tbl_reserved_rooms",$tblfield,$tblvalues);
+					
+					if(!$res)
+					{
+						throw new Exception('b');
+					}
+					
+				}//eof foreach loop
+				$i++;								
+			}//eof while loop
+			
+			
+		}
+		else{
+			throw new Exception('c');	
+		}
+		
+	
+		mysql_query("COMMIT",$con);
+		echo 1;
+		
+	}
+	catch(Exception $e)
+	{
+		echo  $e->getMessage();
+		mysql_query('ROLLBACK',$con);
+		mysql_query('SET AUTOCOMMIT=1',$con);
+	}
 
+}//eof if condition
 
 
 
