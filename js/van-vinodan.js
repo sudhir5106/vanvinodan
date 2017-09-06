@@ -241,6 +241,9 @@ $(document).ready(function(){
 	/////////////////////////
 	$(document).on("click", "#searchRoomsBtn", function(){
 		
+		$("#Tab1").show();
+		$("#Tab2").hide();
+		
 		var formdata = new FormData();
 		formdata.append('type', "getRooms");
 		formdata.append('chckin', $("#chckin").val());

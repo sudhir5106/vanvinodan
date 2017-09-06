@@ -44,7 +44,7 @@ WHERE Room_id NOT IN (SELECT Room_Id FROM tbl_reserved_rooms WHERE Check_In_Date
     
     <div class="middle-container">
     	
-        <div class="container searchFrm padding-left-zero">
+        <div class="container searchFrm padding-left-zero padding-right-zero">
         <form class="form-horizontal" role="form" id="searchRoomsFrm" method="post">
         
         	<div class="col-sm-2 col-xs-6 padding-left-zero">
@@ -64,10 +64,11 @@ WHERE Room_id NOT IN (SELECT Room_Id FROM tbl_reserved_rooms WHERE Check_In_Date
                     </div>
                 </div>
             </div>
-            <div class="col-sm-4 col-xs-12 text-left text-center-xs"><button type="button" id="searchRoomsBtn" class="btn btn-sm btn-info"><i class="fa fa-search" aria-hidden="true"></i> SEARCH</button></div>
+            <div class="col-sm-2 col-xs-12 text-left text-center-xs"><button type="button" id="searchRoomsBtn" class="btn btn-sm btn-info"><i class="fa fa-search" aria-hidden="true"></i> SEARCH</button></div>
             
-            <div class="col-sm-4 col-xs-12 text-right backbtnblk">
-            	<button type="button" id="cancelBtn" class="btn btn-sm btn-danger"><i class="fa fa-times" aria-hidden="true"></i> CANCEL RESERVATION</button>
+            <div class="col-sm-6 col-xs-12 text-right backbtnblk padding-right-zero">
+            	<a id="cancelBtn" class="btn btn-sm btn-danger"><i class="fa fa-times" aria-hidden="true"></i> CANCEL RESERVATION</a>
+                <a id="cancelBtn" class="btn btn-sm btn-info"><i class="fa fa-spinner" aria-hidden="true"></i> PENDING RESERVATION</a>
                 <button type="button" id="backBtn" class="btn btn-sm btn-success"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> BACK</button>
             </div>
             <div class="clearfix"></div>
@@ -257,7 +258,7 @@ WHERE R_Category_Id=".$val['R_Category_Id']." AND Room_id NOT IN (SELECT Room_Id
                         </div>
                         
                         <div>
-                        	<input type="checkbox" id="iagree" name="iagree" required="required" /> I agree with the terms and conditions of Van Vinodan Resort
+                        	<input type="checkbox" id="iagree" name="iagree" required="required" /> <label style="font-weight:normal" class="control-label" for="idprof"><span class="required">*</span> I agree with the terms and conditions of Van Vinodan Resort  </label>
                         </div>
                     
                 </div>
