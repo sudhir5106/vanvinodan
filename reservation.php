@@ -17,7 +17,7 @@ else{
 	$checkoutdate = date("Y-m-d",strtotime($checkindate.'+1 day'));//It will adding 1 day
 	
 	$checkin = date("d-m-Y");
-	$checkout = date("d-m-Y",strtotime($checkin.'+1 day'));//It will adding 1 day
+	$checkout = date("d-m-Y",strtotime($checkin.'+1 day'));//It will add 1 day
 }
 
 /////////////////////////////
@@ -106,8 +106,8 @@ WHERE Room_id NOT IN (SELECT Room_Id FROM tbl_reserved_rooms WHERE Check_In_Date
                                 <input type="hidden" id="room-name-<?php echo $val['R_Category_Id']; ?>" value="<?php echo $val['R_Category_Name']; ?>" />
                                 <input type="hidden" id="roomType-<?php echo $val['R_Category_Id']; ?>" value="<?php echo $val['R_Category_Id']; ?>" />
                             </td>
-                            <td><i class="fa fa-inr" aria-hidden="true"></i> <?php echo sprintf('%0.2f', ($numberOfNights * $val['Base_Fare']));?></td>
-                            <td><i class="fa fa-inr" aria-hidden="true"></i> <?php echo sprintf('%0.2f',$val['Base_Fare']); ?></td>
+                            <td><i class="fa fa-inr" aria-hidden="true"></i> <?php echo sprintf('%0.2f', $val['Base_Fare']);?></td>
+                            <td><i class="fa fa-inr" aria-hidden="true"></i> <?php echo sprintf('%0.2f', ($numberOfNights * $val['Base_Fare'])); ?></td>
                             <td>
                             	<span class="glyphicon glyphicon-user"></span> <?php echo $val['R_Capacity']; ?>
                             	<input type="hidden" id="capacity-<?php echo $val['R_Category_Id']; ?>" value="<?php echo $val['R_Capacity']; ?>" />
@@ -179,7 +179,7 @@ WHERE R_Category_Id=".$val['R_Category_Id']." AND Room_id NOT IN (SELECT Room_Id
         </form>
         </div>
         
-        <div id="Tab2" class="container checkout-tab">
+        <div id="Tab2" class="container checkout-tab" style="display:none;">
         	<form class="form-horizontal" role="form" id="contactFrm" method="post">
             <div class="col-sm-8">
             	<h2><strong>CONTACT INFORMATION</strong></h2>

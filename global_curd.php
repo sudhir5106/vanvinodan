@@ -2,8 +2,12 @@
 
 include('config.php'); 
 require_once(PATH_LIBRARIES.'/classes/DBConn.php');
-require_once(PATH_LIBRARIES.'/classes/resize.php');
 $db = new DBConn();
+
+require_once(PATH_LIBRARIES.'/classes/mail.php');
+$mailClass = new mail();
+
+require_once(PATH_LIBRARIES.'/classes/resize.php');
 
 ///*******************************************************
 /// Get Base_Fare
@@ -32,17 +36,17 @@ if($_POST['type']=="getACAmt")
 ///*******************************************************
 if($_POST['type']=="getTotalNights")
 {
-	/////////////////////////////
+	///////////////////////////////////////////
 	//Get Total No of Nights
-	/////////////////////////////
+	///////////////////////////////////////////
 	$date1 = new DateTime($_REQUEST['chckin']);
 	$date2 = new DateTime($_REQUEST['chckout']);
 	
-	///////////////////////////////////////////////////////////////////////////////////////
-	// this calculates the diff between two dates, which is the number of nights
-	///////////////////////////////////////////////////////////////////////////////////////
+	//***********************************************************
+	// Its calculates the the number of nights between two dates
+	//***********************************************************
 	$numberOfNights= $date2->diff($date1)->format("%a"); 
-	/////////////////////////////////////////
+	//***********************************************************
 	echo $numberOfNights;
 	
 }
@@ -321,6 +325,12 @@ WHERE R_Category_Id=".$roomsTypeArray[$i]." AND Room_id NOT IN (SELECT Room_Id F
 				$i++;								
 			}//eof while loop
 			
+			//**************************************************
+			// Call a class to send a mail to the user regarding 
+			// pending reservation.
+			//**************************************************
+			$mailClass->reservationPendingMail($last_Id);
+			//**************************************************
 			
 		}
 		else{
