@@ -371,8 +371,10 @@ $(document).ready(function(){
 	///////////////////////////////////////
 	$(document).on("click", "#completeReservBtn", function(){
 		
-		if ($("#contactFrm").valid())
+		if($("#contactFrm").valid())
 		{
+			$('#loading').show();
+			
 			var roomsTypeArray = new Array();
 			var adultArray = new Array();
 			var childArray = new Array();
@@ -421,12 +423,11 @@ $(document).ready(function(){
 			   data:formdata,
 			   success: function(data){ //alert(data);
 					
-					if(data==1){
-						alert("success");
-						window.location.replace("reservation.php");
+					if(data!=0){
+						$('#loading').hide();
+						window.location.replace("payment/PayUMoney_form.php?id="+data);						
 					}
 					else{ 
-						alert("fail");
 						window.location.replace("reservation.php");
 					}
 					

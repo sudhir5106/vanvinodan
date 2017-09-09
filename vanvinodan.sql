@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 06, 2017 at 05:04 PM
+-- Generation Time: Sep 09, 2017 at 05:23 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.6.24
 
@@ -38,6 +38,27 @@ CREATE TABLE `tbl_admin_login` (
 
 INSERT INTO `tbl_admin_login` (`Login_Id`, `Login_Name`, `Login_Password`) VALUES
 (1, 'admin', '123456');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_payment_gateway_detail`
+--
+
+CREATE TABLE `tbl_payment_gateway_detail` (
+  `Payment_Gateway_Id` tinyint(4) NOT NULL,
+  `Company_Name` varchar(100) NOT NULL,
+  `Merchant_Key` varchar(20) NOT NULL,
+  `Salt_Key` varchar(20) NOT NULL,
+  `Status` tinyint(4) NOT NULL COMMENT '1 for Activated'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_payment_gateway_detail`
+--
+
+INSERT INTO `tbl_payment_gateway_detail` (`Payment_Gateway_Id`, `Company_Name`, `Merchant_Key`, `Salt_Key`, `Status`) VALUES
+(1, 'Suncros Online', 'rhchpcYE', 'Zu6mupmKDd', 1);
 
 -- --------------------------------------------------------
 
@@ -104,7 +125,7 @@ CREATE TABLE `tbl_rooms_category` (
 --
 
 INSERT INTO `tbl_rooms_category` (`R_Category_Id`, `R_Category_Name`, `R_Capacity`, `Base_Fare`, `Extra_Guest_Fare`, `Room_Info`, `Amenities`) VALUES
-(1, 'Deluxe', 2, 3000, 1000, 'These Cottage Rooms Epitomize The Mark Of Grandeur . Every Cottage Is Encircled By A Private Patch Of Garden With Umbrella Shade Generating A Cozy Nook. The Cottage Encompasses An Exclusive Royal Bed, Accommodating 2 Adult Persons. Amidst The Stretch Of Timeless Idleness The Guests Can Experience The Visual Pleasure Of Viewing And Dynamic Sea-Waves Breaking Upon The Golden Sea-Beach, Through The Huge Fenesta Window . The Cottages Are Adorned With Sophisticated Furniture, Picturesque Wall-Papers, And Traditional Art Frames. A Concoction Of Tradition And Modernity --- Providing The Opportunity Of Living In A Luxurious Style.', 'LCD TV | H/C Water Supply | Tea/Coffee Maker | Wifi | Electronic Safe | EPABX | Toiletries | Mini Refrigerator | Packaged Drinking Water | English Newspaper | Digital Locker | Patio |'),
+(1, 'Deluxe', 2, 0.5, 1000, 'These Cottage Rooms Epitomize The Mark Of Grandeur . Every Cottage Is Encircled By A Private Patch Of Garden With Umbrella Shade Generating A Cozy Nook. The Cottage Encompasses An Exclusive Royal Bed, Accommodating 2 Adult Persons. Amidst The Stretch Of Timeless Idleness The Guests Can Experience The Visual Pleasure Of Viewing And Dynamic Sea-Waves Breaking Upon The Golden Sea-Beach, Through The Huge Fenesta Window . The Cottages Are Adorned With Sophisticated Furniture, Picturesque Wall-Papers, And Traditional Art Frames. A Concoction Of Tradition And Modernity --- Providing The Opportunity Of Living In A Luxurious Style.', 'LCD TV | H/C Water Supply | Tea/Coffee Maker | Wifi | Electronic Safe | EPABX | Toiletries | Mini Refrigerator | Packaged Drinking Water | English Newspaper | Digital Locker | Patio |'),
 (2, 'Super Deluxe', 4, 4000, 1000, 'These Cottage Rooms Epitomize The Mark Of Grandeur . Every Cottage Is Encircled By A Private Patch Of Garden With Umbrella Shade Generating A Cozy Nook. The Cottage Encompasses An Exclusive Royal Bed, Accommodating 2 Adult Persons. Amidst The Stretch Of Timeless Idleness The Guests Can Experience The Visual Pleasure Of Viewing And Dynamic Sea-Waves Breaking Upon The Golden Sea-Beach, Through The Huge Fenesta Window . The Cottages Are Adorned With Sophisticated Furniture, Picturesque Wall-Papers, And Traditional Art Frames. A Concoction Of Tradition And Modernity --- Providing The Opportunity Of Living In A Luxurious Style.', 'LCD TV | H/C Water Supply | Tea/Coffee Maker | Wifi | Electronic Safe | EPABX | Toiletries | Mini Refrigerator | Packaged Drinking Water | English Newspaper | Digital Locker | Patio'),
 (4, 'Tent', 6, 5000, 1000, 'Most Of These Rooms Are In The 2nd , 3rd And 4th Floor Of The Hotel Building. These Rooms Encapsulate 2 Royal Beds Marked By Their Exclusivity. The Exclusivity Can Not Be Enunciated. It Can Only Be Perceived When You Stretch Yourselves Upon Them And Experience An Ineffable Pleasure. The Beds Are Capacious Enough To Accommodate 4 Adults . Through The Crystal Clear Fenesta Windows , Marked By Their Optimum Transparency, The Guests Can Enjoy The Panoramic View Of The Sea Extending Up To The Horizon. The Room Is Adorned By Classical Furniture , Artistic Frames And Exquisite Wall-Papers All Of Which Reflect The Glow Of Aristocratic Sophistication.', 'LCD TV | H/C Water Supply | Tea/Coffee Maker | Wireless Broadband Internet Access | Electronic Safe | EPABX | Toiletries | Mini Refrigerator | Packaged Drinking Water | English Newspaper | Digital Locker');
 
@@ -141,6 +162,23 @@ INSERT INTO `tbl_room_master` (`Room_Id`, `Room_Name`, `R_Category_Id`) VALUES
 (14, 'Room 304', 4),
 (15, 'Room 305', 4);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_transactions`
+--
+
+CREATE TABLE `tbl_transactions` (
+  `Transaction_Id` int(11) NOT NULL,
+  `Transaction_Date` datetime NOT NULL,
+  `Transaction_No` varchar(100) NOT NULL,
+  `Reservation_Id` int(11) NOT NULL,
+  `Paid_Amt` float NOT NULL,
+  `Payment_Mode` varchar(20) NOT NULL,
+  `Pay_Status` varchar(20) NOT NULL,
+  `Payment_Id` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 --
 -- Indexes for dumped tables
 --
@@ -150,6 +188,12 @@ INSERT INTO `tbl_room_master` (`Room_Id`, `Room_Name`, `R_Category_Id`) VALUES
 --
 ALTER TABLE `tbl_admin_login`
   ADD PRIMARY KEY (`Login_Id`);
+
+--
+-- Indexes for table `tbl_payment_gateway_detail`
+--
+ALTER TABLE `tbl_payment_gateway_detail`
+  ADD PRIMARY KEY (`Payment_Gateway_Id`);
 
 --
 -- Indexes for table `tbl_reservation`
@@ -177,19 +221,30 @@ ALTER TABLE `tbl_room_master`
   ADD KEY `R_Category_Id` (`R_Category_Id`);
 
 --
+-- Indexes for table `tbl_transactions`
+--
+ALTER TABLE `tbl_transactions`
+  ADD PRIMARY KEY (`Transaction_Id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
+-- AUTO_INCREMENT for table `tbl_payment_gateway_detail`
+--
+ALTER TABLE `tbl_payment_gateway_detail`
+  MODIFY `Payment_Gateway_Id` tinyint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
 -- AUTO_INCREMENT for table `tbl_reservation`
 --
 ALTER TABLE `tbl_reservation`
-  MODIFY `Reservation_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `Reservation_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 --
 -- AUTO_INCREMENT for table `tbl_reserved_rooms`
 --
 ALTER TABLE `tbl_reserved_rooms`
-  MODIFY `RB_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `RB_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 --
 -- AUTO_INCREMENT for table `tbl_rooms_category`
 --
@@ -200,6 +255,11 @@ ALTER TABLE `tbl_rooms_category`
 --
 ALTER TABLE `tbl_room_master`
   MODIFY `Room_Id` tinyint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+--
+-- AUTO_INCREMENT for table `tbl_transactions`
+--
+ALTER TABLE `tbl_transactions`
+  MODIFY `Transaction_Id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- Constraints for dumped tables
 --

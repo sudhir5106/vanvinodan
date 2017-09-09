@@ -1,0 +1,158 @@
+[15-Jul-2015 12:40:38 Asia/Calcutta] PHP Warning:  include(PATH_USER_INCLUDE/head.php): failed to open stream: No such file or directory in /home/suncross/public_html/mymoment/customer/payment/payment-success.php on line 3
+[15-Jul-2015 12:40:38 Asia/Calcutta] PHP Warning:  include(PATH_USER_INCLUDE/head.php): failed to open stream: No such file or directory in /home/suncross/public_html/mymoment/customer/payment/payment-success.php on line 3
+[15-Jul-2015 12:40:38 Asia/Calcutta] PHP Warning:  include(): Failed opening 'PATH_USER_INCLUDE/head.php' for inclusion (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/suncross/public_html/mymoment/customer/payment/payment-success.php on line 3
+[15-Jul-2015 12:40:38 Asia/Calcutta] PHP Warning:  include(PATH_USER_INCLUDE/header.php): failed to open stream: No such file or directory in /home/suncross/public_html/mymoment/customer/payment/invalid_trans.php on line 3
+[15-Jul-2015 12:40:38 Asia/Calcutta] PHP Warning:  include(PATH_USER_INCLUDE/header.php): failed to open stream: No such file or directory in /home/suncross/public_html/mymoment/customer/payment/invalid_trans.php on line 3
+[15-Jul-2015 12:40:38 Asia/Calcutta] PHP Warning:  include(): Failed opening 'PATH_USER_INCLUDE/header.php' for inclusion (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/suncross/public_html/mymoment/customer/payment/invalid_trans.php on line 3
+[15-Jul-2015 12:40:38 Asia/Calcutta] PHP Warning:  include(PATH_USER_INCLUDE/footer.php): failed to open stream: No such file or directory in /home/suncross/public_html/mymoment/customer/payment/invalid_trans.php on line 22
+[15-Jul-2015 12:40:38 Asia/Calcutta] PHP Warning:  include(PATH_USER_INCLUDE/footer.php): failed to open stream: No such file or directory in /home/suncross/public_html/mymoment/customer/payment/invalid_trans.php on line 22
+[15-Jul-2015 12:40:38 Asia/Calcutta] PHP Warning:  include(): Failed opening 'PATH_USER_INCLUDE/footer.php' for inclusion (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/suncross/public_html/mymoment/customer/payment/invalid_trans.php on line 22
+[16-Jul-2015 21:07:02 Asia/Calcutta] PHP Warning:  mysql_num_fields() expects parameter 1 to be resource, boolean given in /home/suncross/public_html/mymoment/libraries/classes/DBConn.php on line 250
+[16-Jul-2015 21:07:02 Asia/Calcutta] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/suncross/public_html/mymoment/libraries/classes/DBConn.php on line 256
+[17-Jul-2015 16:40:15 Asia/Calcutta] PHP Warning:  mysql_num_fields() expects parameter 1 to be resource, boolean given in /home/suncross/public_html/mymoment/libraries/classes/DBConn.php on line 250
+[17-Jul-2015 16:40:15 Asia/Calcutta] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/suncross/public_html/mymoment/libraries/classes/DBConn.php on line 256
+[17-Jul-2015 17:30:02 Asia/Calcutta] PHP Warning:  mysql_num_fields() expects parameter 1 to be resource, boolean given in /home/suncross/public_html/mymoment/libraries/classes/DBConn.php on line 250
+[17-Jul-2015 17:30:02 Asia/Calcutta] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/suncross/public_html/mymoment/libraries/classes/DBConn.php on line 256
+[17-Jul-2015 17:44:30 Asia/Calcutta] PHP Warning:  mysql_num_fields() expects parameter 1 to be resource, boolean given in /home/suncross/public_html/mymoment/libraries/classes/DBConn.php on line 250
+[17-Jul-2015 17:44:30 Asia/Calcutta] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/suncross/public_html/mymoment/libraries/classes/DBConn.php on line 256
+[17-Jul-2015 18:28:28 Asia/Calcutta] PHP Warning:  mysql_num_fields() expects parameter 1 to be resource, boolean given in /home/suncross/public_html/mymoment/libraries/classes/DBConn.php on line 250
+[17-Jul-2015 18:28:28 Asia/Calcutta] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/suncross/public_html/mymoment/libraries/classes/DBConn.php on line 256
+[17-Jul-2015 18:36:28 Asia/Calcutta] PHP Warning:  mysql_num_fields() expects parameter 1 to be resource, boolean given in /home/suncross/public_html/mymoment/libraries/classes/DBConn.php on line 250
+[17-Jul-2015 18:36:28 Asia/Calcutta] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/suncross/public_html/mymoment/libraries/classes/DBConn.php on line 256
+[17-Jul-2015 18:37:12 Asia/Calcutta] PHP Warning:  mysql_num_fields() expects parameter 1 to be resource, boolean given in /home/suncross/public_html/mymoment/libraries/classes/DBConn.php on line 250
+[17-Jul-2015 18:37:12 Asia/Calcutta] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/suncross/public_html/mymoment/libraries/classes/DBConn.php on line 256
+[17-Jul-2015 19:51:36 Asia/Calcutta] PHP Warning:  mysql_num_fields() expects parameter 1 to be resource, boolean given in /home/suncross/public_html/mymoment/libraries/classes/DBConn.php on line 250
+[17-Jul-2015 19:51:36 Asia/Calcutta] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/suncross/public_html/mymoment/libraries/classes/DBConn.php on line 256
+[19-Jul-2015 13:19:02 Asia/Calcutta] PHP Warning:  mysql_num_fields() expects parameter 1 to be resource, boolean given in /home/suncross/public_html/mymoment/libraries/classes/DBConn.php on line 250
+[19-Jul-2015 13:19:02 Asia/Calcutta] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/suncross/public_html/mymoment/libraries/classes/DBConn.php on line 256
+[19-Jul-2015 13:20:08 Asia/Calcutta] PHP Warning:  mysql_num_fields() expects parameter 1 to be resource, boolean given in /home/suncross/public_html/mymoment/libraries/classes/DBConn.php on line 250
+[19-Jul-2015 13:20:08 Asia/Calcutta] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/suncross/public_html/mymoment/libraries/classes/DBConn.php on line 256
+[19-Jul-2015 13:20:16 Asia/Calcutta] PHP Warning:  mysql_num_fields() expects parameter 1 to be resource, boolean given in /home/suncross/public_html/mymoment/libraries/classes/DBConn.php on line 250
+[19-Jul-2015 13:20:16 Asia/Calcutta] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/suncross/public_html/mymoment/libraries/classes/DBConn.php on line 256
+[19-Jul-2015 13:20:20 Asia/Calcutta] PHP Warning:  mysql_num_fields() expects parameter 1 to be resource, boolean given in /home/suncross/public_html/mymoment/libraries/classes/DBConn.php on line 250
+[19-Jul-2015 13:20:20 Asia/Calcutta] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/suncross/public_html/mymoment/libraries/classes/DBConn.php on line 256
+[19-Jul-2015 13:20:22 Asia/Calcutta] PHP Warning:  mysql_num_fields() expects parameter 1 to be resource, boolean given in /home/suncross/public_html/mymoment/libraries/classes/DBConn.php on line 250
+[19-Jul-2015 13:20:22 Asia/Calcutta] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/suncross/public_html/mymoment/libraries/classes/DBConn.php on line 256
+[22-Jul-2015 19:31:42 Asia/Calcutta] PHP Warning:  mysql_num_fields() expects parameter 1 to be resource, boolean given in /home/suncross/public_html/mymoment/libraries/classes/DBConn.php on line 250
+[22-Jul-2015 19:31:42 Asia/Calcutta] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/suncross/public_html/mymoment/libraries/classes/DBConn.php on line 256
+[24-Jul-2015 00:28:50 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[24-Jul-2015 00:28:50 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[24-Jul-2015 00:28:50 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[24-Jul-2015 00:28:50 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[24-Jul-2015 00:33:02 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[24-Jul-2015 00:33:02 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[24-Jul-2015 00:33:02 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[24-Jul-2015 00:33:02 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[24-Jul-2015 00:33:44 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[24-Jul-2015 00:33:44 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[24-Jul-2015 00:33:44 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[24-Jul-2015 00:33:44 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[24-Jul-2015 00:35:10 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[24-Jul-2015 00:35:10 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[24-Jul-2015 00:35:10 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[24-Jul-2015 00:35:10 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[24-Jul-2015 00:35:39 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[24-Jul-2015 00:35:39 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[24-Jul-2015 00:35:39 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[24-Jul-2015 00:35:39 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[24-Jul-2015 00:35:41 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[24-Jul-2015 00:35:41 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[24-Jul-2015 00:35:41 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[24-Jul-2015 00:35:41 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[24-Jul-2015 00:41:28 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[24-Jul-2015 00:41:28 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[24-Jul-2015 00:41:28 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[24-Jul-2015 00:41:28 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[24-Jul-2015 10:03:17 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[24-Jul-2015 10:03:17 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[24-Jul-2015 10:03:17 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[24-Jul-2015 10:03:17 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[24-Jul-2015 10:03:46 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[24-Jul-2015 10:03:46 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[24-Jul-2015 10:03:46 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[24-Jul-2015 10:03:46 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[24-Jul-2015 10:05:42 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[24-Jul-2015 10:05:42 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[24-Jul-2015 10:05:42 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[24-Jul-2015 10:05:42 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[24-Jul-2015 10:05:54 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[24-Jul-2015 10:05:54 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[24-Jul-2015 10:05:54 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[24-Jul-2015 10:05:54 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[29-Jul-2015 20:26:04 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[29-Jul-2015 20:26:04 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[29-Jul-2015 20:26:04 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[29-Jul-2015 20:26:04 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[29-Jul-2015 20:26:08 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[29-Jul-2015 20:26:08 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[29-Jul-2015 20:26:08 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[29-Jul-2015 20:26:08 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[29-Jul-2015 20:26:41 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[29-Jul-2015 20:26:41 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[29-Jul-2015 20:26:41 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[29-Jul-2015 20:26:41 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[29-Jul-2015 20:27:34 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[29-Jul-2015 20:27:34 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[29-Jul-2015 20:27:34 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[29-Jul-2015 20:27:34 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[29-Jul-2015 20:27:37 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[29-Jul-2015 20:27:37 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[29-Jul-2015 20:27:37 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[29-Jul-2015 20:27:37 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[05-Aug-2015 12:29:04 Asia/Calcutta] PHP Notice:  Undefined index: id in /home/bookmymoment/public_html/registration/customer/payment/PayUMoney_form.php on line 15
+[05-Aug-2015 12:29:04 Asia/Calcutta] PHP Warning:  mysql_num_fields() expects parameter 1 to be resource, boolean given in /home/bookmymoment/public_html/registration/libraries/classes/DBConn.php on line 250
+[05-Aug-2015 12:29:04 Asia/Calcutta] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/bookmymoment/public_html/registration/libraries/classes/DBConn.php on line 256
+[05-Aug-2015 12:29:04 Asia/Calcutta] PHP Notice:  Undefined offset: 1 in /home/bookmymoment/public_html/registration/customer/payment/PayUMoney_form.php on line 61
+[05-Aug-2015 12:29:04 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[05-Aug-2015 12:29:04 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[05-Aug-2015 12:29:04 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[05-Aug-2015 12:29:04 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[28-Aug-2015 11:09:47 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[28-Aug-2015 11:09:47 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[28-Aug-2015 11:09:47 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[28-Aug-2015 11:09:47 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[28-Aug-2015 11:09:50 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[28-Aug-2015 11:09:50 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[28-Aug-2015 11:09:50 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[28-Aug-2015 11:09:50 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[28-Aug-2015 11:10:10 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[28-Aug-2015 11:10:10 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[28-Aug-2015 11:10:10 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[28-Aug-2015 11:10:10 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[26-Sep-2015 13:59:13 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[26-Sep-2015 13:59:13 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[26-Sep-2015 13:59:13 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[26-Sep-2015 13:59:13 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[26-Sep-2015 13:59:21 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[26-Sep-2015 13:59:21 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[26-Sep-2015 13:59:21 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[26-Sep-2015 13:59:21 Asia/Calcutta] PHP Notice:  Use of undefined constant PATH_LINK - assumed 'PATH_LINK' in /home/bookmymoment/public_html/registration/customer/include/footer.php on line 7
+[17-Dec-2015 15:15:52 Asia/Calcutta] PHP Warning:  mysql_num_fields() expects parameter 1 to be resource, boolean given in /home/suprememindpower/public_html/libraries/classes/DBConn.php on line 251
+[17-Dec-2015 15:15:52 Asia/Calcutta] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/suprememindpower/public_html/libraries/classes/DBConn.php on line 257
+[17-Dec-2015 15:15:52 Asia/Calcutta] PHP Notice:  Undefined offset: 1 in /home/suprememindpower/public_html/payment/PayUMoney_form.php on line 61
+[17-Dec-2015 15:15:52 Asia/Calcutta] PHP Notice:  Undefined offset: 1 in /home/suprememindpower/public_html/payment/PayUMoney_form.php on line 214
+[17-Dec-2015 15:15:52 Asia/Calcutta] PHP Notice:  Undefined offset: 1 in /home/suprememindpower/public_html/payment/PayUMoney_form.php on line 214
+[17-Dec-2015 15:18:24 Asia/Calcutta] PHP Warning:  include(header.php): failed to open stream: No such file or directory in /home/suprememindpower/public_html/payment/PayUMoney_form.php on line 6
+[17-Dec-2015 15:18:24 Asia/Calcutta] PHP Warning:  include(header.php): failed to open stream: No such file or directory in /home/suprememindpower/public_html/payment/PayUMoney_form.php on line 6
+[17-Dec-2015 15:18:24 Asia/Calcutta] PHP Warning:  include(): Failed opening 'header.php' for inclusion (include_path='.:/opt/alt/php54/usr/share/pear:/opt/alt/php54/usr/share/php') in /home/suprememindpower/public_html/payment/PayUMoney_form.php on line 6
+[17-Dec-2015 15:18:24 Asia/Calcutta] PHP Warning:  mysql_num_fields() expects parameter 1 to be resource, boolean given in /home/suprememindpower/public_html/libraries/classes/DBConn.php on line 251
+[17-Dec-2015 15:18:24 Asia/Calcutta] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/suprememindpower/public_html/libraries/classes/DBConn.php on line 257
+[17-Dec-2015 15:18:24 Asia/Calcutta] PHP Notice:  Undefined offset: 1 in /home/suprememindpower/public_html/payment/PayUMoney_form.php on line 61
+[17-Dec-2015 15:18:24 Asia/Calcutta] PHP Notice:  Undefined offset: 1 in /home/suprememindpower/public_html/payment/PayUMoney_form.php on line 214
+[17-Dec-2015 15:18:24 Asia/Calcutta] PHP Notice:  Undefined offset: 1 in /home/suprememindpower/public_html/payment/PayUMoney_form.php on line 214
+[17-Dec-2015 15:23:41 Asia/Calcutta] PHP Warning:  include(header.php): failed to open stream: No such file or directory in /home/suprememindpower/public_html/payment/PayUMoney_form.php on line 6
+[17-Dec-2015 15:23:41 Asia/Calcutta] PHP Warning:  include(header.php): failed to open stream: No such file or directory in /home/suprememindpower/public_html/payment/PayUMoney_form.php on line 6
+[17-Dec-2015 15:23:41 Asia/Calcutta] PHP Warning:  include(): Failed opening 'header.php' for inclusion (include_path='.:/opt/alt/php54/usr/share/pear:/opt/alt/php54/usr/share/php') in /home/suprememindpower/public_html/payment/PayUMoney_form.php on line 6
+[17-Dec-2015 15:23:41 Asia/Calcutta] PHP Warning:  mysql_num_fields() expects parameter 1 to be resource, boolean given in /home/suprememindpower/public_html/libraries/classes/DBConn.php on line 251
+[17-Dec-2015 15:23:41 Asia/Calcutta] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/suprememindpower/public_html/libraries/classes/DBConn.php on line 257
+[17-Dec-2015 15:23:41 Asia/Calcutta] PHP Notice:  Undefined offset: 1 in /home/suprememindpower/public_html/payment/PayUMoney_form.php on line 61
+[17-Dec-2015 15:23:41 Asia/Calcutta] PHP Notice:  Undefined offset: 1 in /home/suprememindpower/public_html/payment/PayUMoney_form.php on line 214
+[17-Dec-2015 15:23:41 Asia/Calcutta] PHP Notice:  Undefined offset: 1 in /home/suprememindpower/public_html/payment/PayUMoney_form.php on line 214
+[17-Dec-2015 15:25:36 Asia/Calcutta] PHP Warning:  include(header.php): failed to open stream: No such file or directory in /home/suprememindpower/public_html/payment/PayUMoney_form.php on line 6
+[17-Dec-2015 15:25:36 Asia/Calcutta] PHP Warning:  include(header.php): failed to open stream: No such file or directory in /home/suprememindpower/public_html/payment/PayUMoney_form.php on line 6
+[17-Dec-2015 15:25:36 Asia/Calcutta] PHP Warning:  include(): Failed opening 'header.php' for inclusion (include_path='.:/opt/alt/php54/usr/share/pear:/opt/alt/php54/usr/share/php') in /home/suprememindpower/public_html/payment/PayUMoney_form.php on line 6
+[17-Dec-2015 15:25:37 Asia/Calcutta] PHP Warning:  mysql_num_fields() expects parameter 1 to be resource, boolean given in /home/suprememindpower/public_html/libraries/classes/DBConn.php on line 251
+[17-Dec-2015 15:25:37 Asia/Calcutta] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/suprememindpower/public_html/libraries/classes/DBConn.php on line 257
+[17-Dec-2015 15:25:37 Asia/Calcutta] PHP Notice:  Undefined offset: 1 in /home/suprememindpower/public_html/payment/PayUMoney_form.php on line 61
+[17-Dec-2015 15:25:37 Asia/Calcutta] PHP Notice:  Undefined offset: 1 in /home/suprememindpower/public_html/payment/PayUMoney_form.php on line 214
+[17-Dec-2015 15:25:37 Asia/Calcutta] PHP Notice:  Undefined offset: 1 in /home/suprememindpower/public_html/payment/PayUMoney_form.php on line 214

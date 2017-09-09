@@ -2,19 +2,18 @@
         	<div class="footer-bg">
             	<div class="container">
                 	<div class="text-center suncrosTxt">Copyright 2017 - <span>Van Vinodan The Resort</span> - All Rights Reserved.<br>
-                    Developed by <a target="_blank" href="http://www.suncrosonline.com"><img src="images/suncrosonline.png" alt=""></a></div>
+                    Developed by <a target="_blank" href="http://www.suncrosonline.com"><img src="<?php echo PATH_IMAGE ?>/suncrosonline.png" alt=""></a></div>
                     <div class="clearfix"></div>
                 </div>
             </div>
         </footer>
-        <script src="js/multi-select-1.js"></script>
-        <script src="js/van-vinodan.js"></script>
+        <script src="<?php echo PATH_JS_LIBRARIES ?>/multi-select-1.js"></script>
+        <script src="<?php echo PATH_JS_LIBRARIES ?>/van-vinodan.js"></script>
 
         <script type="text/javascript">
 			
 			// An array of dates
 			//var array = ["2017-08-31","2017-09-01","2017-09-02"];
-			
 			
 		   <!--Time Picker Show here -->
 			$(function () {
@@ -109,18 +108,15 @@
 					1024:{
 						items:1,
 						nav:true,
-						loop:false
 					},
 					1200:{
 						items:1,
 						nav:true,
-						loop:false
 					},
 					
 					1600:{
 						items:1,
 						nav:true,
-						loop:false
 					}
 				}
 			});
@@ -145,18 +141,15 @@
 						1024:{
 							items:1,
 							nav:true,
-							loop:false
 						},
 						1200:{
 							items:1,
 							nav:true,
-							loop:false
 						},
 						
 						1600:{
 							items:1,
 							nav:true,
-							loop:false
 						}
 					}
 				});

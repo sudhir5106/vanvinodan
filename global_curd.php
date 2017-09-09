@@ -279,7 +279,7 @@ if($_POST['type']=="insertReservationInfo"){
 			
 			if(!$res)
 			{
-				throw new Exception('a');
+				throw new Exception('0');
 			}
 			//*************************
 			//Get the Inserted Last Id
@@ -318,7 +318,7 @@ WHERE R_Category_Id=".$roomsTypeArray[$i]." AND Room_id NOT IN (SELECT Room_Id F
 					
 					if(!$res)
 					{
-						throw new Exception('b');
+						throw new Exception('0');
 					}
 					
 				}//eof foreach loop
@@ -329,17 +329,17 @@ WHERE R_Category_Id=".$roomsTypeArray[$i]." AND Room_id NOT IN (SELECT Room_Id F
 			// Call a class to send a mail to the user regarding 
 			// pending reservation.
 			//**************************************************
-			$mailClass->reservationPendingMail($last_Id);
+			//$mailClass->reservationPendingMail($last_Id);
 			//**************************************************
 			
 		}
 		else{
-			throw new Exception('c');	
+			throw new Exception('0');
 		}
 		
-	
 		mysql_query("COMMIT",$con);
-		echo 1;
+		
+		echo base64_encode($last_Id);
 		
 	}
 	catch(Exception $e)
@@ -350,8 +350,5 @@ WHERE R_Category_Id=".$roomsTypeArray[$i]." AND Room_id NOT IN (SELECT Room_Id F
 	}
 
 }//eof if condition
-
-
-
 
 ?>

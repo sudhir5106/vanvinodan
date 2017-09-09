@@ -1,4 +1,5 @@
 <?php 
+require_once('config.php');
 include('header.php');
 require_once(PATH_LIBRARIES.'/classes/DBConn.php');
 $db = new DBConn();
@@ -39,7 +40,11 @@ WHERE Room_id NOT IN (SELECT Room_Id FROM tbl_reserved_rooms WHERE Check_In_Date
 ?>
 
 
-<main> 
+<main>
+	
+    <div id="loading">
+        <div class="loader-block"><i class="fa-li fa fa-spinner fa-spin spinloader"></i> <span>On Process...</span></div>
+    </div> 
     
     <div class="middle-container">
     	

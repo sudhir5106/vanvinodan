@@ -1,4 +1,6 @@
-<?php include('header.php'); ?>
+<?php 
+require_once('config.php');
+include('header.php'); ?>
 <main>    
     <div class="middle-container">
         <div>

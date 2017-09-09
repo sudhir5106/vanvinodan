@@ -1,6 +1,8 @@
-<?php require_once('config.php');
+<?php 
 $page = basename($_SERVER['REQUEST_URI'], '?' . $_SERVER['QUERY_STRING']);
 $pagename = basename($page, ".php"); // $file is set to "index"
+//For base url PayUMoney_form.php
+$baseurl = basename($_SERVER['PHP_SELF']);
 
 ?>
 <!doctype html>
@@ -15,35 +17,32 @@ $pagename = basename($page, ".php"); // $file is set to "index"
         <title>Van Vinodan :: The Resort</title>
 
         <!-- Latest compiled and minified CSS -->
-        <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" href="css/bootstrap.min.css">
-        <link rel="stylesheet" href="css/style.css">
-        <link rel="stylesheet" href="css/owl.carousel.css" type="text/css">
-    	  <link rel="stylesheet" href="css/owl.theme.default.min.css"  type="text/css" />
-        <link rel="stylesheet" href="css/animate.min.css"  type="text/css" />
-        <link rel="stylesheet" href="css/jquery-ui.css">
+        <link href="<?php echo PATH_CSS_LIBRARIES ?>/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="<?php echo PATH_CSS_LIBRARIES ?>/bootstrap.min.css">
+        <link rel="stylesheet" href="<?php echo PATH_CSS_LIBRARIES ?>/style.css">
+        <link rel="stylesheet" href="<?php echo PATH_CSS_LIBRARIES ?>/owl.carousel.css" type="text/css">
+    	<link rel="stylesheet" href="<?php echo PATH_CSS_LIBRARIES ?>/owl.theme.default.min.css"  type="text/css" />
+        <link rel="stylesheet" href="<?php echo PATH_CSS_LIBRARIES ?>/animate.min.css"  type="text/css" />
+        <link rel="stylesheet" href="<?php echo PATH_CSS_LIBRARIES ?>/jquery-ui.css">
 
-        <script src="js/jquery.min.js"></script>
-        <script src="js/jquery-ui.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/owl.carousel.min.js"></script>
-        <script src="js/jquery.validate.js"></script>
+        <script src="<?php echo PATH_JS_LIBRARIES ?>/jquery.min.js"></script>
+        <script src="<?php echo PATH_JS_LIBRARIES ?>/jquery-ui.js"></script>
+        <script src="<?php echo PATH_JS_LIBRARIES ?>/bootstrap.min.js"></script>
+        <script src="<?php echo PATH_JS_LIBRARIES ?>/owl.carousel.min.js"></script>
+        <script src="<?php echo PATH_JS_LIBRARIES ?>/jquery.validate.js"></script>
         
 		<script>
-        $(document).ready(function() {
-            $(".bottom-slider").owlCarousel();
-			interval: 1200;
-
-            $('.innerPageTxt').addClass("fadeIn").addClass("animated");
-
-		});
-
-
-        
+			$(document).ready(function() {
+				$(".bottom-slider").owlCarousel();
+				interval: 1200;
+	
+				$('.innerPageTxt').addClass("fadeIn").addClass("animated");
+	
+			});
         </script>
 		
     </head>
-    <body>
+    <body <?php if($baseurl=='PayUMoney_form.php'){ ?> onLoad="submitPayuForm()" <?php } ?>>
     <?php
         if($pagename=='vanvinodan' || $pagename=='index'){ ?>
         	<div class="homeslider">
@@ -73,7 +72,7 @@ $pagename = basename($page, ".php"); // $file is set to "index"
             	<div class="closeBtn">X</div>
             	<div class="searchTitle">CHECK AVAILABILITY FOR ROOMS AT VANVINODAN RESORT</div>
                 <div class="searchFields">
-                	<form class="form-horizontal" role="form" id="searchFrm" name="searchFrm" action="reservation.php" method="post">
+                	<form class="form-horizontal" role="form" id="searchFrm" name="searchFrm" action="<?php echo LINK_ROOT ?>/reservation.php" method="post">
                         <div class="col-sm-4 col-xs-6">
                         	<div class="input-group date" data-provide="datepicker">
                                 <input type="text" id="checkindate" name="checkindate" class="form-control input-lg datetimepicker" placeholder="check-in">
@@ -99,7 +98,7 @@ $pagename = basename($page, ".php"); // $file is set to "index"
             <div class="headTop">
             	<div class="container-fluid">
                     <div class="col-xs-12 col-sm-4 col-md-4 padding-left-zero">
-                        <div class="logo"><a href="index.php"><img class="img-responsive" src="images/logo.png" alt="SA Global India Financial Services"></a></div>
+                        <div class="logo"><a href="<?php echo LINK_ROOT ?>/index.php"><img class="img-responsive" src="<?php echo PATH_IMAGE ?>/logo.png" alt="SA Global India Financial Services"></a></div>
                     </div>
                     <div class="navbar-header hidden-md">
                       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
@@ -129,13 +128,13 @@ $pagename = basename($page, ".php"); // $file is set to "index"
                             <nav class="navbar navbar-default navbar-static-top navBg" role="navigation">
                             	<div class="collapse navbar-collapse in" id="navbar-collapse-1">
                                 <ul class="nav navbar-nav navigation">
-                                  <li class="active"><a class="homelink" href="index.php">Home</a></li>
+                                  <li class="active"><a class="homelink" href="<?php echo LINK_ROOT ?>/index.php">Home</a></li>
                                   <li><a href="about-us.php">About us</a></li>
                                   <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Accommodation <b class="caret"></b></a>
                                      <ul class="dropdown-menu">
-                                        <li><a href="super-deluxe.php"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Super Deluxe Room</a></li>
-                                        <li><a href="deluxe.php"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Deluxe Room</a></li>
-                                        <li><a href="tent.php"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Tent Room</a></li>
+                                        <li><a href="<?php echo LINK_ROOT ?>/super-deluxe.php"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Super Deluxe Room</a></li>
+                                        <li><a href="<?php echo LINK_ROOT ?>/deluxe.php"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Deluxe Room</a></li>
+                                        <li><a href="<?php echo LINK_ROOT ?>/tent.php"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Tent Room</a></li>
                                      </ul>
                                   </li>
                                   <li><a href="#" class="dropdown-toggle" data-toggle="dropdown">Places to visit <b class="caret"></b></a>
@@ -159,7 +158,7 @@ $pagename = basename($page, ".php"); // $file is set to "index"
                                   	<ul class="dropdown-menu">
                                         <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Package Tour</a></li>
                                         <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Tariff</a></li>
-                                        <li><a href="reservation.php"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Online Reservation</a></li>
+                                        <li><a href="<?php echo LINK_ROOT ?>/reservation.php"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Online Reservation</a></li>
                                      </ul>
                                   </li>
                                   <li><a href="#">Contact us</a></li>
