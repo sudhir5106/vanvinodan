@@ -50,10 +50,10 @@ $db = new DBConn();
                 </div>
                 
                 <div class="item form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="fileupload">Updoad News PDF</label>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="fileupload">Updoad News Image</label>
                   <div class="col-md-3 col-sm-3 col-xs-12">
                     <input type="file" id="fileupload" name="fileupload" class="form-control col-md-7 col-xs-12" accept="pdf">
-                    <span id="errmsg"></span> (Note : Only PDF Document Can Upload.) </div>
+                    <span id="errmsg"></span> (Note : Upload only samll than 1MB file.) </div>
               	</div>
                 
                 <div class="item form-group">
