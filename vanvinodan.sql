@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 09, 2017 at 05:23 PM
+-- Generation Time: Sep 14, 2017 at 05:48 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.6.24
 
@@ -85,6 +85,16 @@ CREATE TABLE `tbl_reservation` (
   `Reservation_Status` tinyint(4) NOT NULL COMMENT '1 confirmed, 2 arrived, 3 checked-out, 4 cancelled, 5 pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `tbl_reservation`
+--
+
+INSERT INTO `tbl_reservation` (`Reservation_Id`, `Reservation_Ref_No`, `Check_In_Date`, `Check_Out_Date`, `Arrival_Time`, `Client_Name`, `Email`, `Phone`, `ID_Proof_Image`, `Total_Rooms_Amt`, `Total_Guests_Amt`, `Subtotal_Amt`, `SGST_Amt`, `CGST_Amt`, `Grand_Total_Amt`, `Reservation_Status`) VALUES
+(1, 'REF1505218825', '2017-09-12', '2017-09-13', '12:00:00', 'sudhir', 'sudhir5106@gmail.com', '9826396462', '1505218825.jpg', 1, 0, 1, 0.09, 0.09, 1.18, 5),
+(2, 'REF1505226757', '2017-09-12', '2017-09-13', '12:00:00', 'sudhir', 'sudhir5106@gmail.com', '9826396462', '1505226757.jpg', 1, 0, 1, 0.09, 0.09, 1.18, 5),
+(3, 'REF1505227015', '2017-09-12', '2017-09-13', '10:00:00', 'rejith', 'sudhir5106@gmail.com', '9826233257', '1505227015.jpg', 1, 0, 1, 0.09, 0.09, 1.18, 5),
+(4, 'REF1505229819', '2017-09-12', '2017-09-13', '11:00:00', 'Rakesh', 'sudhir5106@gmail.com', '9826138203', '1505229819.jpg', 1, 0, 1, 0.09, 0.09, 1.18, 5);
+
 -- --------------------------------------------------------
 
 --
@@ -103,6 +113,16 @@ CREATE TABLE `tbl_reserved_rooms` (
   `Extra_Guest_Amt` float NOT NULL,
   `Reservation_Status` tinyint(4) NOT NULL COMMENT '1 confirmed, 2 arrived, 3 checked-out, 4 cancelled, 5 pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_reserved_rooms`
+--
+
+INSERT INTO `tbl_reserved_rooms` (`RB_Id`, `Reservation_Id`, `Room_Id`, `Check_In_Date`, `Check_Out_Date`, `Adult`, `Children`, `Base_Fare`, `Extra_Guest_Amt`, `Reservation_Status`) VALUES
+(1, 1, 1, '2017-09-12', '2017-09-13', 1, 0, 0.5, 0, 5),
+(2, 2, 1, '2017-09-12', '2017-09-13', 1, 0, 0.5, 0, 5),
+(3, 3, 1, '2017-09-12', '2017-09-13', 1, 0, 0.5, 0, 5),
+(4, 4, 1, '2017-09-12', '2017-09-13', 1, 0, 0.5, 0, 5);
 
 -- --------------------------------------------------------
 
@@ -180,6 +200,14 @@ CREATE TABLE `tbl_transactions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+-- Dumping data for table `tbl_transactions`
+--
+
+INSERT INTO `tbl_transactions` (`Transaction_Id`, `Transaction_Date`, `Transaction_No`, `Reservation_Id`, `Paid_Amt`, `Payment_Mode`, `Pay_Status`, `Payment_Id`) VALUES
+(1, '2017-09-12 21:09:43', 'NA==', 4, 1.18, 'NB', 'success', '162975893'),
+(2, '2017-09-12 21:11:22', 'NA==', 4, 1.18, 'NB', 'success', '162975893');
+
+--
 -- Indexes for dumped tables
 --
 
@@ -239,12 +267,12 @@ ALTER TABLE `tbl_payment_gateway_detail`
 -- AUTO_INCREMENT for table `tbl_reservation`
 --
 ALTER TABLE `tbl_reservation`
-  MODIFY `Reservation_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `Reservation_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `tbl_reserved_rooms`
 --
 ALTER TABLE `tbl_reserved_rooms`
-  MODIFY `RB_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `RB_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `tbl_rooms_category`
 --
@@ -259,7 +287,7 @@ ALTER TABLE `tbl_room_master`
 -- AUTO_INCREMENT for table `tbl_transactions`
 --
 ALTER TABLE `tbl_transactions`
-  MODIFY `Transaction_Id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Transaction_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- Constraints for dumped tables
 --
