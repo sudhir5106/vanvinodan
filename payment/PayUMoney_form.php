@@ -9,7 +9,7 @@ $getid=$_REQUEST['id'];
 //Get Payment Gateway Details ///////////////////////////////////////
 //*******************************************************************
 $paymentGateway=$db->ExecuteQuery("SELECT Company_Name, Merchant_Key, Salt_Key FROM `tbl_payment_gateway_detail` 
-WHERE `Status`=1");	
+WHERE `Status`=1");
 //*******************************************************************
 		
 $con= mysql_connect(SERVER,DBUSER,DBPASSWORD);
@@ -27,7 +27,7 @@ try
 	//////////////////////////////////////////////////////////
 	//Get The Resrvation Details /////////////////////////////
 	//////////////////////////////////////////////////////////
-	$sql = "SELECT Reservation_Ref_No, Check_In_Date, Check_Out_Date, Grand_Total_Amt, Client_Name, Email, Phone FROM tbl_reservation	
+	$sql = "SELECT Reservation_Ref_No, DATE_FORMAT(Check_In_Date,'%d-%m-%Y') AS Check_In_Date, DATE_FORMAT(Check_Out_Date,'%d-%m-%Y') AS Check_Out_Date, Grand_Total_Amt, Client_Name, Email, Phone FROM tbl_reservation	
 	WHERE Reservation_Id =".$Id;
 	
 	$getDetails=$db->ExecuteQuery($sql);
@@ -75,13 +75,6 @@ if(!empty($_POST)) {
 $formError = 0;
 $txnid=$getid;
 
-/*if(empty($posted['txnid'])) {
-  // Generate random transaction id
-  $txnid = substr(hash('sha256', mt_rand() . microtime()), 0, 20);
-} else {
-  $txnid = $posted['txnid'];
-}*/
-//$txnid=$getid;
 $hash = '';
 
 //****************************************************************
@@ -109,7 +102,6 @@ if(empty($posted['hash']) && sizeof($posted) > 0) {
   }//eof if condition 
   else
   {  
-		//$posted['productinfo'] = json_encode(json_decode('[{"name":"tutionfee","description":"","value":"500","isRequired":"false"},{"name":"developmentfee","description":"monthly tution fee","value":"1500","isRequired":"false"}]'));
 		$hashVarsSeq = explode('|', $hashSequence);
 		$hash_string = '';
 		
@@ -146,80 +138,51 @@ elseif(!empty($posted['hash'])) {
 
 <main>    
     <div class="middle-container">
-        <div class="innerPageTxt">
-        	<div class="container">
-            	<h1>Payment</h1>
-                
+        <div class="container">
+        	<h1 class="innerTitle">Reservation &amp; Payment Details</h1>
+        	<div class="innerPageTxt">
                 <section id="form">
-                <!--form-->
-                <div class="container">
-                    <div class="row">
-                    
-                        <div class="col-sm-10 col-sm-offset-1">
-                            <div class="content-wrapper">
-                              <section class="content-header">
-                                <h3> Pay </h3>
-                              </section>
-                              <div class="content">
-                                <?php if($formError) { ?>
-                                <span style="color:red; margin-bottom:20px; margin-top:20px;">Please fill all mandatory fields.</span>
-                                <?php } ?>
-                                <div class="row">
-                                  <div>
-                                    <div class="box box-primary">
-                                      <div class="box-header with-border">
-                                        <h3 class="box-title"> </h3>
-                                      </div>
-                                      <div class="box-body">
-                                        <form action="<?php echo $action; ?>" method="post" name="payuForm">
+                    <div class="contents">
+                        <?php if($formError) { ?>
+                        <div class="alert alert-danger">Please fill all <strong>mandatory fields.</strong></div>
+                        <?php } ?>
+                        
+                        <div class="row">
+                        	<form action="<?php echo $action; ?>" method="post" name="payuForm">                                
+                                  <input type="hidden" name="key" value="<?php echo $MERCHANT_KEY ?>" />
+                                  <input type="hidden" name="hash" value="<?php echo $hash ?>"/>
+                                  <input type="hidden" name="txnid" value="<?php echo $txnid?>" />
+                                  
+                                  <?php  
+                                       $surl='http://'.$_SERVER['SERVER_NAME'].LINK_ROOT.'/payment/payment-success.php';
+                                       $furl='http://'.$_SERVER['SERVER_NAME'].LINK_ROOT.'/payment/payment-failure.php';
+                                  ?>
+                                   
+                                  <div class="payment-info">
+                                  		
+                                        <div style="display:none;">
+                                        	Amount: <input type="text" name="amount" value="<?php echo (empty($getDetails[1]['Grand_Total_Amt'])) ? '' :$getDetails[1]['Grand_Total_Amt']?>" /><br />
+                                            Name: <input type="text" name="firstname" id="firstname" value="<?php echo (empty($getDetails[1]['Client_Name']))? '' : $getDetails[1]['Client_Name']; ; ?>" /><br />
+                                            Email: <input type="text" name="email" id="email" value="<?php echo (empty($getDetails[1]['Email'])) ? '' : $getDetails[1]['Email']; ?>" /><br />
+                                            Phone: <input type="text" name="phone" value="<?php echo (empty($getDetails[1]['Phone'])) ? '' : $getDetails[1]['Phone']; ?>" /><br />
+                                            Product Info:<textarea name="productinfo"><?php echo 'Room(s) Booking on van vinodan resort'?></textarea><br />
+                                   			Success URL: <input  type="text" name="surl" value="<?php echo (empty($surl)) ? '' : $surl ?>" size="64" /><br />
+                                            Failure URL: <input type="text" name="furl" value="<?php echo (empty($furl)) ? '' : $furl ?>" size="64" /><br />
+                                            <input  type="hidden"  name="service_provider" value="payu_paisa" size="64" />
+                                        </div>
+                                  
+                                  
+										<div>
+                                        	<strong>Name:</strong> <?php echo $getDetails[1]['Client_Name']; ?><br />
+                                            <strong>Check-In Date:</strong> <?php echo $getDetails[1]['Check_In_Date']; ?> - 
+                                            <strong>Check-Out Date:</strong> <?php echo $getDetails[1]['Check_Out_Date']; ?>
+                                            
+                                            
+                                        </div>
                                         
-                                          <input type="text" name="key" value="<?php echo $MERCHANT_KEY ?>" />
-                                          <input type="text" name="hash" value="<?php echo $hash ?>"/>
-                                          <input type="text" name="txnid" value="<?php echo $txnid?>" />
-                                          <?php  
-                                               $surl='http://'.$_SERVER['SERVER_NAME'].LINK_ROOT.'/payment/payment-success.php';
-                                               $furl='http://'.$_SERVER['SERVER_NAME'].LINK_ROOT.'/payment/payment-failure.php';
-                                           ?>
-                                           
-                                          <div class="col-md-9 col-md-offset-1">
-                                            <div class="table-responsive">
-                                              <table class="table table-bordered">
-                                                <tbody  style="display:block">
-                                                  <tr>
-                                                    <td><b>Mandatory Parameters</b></td>
-                                                  </tr>
-                                                  <tr>
-                                                    <td>Amount: </td>
-                                                    <td><input type="text" name="amount" value="<?php echo (empty($getDetails[1]['Grand_Total_Amt'])) ? '' :$getDetails[1]['Grand_Total_Amt']?>" /></td>
-                                                    <td>Name: </td>
-                                                    <td><input type="text" name="firstname" id="firstname" value="<?php echo (empty($getDetails[1]['Client_Name']))? '' : $getDetails[1]['Client_Name']; ; ?>" /></td>
-                                                  </tr>
-                                                  <tr>
-                                                    <td>Email: </td>
-                                                    <td><input type="text" name="email" id="email" value="<?php echo (empty($getDetails[1]['Email'])) ? '' : $getDetails[1]['Email']; ?>" /></td>
-                                                    <td>Phone: </td>
-                                                    <td><input type="text" name="phone" value="<?php echo (empty($getDetails[1]['Phone'])) ? '' : $getDetails[1]['Phone']; ?>" /></td>
-                                                  </tr>
-                                                  <tr>
-                                                    <td>Product Info: </td>
-                                                    <td colspan="3"><textarea name="productinfo"><?php echo 'Room(s) Booking on van vinodan resort'?></textarea></td>
-                                                  </tr>
-                                                  <tr>
-                                                    <td>Success URI: </td>
-                                                    <td colspan="3"><input  type="text" name="surl" value="<?php echo (empty($surl)) ? '' : $surl ?>" size="64" /></td>
-                                                  </tr>
-                                                  <tr>
-                                                    <td>Failure URI: </td>
-                                                    <td colspan="3"><input type="text" name="furl" value="<?php echo (empty($furl)) ? '' : $furl ?>" size="64" /></td>
-                                                  </tr>
-                                                  <tr>
-                                                    <td colspan="3"><input  type="hidden"  name="service_provider" value="payu_paisa" size="64" /></td>
-                                                  </tr>
-                                                </tbody>
-                                                
-                                                <!---------------------------------------------------------------------------------------------
-                                               for display order ----------------------------------------------------------------------------------------------->
-                                                
+                                        
+                                        <div class="table-responsive">
+                                      		<table class="table">
                                                 <tr>
                                                   <td class="active"><strong>Payment Method :</strong></td>
                                                   <td>Online</td>
@@ -229,16 +192,8 @@ elseif(!empty($posted['hash'])) {
                                                   <td>PayUMoney</td>
                                                 </tr>
                                                 <tr>
-                                                  <td class="active"><strong>Total Payble Amount:</strong></td>
-                                                  <td><i class="fa fa-inr"></i> <?php echo (empty($getDetails[1]['Grand_Total_Amt'])) ? '' : $getDetails[1]['Grand_Total_Amt']; ?></td>
-                                                </tr>
-                                                <tr>
-                                                  <td class="active"><strong>Check-In Date:</strong></td>
-                                                  <td><?php echo (empty($getDetails[1]['Check_In_Date'])) ? '' : $getDetails[1]['Check_In_Date']; ?></td>
-                                                </tr>
-                                                <tr>
-                                                  <td class="active"><strong>Check-Out Date:</strong></td>
-                                                  <td><?php echo (empty($getDetails[1]['Check_Out_Date'])) ? '' : $getDetails[1]['Check_Out_Date']; ?></td>
+                                                  <td class="active"><strong>Total Reservation Amount:</strong></td>
+                                                  <td><i class="fa fa-inr"></i> <?php echo $getDetails[1]['Grand_Total_Amt']; ?></td>
                                                 </tr>
                                                 
                                                 <tr>
@@ -246,22 +201,13 @@ elseif(!empty($posted['hash'])) {
                                                   <td colspan="4" align="center"><input type="submit"  class="btn btn-lg btn-success" value="Pay by Net Banking/ Credit Card/ Debit Card " /></td>
                                                   <?php } ?>
                                                 </tr>
-                                              </table>
-                                            </div>
-                                          </div>
-                                        </form>
-                                      </div>
-                                    </div>
+                                            </table>
+                                  		</div>
                                   </div>
-                                </div>
-                              </div>
-                            </div>
-                        <!--middle containar start here-->
+                            </form>
                         </div>
                     </div>
-                </div>
                 </section>
-                
             </div>
         </div>
     </div>  	

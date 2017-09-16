@@ -1,7 +1,12 @@
 <?php
 include('../config.php');
+
 require_once(PATH_LIBRARIES.'/classes/DBConn.php');
 $db = new DBConn();
+
+require_once(PATH_LIBRARIES.'/classes/mail.php');
+$mailClass = new mail();
+
 include('../header.php');
 //error_reporting(0);
 		 
@@ -32,59 +37,47 @@ include('../header.php');
 		 if ($hash != $posted_hash)
 		 {
 			 echo "Invalid Transaction. Please try again";
-			 //throw new Exception('0');
 		 }
 		 
 		 else 
 		 {
-
 			 $Id = base64_decode($txnid);
-			///********** for database (starts) *****************************///   
-
-			///////////////////////////////////
+			////////////////////////////////////////////////
 			///// Query for payment status( not reload page)
-			////////////////////////////////////					
-			
+			////////////////////////////////////////////////			
 			$paymentCheck=$db->ExecuteQuery("SELECT Grand_Total_Amt FROM tbl_reservation WHERE Reservation_Status=5 AND Reservation_Id=".$Id);
 			
-			//echo "SELECT Grand_Total_Amt FROM tbl_reservation WHERE Reservation_Status=5 AND Reservation_Id=".$Id;
-			
 			if(count($paymentCheck)>0)
-			{
-				
-				///////////////////////////////////
-				///// insert transaction detail after transaction
-				////////////////////////////////////	
-				
-				/*$res=mysql_query("UPDATE orders SET Transaction_Id='".$txnid."', Transaction_Date=TIMESTAMPADD(MINUTE, 330,NOW()), Payment_Id='".$payuMoneyId."', Pay_Status='".$status."', Payment_Mode='".$mode."', Payment_Status=1  WHERE Order_Id=".$Id[0]." AND User_Id=".$Id[1]."");*/
-				
+			{				
+				////////////////////////////////////////////////////
+				///// insert transaction detail in tbl_transactions
+				////////////////////////////////////////////////////			
 				$date = date('Y-m-d H:i:s');
-				
-				/*$res=mysql_query("INSERT INTO tbl_transactions ('Transaction_Date','Transaction_No','Reservation_Id','Paid_Amt','Payment_Mode','Pay_Status','Payment_Id') 			
-
-VALUES ('".$date."', ".$txnid.", ".$Id.", ".$amount.", '".$mode."', '".$status."', '".$payuMoneyId."')");
-				
-				echo "INSERT INTO tbl_transactions ('Transaction_Date','Transaction_No','Reservation_Id','Paid_Amt','Payment_Mode','Pay_Status','Payment_Id') 			
-
-VALUES ('".$date."', ".$txnid.", ".$Id.", ".$amount.", '".$mode."', '".$status."', '".$payuMoneyId."')";*/
-
-
+				//************************************************
 				$tblname = "tbl_transactions";
 				$tblfield=array('Transaction_Date', 'Transaction_No', 'Reservation_Id', 'Paid_Amt', 'Payment_Mode', 'Pay_Status', 'Payment_Id');
 				$tblvalues=array($date, $txnid, $Id, $amount, $mode, $status, $payuMoneyId);
 				$res=$db->valInsert($tblname, $tblfield, $tblvalues);
 				
-				/*echo '<script type="text/javascript">window.location.href="success-report.php?id='.$txnid.'";</script>';*/
+				////////////////////////////////////////////////////////////
+				///// Update the tbl_reservation and tbl_reserved_rooms both
+				////////////////////////////////////////////////////////////
+				$res=mysql_query("UPDATE tbl_reservation r INNER JOIN tbl_reserved_rooms rr ON (r.Reservation_Id = rr.Reservation_Id) SET r.Reservation_Status=1, rr.Reservation_Status=1 WHERE rr.Reservation_Id=".$Id." AND r.Reservation_Id=".$Id);
 				
-				 
+				//**************************************************
+				// Call a class to send a mail to the user regarding 
+				// confirmation of reservation.
+				//**************************************************
+				$mailClass->reservationConfirmedMail($Id);
+				//**************************************************
+				
+				echo '<script type="text/javascript">window.location.href="success-report.php?id='.$txnid.'";</script>';
 				  
-			} //if closing (payment status for transection and no reload page )
+			} //eof if condition
 			else{
 				echo 'Reservation_Id='.$Id;
-			}
-			
-		 }
-
+			}//eof else
+		 }//eof else
 ?>
             
             

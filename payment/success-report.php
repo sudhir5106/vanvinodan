@@ -2,7 +2,7 @@
 include('../config.php');
 require_once(PATH_LIBRARIES.'/classes/DBConn.php');
 $db = new DBConn();
-include(PATH_INCLUDE.'/header.php');
+include('../header.php');
 //error_reporting(0);
 	
 $reservationId = base64_decode($_REQUEST['id']);
@@ -11,20 +11,14 @@ $res=$db->ExecuteQuery("SELECT * FROM `tbl_transactions` WHERE `Reservation_Id`=
 
 ?>
 
-<div class="content-wrapper">
-  <div class="content">
-    <div class="row">
-      <div class="col-sm-8 col-sm-offset-2">
-        <div class="box box-primary">
-          <div class="box-header with-border">
-            <h3 class="box-title">Payment Success </h3>
-            
-          </div>
-          <div class="box-body">
-            <div class="row">
+<main>    
+    <div class="middle-container">
+        <div class="container">
+        	<div class="row" style="margin:90px 0;">
               <div class="col-sm-12">
-                <h2 class="text-center"> <i class="glyphicon glyphicon-ok-circle" style="color:#84AE2D; font-size:56px; vertical-align:middle;"></i> Your transaction successfully completed. </h2>
+                <h2 class="text-center"> <i class="glyphicon glyphicon-ok-circle" style="color:#84AE2D; font-size:56px; vertical-align:middle;"></i> <strong>Coguratulations!</strong> Your Reservation is Confirmed</h2>
               </div>
+              <div class="text-center text-danger" style="padding-bottom:15px;">Please Copy This Transaction Details For Your Future Reference.</div>
               <div class="col-sm-6 col-sm-offset-3">
                 <div style="background:#fff; padding:10px; box-shadow:0px 0px 2px #B7B7B7; margin-bottom:20px;">
                   <div class="table-responsive">
@@ -52,10 +46,8 @@ $res=$db->ExecuteQuery("SELECT * FROM `tbl_transactions` WHERE `Reservation_Id`=
                 </div>
               </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
-</div>
- <?php include(PATH_INCLUDE.'/footer.php');?>
+</main>
+
+ <?php include('../footer.php');?>

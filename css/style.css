@@ -549,7 +549,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a108c7', end
 
 .page-content{background:#fff; margin:20px auto; padding:20px 0;}
 .room-row{margin-bottom:5px; border-bottom:solid 1px #c7c9cf;}
-
+.contents{padding:0 15px;}
+.payment-info{width:50%; margin:0 auto; padding:15px; border:solid 1px #F3F3F3;}
 /*Select Drop Down*/
 .multiselect-container{position:absolute;list-style-type:none;margin:0;padding:0; min-width:auto!important;}
 .multiselect-container .input-group{margin:5px}
@@ -608,7 +609,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a108c7', end
 
 .innerPageTxt{background:#fff; padding:20px 0;}
 
-.innerPageTxt h1{ font-size: 3em; font-family: 'Gabriola';}
+.innerPageTxt h1, h1.innerTitle{ font-size: 3em; font-family: 'Gabriola';}
 .innerPageTxt p{ font-size: 1.2em; line-height: 30px;}
 
 .partners-bg3, .partners-bg4{padding:50px 0 50px 0; position:relative;

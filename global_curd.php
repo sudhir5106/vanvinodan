@@ -329,7 +329,7 @@ WHERE R_Category_Id=".$roomsTypeArray[$i]." AND Room_id NOT IN (SELECT Room_Id F
 			// Call a class to send a mail to the user regarding 
 			// pending reservation.
 			//**************************************************
-			//$mailClass->reservationPendingMail($last_Id);
+			$mailClass->reservationPendingMail($last_Id);
 			//**************************************************
 			
 		}
