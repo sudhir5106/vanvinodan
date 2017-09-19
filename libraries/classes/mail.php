@@ -14,8 +14,7 @@ class mail extends DBConn
 		//*********************************
 		$bookingInfo = 	$this->ExecuteQuery("SELECT Reservation_Ref_No, Check_In_Date, Check_Out_Date, Arrival_Time, Client_Name, Email, Phone, Total_Rooms_Amt, Total_Guests_Amt, Subtotal_Amt, SGST_Amt, CGST_Amt, Grand_Total_Amt, CASE WHEN Reservation_Status=5 THEN 'Pending' END Reservation_Status
 		FROM tbl_reservation 
-		WHERE Reservation_Id=".$reservationId."
-		");
+		WHERE Reservation_Id=".$reservationId);
 		
 		//************************************************************
 		$checkindate=date('d-m-Y',strtotime($bookingInfo[1]['Check_In_Date']));

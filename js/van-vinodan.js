@@ -452,6 +452,7 @@ $(document).ready(function(){
 			{ 
 				required: true,
 				RnoExist:true,
+				ConfirmedRno:true
 			}
 		},
 		messages:
@@ -477,6 +478,25 @@ $(document).ready(function(){
 		return isSuccess ;				
 	}, 'Please Enter Valid Reservation Ref. No.');
 	
+	//////////////////////////////////////////////////////////////////
+	// Method to check the Reservation Ref no is confirmed or pending
+	//////////////////////////////////////////////////////////////////
+	$.validator.addMethod('ConfirmedRno', function(val, element)
+	{		
+		$('#loading').show();
+		$.ajax({
+			 url:"global_curd.php",
+			 type: "POST",
+			 data: {type:"ConfirmedRno",rno: $('#rno').val()},
+			 async:false,
+			 success:function(data){//alert(data);
+				 isSuccess=(data!=1)?true:false;
+				 $('#loading').hide();
+			 }
+		});//eof ajax
+		return isSuccess ;				
+	}, 'Please Enter Pending Reservation Ref. No. Only');
+	
 	///////////////////////////////////////
 	//click on findReservationBtn button //
 	///////////////////////////////////////
@@ -497,6 +517,7 @@ $(document).ready(function(){
 			   success: function(data){ //alert(data);
 					
 					$("#reservation-details").html(data);
+					$('#loading').hide();
 					
 			   },
 			   cache: false,

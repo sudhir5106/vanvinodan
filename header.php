@@ -129,7 +129,7 @@ $baseurl = basename($_SERVER['PHP_SELF']);
                             	<div class="collapse navbar-collapse in" id="navbar-collapse-1">
                                 <ul class="nav navbar-nav navigation">
                                   <li class="active"><a class="homelink" href="<?php echo LINK_ROOT ?>/index.php">Home</a></li>
-                                  <li><a href="about-us.php">About us</a></li>
+                                  <li><a href="<?php echo LINK_ROOT ?>/about-us.php">About us</a></li>
                                   <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Accommodation <b class="caret"></b></a>
                                      <ul class="dropdown-menu">
                                         <li><a href="<?php echo LINK_ROOT ?>/super-deluxe.php"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Super Deluxe Room</a></li>

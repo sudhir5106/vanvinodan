@@ -366,6 +366,24 @@ if($_POST['type']=="RnoExist"){
 }
 
 ///*******************************************************
+/// check the Reservation Ref no is confirmed or pending 
+///*******************************************************
+if($_POST['type']=="ConfirmedRno"){
+	
+	//////////////////////////////////////////////
+	// SELECT Query to Get the Reservation status
+	//////////////////////////////////////////////
+	$res = $db->ExecuteQuery("SELECT Reservation_Status FROM tbl_reservation WHERE Reservation_Ref_No='".$_POST['rno']."' AND (Reservation_Status=1 OR Reservation_Status=2 OR Reservation_Status=3 OR Reservation_Status=4)");
+	
+	if(!$res){
+		echo 0;
+	}
+	else{
+		echo 1;
+	}
+}
+
+///*******************************************************
 /// Check the Reservation Ref No is valid or Not /////////
 ///*******************************************************
 if($_POST['type']=="getReservationInfo"){
@@ -373,13 +391,13 @@ if($_POST['type']=="getReservationInfo"){
 	//*********************************
 	// Get reservation details from DB
 	//*********************************
-	$bookingInfo = 	$this->ExecuteQuery("SELECT Reservation_Id, Reservation_Ref_No, Check_In_Date, Check_Out_Date, Arrival_Time, Client_Name, Email, Phone, Total_Rooms_Amt, Total_Guests_Amt, Subtotal_Amt, SGST_Amt, CGST_Amt, Grand_Total_Amt, CASE WHEN Reservation_Status=1 THEN 'Confirmed' END Reservation_Status, Transaction_No, Payment_Id
-	FROM tbl_reservation r
-	LEFT JOIN tbl_transactions t ON r.Reservation_Id = t.Reservation_Id
-	WHERE Reservation_Ref_No=".$_POST['rno']."
-	");
+	$bookingInfo = 	$db->ExecuteQuery("SELECT Reservation_Id, Reservation_Ref_No, Check_In_Date, Check_Out_Date, Arrival_Time, Client_Name, Email, Phone, Total_Rooms_Amt, Total_Guests_Amt, Subtotal_Amt, SGST_Amt, CGST_Amt, Grand_Total_Amt, CASE WHEN Reservation_Status=5 THEN 'Pending' END Reservation_Status
+		FROM tbl_reservation 
+		WHERE Reservation_Ref_No='".$_POST['rno']."'");
 	
-	//************************************************************
+	//*****************************************************************
+	$reservationId = base64_encode($bookingInfo[1]['Reservation_Id']);
+	//*****************************************************************
 	$checkindate=date('d-m-Y',strtotime($bookingInfo[1]['Check_In_Date']));
 	$checkoutdate=date('d-m-Y',strtotime($bookingInfo[1]['Check_Out_Date']));
 	//************************************************************
@@ -396,7 +414,7 @@ if($_POST['type']=="getReservationInfo"){
 	/////////////////////////////////////////////////////////////////////////////
 	// this calculates the diff between two dates, which is the number of nights
 	/////////////////////////////////////////////////////////////////////////////
-	$bookedRooms = $this->ExecuteQuery("SELECT COUNT( rc.R_Category_Id ) AS Room_Count, R_Category_Name, Adult, Children 
+	$bookedRooms = $db->ExecuteQuery("SELECT COUNT( rc.R_Category_Id ) AS Room_Count, R_Category_Name, Adult, Children 
 	FROM tbl_reserved_rooms rr
 	LEFT JOIN tbl_room_master rm ON rm.Room_Id = rr.Room_Id
 	LEFT JOIN tbl_rooms_category rc ON rm.R_Category_Id = rc.R_Category_Id
@@ -408,22 +426,14 @@ if($_POST['type']=="getReservationInfo"){
 	// Message ////////////////////////////////////////////////
 	//*********************************************************
 	$message = '
-	<table width="600" border="0" cellspacing="0" cellpadding="0">
+	<table width="60%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
 		<td style="padding:20px; background:#F2F2F2;">
 			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				
 				<tr>
-					<td><img src="images/logo.png" alt="" /></td>
-				</tr>
-				<tr>
-					<td style="background:#fff; padding:15px; font-family:Arial, Helvetica, sans-serif; font-size:14px;">
+					<td style="padding:15px; font-family:Arial, Helvetica, sans-serif; font-size:14px;">
 						<table width="100%" border="0" cellspacing="0" cellpadding="0">
-							<tr>
-								<td>
-									<h2>Thanks for showing an ineterest in reservation with Van Vinodan</h2>
-									<p>your confirmation of reservation and payment details</p>
-								</td>
-							</tr>
 							<tr>
 								<td style="background:#F2F2F2; padding:10px;">
 									YOUR RESERVATION DETAILS
@@ -434,26 +444,12 @@ if($_POST['type']=="getReservationInfo"){
 									<table width="100%" border="0" cellspacing="0" cellpadding="5">
 										<tr>
 											<td><strong>Reservation Ref. No.:</strong> '.$bookingInfo[1]['Reservation_Ref_No'].'</td>
-											<td style="text-align:right;"><strong>Date:</strong> '.date("M d, Y").'</td>
 										</tr>
 										<tr>
 											<td><strong>Reservation Status:</strong> '.$bookingInfo[1]['Reservation_Status'].'</td>
 										</tr>
-										<tr>
-											<td colspan="2" style="padding-bottom:15px;">
-												<table width="50%">
-													<tr>
-														<td colspan="2" style="padding-top:15px; padding-bottom:5px; border-bottom:solid 1px #CCCCCC;"><strong>RECEIPT To</strong></td>
-													</tr>
-												</table>
-											</td>
-										</tr>
-										<tr>
-											<td colspan="2"><strong>Payment Id:</strong> '.$bookingInfo[1]['Payment_Id'].'</td>
-										</tr>
-										<tr>
-											<td colspan="2"><strong>Transaction Code:</strong> '.$bookingInfo[1]['Transaction_No'].'</td>
-										</tr>
+										
+										
 										<tr>
 											<td colspan="2"><strong>Name:</strong> '.$bookingInfo[1]['Client_Name'].'</td>
 										</tr>
@@ -505,7 +501,9 @@ if($_POST['type']=="getReservationInfo"){
 											<td style="border-top:solid 1px #CCC; border-bottom:solid 1px #CCC;"><strong>'.$bookingInfo[1]['Grand_Total_Amt'].'</strong></td>
 										</tr>
 										<tr>
-											<td colspan="2" style="text-align:center; padding:15px; color:green; font-size:35px;">PAID</td>
+											<td colspan="2" style="text-align:center; padding:15px;">
+												<a href="payment/PayUMoney_form.php?id='.$reservationId.'"><img src="images/payBtn.png" alt="" /></a>
+											</td>
 										</tr>
 									</table>
 								</td>

@@ -66,7 +66,7 @@ $checkout = date("d-m-Y",strtotime($checkin.'+1 day'));//It will add 1 day
                 </div>
                 
                 <div id="reservation-details">
-                	dsaf
+                	
                 </div>
             </div>
         </div>
