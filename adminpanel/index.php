@@ -3,11 +3,10 @@ include('../config.php');
 require_once(PATH_LIBRARIES.'/classes/DBConn.php');
 $db = new DBConn();
 $currentDate = date("Y-m-d");
-$getTdayCnfmedBkng = $db->ExecuteQuery("SELECT Reservation_Id, Client_Name, DATE_FORMAT(Check_In_Date,'%d-%m-%Y') AS Check_In_Date, DATE_FORMAT(Check_Out_Date,'%d-%m-%Y') AS Check_Out_Date, Arrival_Time FROM tbl_reservation WHERE Reservation_Status = 1 AND Check_In_Date = ".$currentDate." ORDER BY Arrival_Time ASC");
-
-$getPendingBkng = $db->ExecuteQuery("SELECT Reservation_Id, Client_Name, DATE_FORMAT(Check_In_Date,'%d-%m-%Y') AS Check_In_Date, DATE_FORMAT(Check_Out_Date,'%d-%m-%Y') AS Check_Out_Date, Arrival_Time FROM tbl_reservation WHERE Reservation_Status = 5 AND Check_In_Date >= '".$currentDate."' ORDER BY Check_In_Date ASC");
+$getTdayCnfmedBkng = $db->ExecuteQuery("SELECT Reservation_Id, Client_Name, DATE_FORMAT(Check_In_Date,'%d-%m-%Y') AS Check_In_Date, DATE_FORMAT(Check_Out_Date,'%d-%m-%Y') AS Check_Out_Date, Arrival_Time FROM tbl_reservation WHERE (Reservation_Status = 1 OR Reservation_Status = 2) AND Check_In_Date = '".$currentDate."' ORDER BY Arrival_Time ASC LIMIT 5");
 
 
+$getPendingBkng = $db->ExecuteQuery("SELECT Reservation_Id, Client_Name, DATE_FORMAT(Check_In_Date,'%d-%m-%Y') AS Check_In_Date, DATE_FORMAT(Check_Out_Date,'%d-%m-%Y') AS Check_Out_Date, Arrival_Time FROM tbl_reservation WHERE Reservation_Status = 5 AND Check_In_Date >= '".$currentDate."' ORDER BY Check_In_Date ASC LIMIT 5");
 
 require_once(PATH_ADMIN_INCLUDE.'/header.php');
 
@@ -52,7 +51,7 @@ require_once(PATH_ADMIN_INCLUDE.'/header.php');
                     <td><?php echo $getTdayCnfmedBkngVal['Check_In_Date'] ?></td>
                     <td><?php echo $getTdayCnfmedBkngVal['Check_Out_Date'] ?></td>
                     <td><?php echo $getTdayCnfmedBkngVal['Arrival_Time'] ?></td>
-                    <td><a class="btn btn-xs btn-info" href="">view details</a></td>
+                    <td><a class="btn btn-xs btn-info" href="">view</a></td>
                 </tr>
                 <?php }
 				}else{?>
@@ -98,8 +97,8 @@ require_once(PATH_ADMIN_INCLUDE.'/header.php');
                     <td><?php echo $getPendingBkngVal['Check_In_Date'] ?></td>
                     <td><?php echo $getPendingBkngVal['Check_Out_Date'] ?></td>
                     <td><?php echo $getPendingBkngVal['Arrival_Time'] ?></td>
-                    <td><!--<a class="btn btn-xs btn-info" href="reservations/reservation-info.php?rid=<?php echo $getPendingBkngVal['Reservation_Id'] ?>">view details</a>-->
-                    <button class="btn btn-xs btn-info pendingViewBtn" id="rid-<?php echo $getPendingBkngVal['Reservation_Id'] ?>">view details</button>
+                    <td>
+                    <button class="btn btn-xs btn-info pendingViewBtn" id="rid-<?php echo $getPendingBkngVal['Reservation_Id'] ?>">view</button>
                     </td>
                 </tr>
                 <?php }
@@ -119,12 +118,7 @@ require_once(PATH_ADMIN_INCLUDE.'/header.php');
     <div class="col-md-6 col-sm-6 col-xs-12">
       <div class="x_panel">
         <div class="x_title">
-          <h2>All Reservations</h2>
-          <ul class="nav navbar-right panel_toolbox">
-            <li>
-              <button class="btn btn-sm btn-success" onclick="location.href='list.php';">View List</button>
-            </li>
-          </ul>
+          <h2>Today's Reserved Rooms</h2>
           <div class="clearfix"></div>
         </div>
         <div class="x_content">
@@ -134,13 +128,27 @@ require_once(PATH_ADMIN_INCLUDE.'/header.php');
     </div>
     
     
+    
     <!-- Modal POPUP -->
-    <div id="bookingInfo" rel="modal" style="background:#fff; display:none">sdfsd</div>
-    
-    
-  </div>
+    <div id="bookingInfo" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="gridModalLabel" style="display: none;" aria-hidden="false">
+        <div class="modal-dialog modal-md" role="document">
+          
+          <div class="modal-content" id="usersignin">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                  </button>
+                  <h4 class="modal-title" id="gridModalLabel">Reservation Info</h4>
+              </div>
+              <div class="modal-body">
+                          
+                
+              
+              </div>
+              <div class="clearfix"></div>
+          </div>
+        </div>
+    </div>
+    <!-- EOF Modal POPUP -->
 </div>
-<?php 
-require_once(PATH_ADMIN_INCLUDE.'/footer.php');
-
-?>
+<?php require_once(PATH_ADMIN_INCLUDE.'/footer.php'); ?>

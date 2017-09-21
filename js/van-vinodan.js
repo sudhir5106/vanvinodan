@@ -537,10 +537,29 @@ $(document).ready(function(){
 	$(document).on("click", ".pendingViewBtn", function(){
 		var rid = $(this).attr('id');
 		var reservationId = rid.split("-");
-		//reservationId[1];
 		
+
+		var formdata = new FormData();
+		formdata.append('type', "getReservationDetails");
+		formdata.append('rid', reservationId[1]);
+					
+		$.ajax({
+		   type: "POST",
+		   url: "../global_curd.php",
+		   data:formdata,
+		   success: function(data){ //alert(data);
+				
+				$(".modal-body").html(data);
+				$("#bookingInfo").modal('show');
+				
+		   },
+		   cache: false,
+		   contentType: false,
+		   processData: false
+		});//eof ajax
+
+
 		
-		$("#bookingInfo").modal('show');
 		
 	});
 	

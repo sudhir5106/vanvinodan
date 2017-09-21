@@ -197,6 +197,14 @@ body.nav-md .container.body .right_col {
   height: 57px;
 }
 .error, .required{color:#ff0000;}
+.modal-top-info{margin-bottom:10px;}
+.roomBg{background:#fff; color:#333; padding:8px 10px; border-radius:4px; margin-top:5px;}
+.modal-room-info{background:#e5e5e5; padding:15px 0;}
+.calculationBlock{padding:15px 20px; background:#F2F2F2;}
+.x_title h2 span{color:#fff;}
+
+
+
 @media (max-width: 991px) {
   body.nav-md .container.body .right_col, body.nav-md .container.body .top_nav {
     width: 100%;

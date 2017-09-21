@@ -384,7 +384,7 @@ if($_POST['type']=="ConfirmedRno"){
 }
 
 ///*******************************************************
-/// Check the Reservation Ref No is valid or Not /////////
+/// Find the Reservation Details /////////////////////////
 ///*******************************************************
 if($_POST['type']=="getReservationInfo"){
 	
@@ -519,4 +519,111 @@ if($_POST['type']=="getReservationInfo"){
 echo $message;
 	
 }
+
+
+///*******************************************************
+/// Get the Reservation Details //////////////////////////
+///*******************************************************
+if($_POST['type']=="getReservationDetails"){
+	
+	//*********************************
+	// Get reservation details from DB
+	//*********************************
+	$bookingInfo = 	$db->ExecuteQuery("SELECT Reservation_Id, Reservation_Ref_No, Check_In_Date, Check_Out_Date, Arrival_Time, Client_Name, Email, Phone, Total_Rooms_Amt, Total_Guests_Amt, Subtotal_Amt, SGST_Amt, CGST_Amt, Grand_Total_Amt, CASE WHEN Reservation_Status=5 THEN 'Pending' END Reservation_Status
+		FROM tbl_reservation 
+		WHERE Reservation_Id='".$_POST['rid']."'");
+	
+	//*****************************************************************
+	$reservationId = base64_encode($bookingInfo[1]['Reservation_Id']);
+	//*****************************************************************
+	$checkindate=date('d-m-Y',strtotime($bookingInfo[1]['Check_In_Date']));
+	$checkoutdate=date('d-m-Y',strtotime($bookingInfo[1]['Check_Out_Date']));
+	//************************************************************
+	//Get Total No of Nights /////////////////////////////////////
+	//************************************************************
+	$date1 = new DateTime($bookingInfo[1]['Check_In_Date']);
+	$date2 = new DateTime($bookingInfo[1]['Check_Out_Date']);
+	
+	//***********************************************************
+	// Its calculates the the number of nights between two dates
+	//***********************************************************
+	$numberOfNights= $date2->diff($date1)->format("%a"); 
+	
+	/////////////////////////////////////////////////////////////////////////////
+	// this calculates the diff between two dates, which is the number of nights
+	/////////////////////////////////////////////////////////////////////////////
+	$bookedRooms = $db->ExecuteQuery("SELECT COUNT( rc.R_Category_Id ) AS Room_Count, R_Category_Name, Adult, Children 
+	FROM tbl_reserved_rooms rr
+	LEFT JOIN tbl_room_master rm ON rm.Room_Id = rr.Room_Id
+	LEFT JOIN tbl_rooms_category rc ON rm.R_Category_Id = rc.R_Category_Id
+	
+	WHERE Reservation_Id=".$bookingInfo[1]['Reservation_Id']." GROUP BY rc.R_Category_Id
+	");
+	
+	//*********************************************************
+	// Message ////////////////////////////////////////////////
+	//*********************************************************
+	$message = '
+	<div>
+		<div class="modal-top-info">
+			<div class="col-sm-5">
+				<strong>Customer Name:</strong> '.$bookingInfo[1]['Client_Name'].'<br>
+				<strong>Email:</strong> '.$bookingInfo[1]['Email'].'<br>
+				<strong>Phone:</strong> '.$bookingInfo[1]['Phone'].'
+			</div>
+			<div class="col-sm-7">
+				<strong>Reservation Ref. No.:</strong> '.$bookingInfo[1]['Reservation_Ref_No'].'<br>
+				<strong>Reservation Status:</strong> <span class="label label-danger">'.$bookingInfo[1]['Reservation_Status'].'</span>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+		
+		<div class="col-sm-12 modal-room-info">
+			<div>
+				<strong>Check-In:</strong> '.$checkindate.'&nbsp;&nbsp;&nbsp;&nbsp;<strong>Check-Out:</strong> '.$checkoutdate.'&nbsp;&nbsp;&nbsp;&nbsp;<strong>Total Nights:</strong> '.$numberOfNights.'&nbsp;&nbsp;&nbsp;&nbsp;<strong>Arriaval Time:</strong>'.$bookingInfo[1]['Arrival_Time'].'
+			</div>
+			';
+			foreach($bookedRooms as $val){
+			
+			$message .='<div class="roomBg">
+				<div class="col-sm-6">'.$val['R_Category_Name'].' - '.$val['Room_Count'].' Room(s)</div>
+				<div class="col-sm-6">Adult(s):'.$val['Adult'].'&nbsp;&nbsp;&nbsp;&nbsp; Children(s):'.$val['Children'].'</div>
+				<div class="clearfix"></div>
+				</div>';
+			}
+		$message .='
+		</div>
+		<div class="clearfix"></div>
+		<div class="calculationBlock">
+			<table width="100%" border="0" cellspacing="0" cellpadding="5">
+				<tr>
+					<td>Total Room Amt.:</td>
+					<td>'.$bookingInfo[1]['Total_Rooms_Amt'].'</td>
+				</tr>
+				<tr>
+					<td>Extra Guest Amt:</td>
+					<td>0.00</td>
+				</tr>
+				<tr>
+					<td>SGST(9%):</td>
+					<td>'.$bookingInfo[1]['SGST_Amt'].'</td>
+				</tr>
+				<tr>
+					<td>CGST(9%):</td>
+					<td>'.$bookingInfo[1]['CGST_Amt'].'</td>
+				</tr>
+				<tr>
+					<td style="border-top:solid 1px #CCC; border-bottom:solid 1px #CCC;"><strong>GRAND TOTAL:</strong></td>
+					<td style="border-top:solid 1px #CCC; border-bottom:solid 1px #CCC;"><strong>'.$bookingInfo[1]['Grand_Total_Amt'].'</strong></td>
+				</tr>
+				
+			</table>
+		</div>
+
+	</div>';
+
+echo $message;
+	
+}
+
 ?>
