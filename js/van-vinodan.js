@@ -528,4 +528,20 @@ $(document).ready(function(){
 		}
 	});
 	
+	
+	///////////////////////////////////////
+	//Adminpanel Use //////////////////////
+	///////////////////////////////////////
+	// Open Modal onClick pending view Btn
+	//*************************************
+	$(document).on("click", ".pendingViewBtn", function(){
+		var rid = $(this).attr('id');
+		var reservationId = rid.split("-");
+		//reservationId[1];
+		
+		
+		$("#bookingInfo").modal('show');
+		
+	});
+	
 })//eof ready function

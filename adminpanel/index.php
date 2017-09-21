@@ -98,7 +98,9 @@ require_once(PATH_ADMIN_INCLUDE.'/header.php');
                     <td><?php echo $getPendingBkngVal['Check_In_Date'] ?></td>
                     <td><?php echo $getPendingBkngVal['Check_Out_Date'] ?></td>
                     <td><?php echo $getPendingBkngVal['Arrival_Time'] ?></td>
-                    <td><a class="btn btn-xs btn-info" href="reservation-info.php?rid=<?php echo $getPendingBkngVal['Reservation_Id'] ?>">view details</a></td>
+                    <td><!--<a class="btn btn-xs btn-info" href="reservations/reservation-info.php?rid=<?php echo $getPendingBkngVal['Reservation_Id'] ?>">view details</a>-->
+                    <button class="btn btn-xs btn-info pendingViewBtn" id="rid-<?php echo $getPendingBkngVal['Reservation_Id'] ?>">view details</button>
+                    </td>
                 </tr>
                 <?php }
 				}else{?>
@@ -117,7 +119,7 @@ require_once(PATH_ADMIN_INCLUDE.'/header.php');
     <div class="col-md-6 col-sm-6 col-xs-12">
       <div class="x_panel">
         <div class="x_title">
-          <h2>Pending Reservations</h2>
+          <h2>All Reservations</h2>
           <ul class="nav navbar-right panel_toolbox">
             <li>
               <button class="btn btn-sm btn-success" onclick="location.href='list.php';">View List</button>
@@ -130,6 +132,11 @@ require_once(PATH_ADMIN_INCLUDE.'/header.php');
         </div>
       </div>
     </div>
+    
+    
+    <!-- Modal POPUP -->
+    <div id="bookingInfo" rel="modal" style="background:#fff; display:none">sdfsd</div>
+    
     
   </div>
 </div>

@@ -29,6 +29,7 @@
   <script src="<?php echo PATH_JS_LIBRARIES ?>/jquery.min.js"></script>
   <script src="<?php echo PATH_JS_LIBRARIES ?>/jquery-ui.js"></script>
   <script src="<?php echo PATH_JS_LIBRARIES ?>/nprogress.js"></script>
+  <script src="<?php echo PATH_JS_LIBRARIES ?>/van-vinodan.js"></script>
 
   <!--[if lt IE 9]>
         <script src="../assets/js/ie8-responsive-file-warning.js"></script>
