@@ -14,7 +14,7 @@ $(document).ready(function(){
 			{ 
 				required: true,
 			},
-			heading:
+			newstitle:
 			{
 				required:true,
 			},
@@ -42,44 +42,12 @@ $(document).ready(function(){
 		
 			$('#loading').show();
 			
-			///////////////////////////////////
-			//Check News PDF Uploaded or not
-			///////////////////////////////////
-			var pdf='';
-			var pdfval='';
-			
-			if($("#fileupload").val().length>0)
-			{
-				pdf=$("#fileupload").prop('files')[0];
-				pdfval=1;
-			}
-			
-			//////////////////////////////////////////
-			//Check News PDF Uploaded or not for hindi
-			//////////////////////////////////////////
-			var pdf_h='';
-			var pdfval_h='';
-			
-			if($("#fileupload_h").val().length>0)
-			{
-				pdf_h=$("#fileupload_h").prop('files')[0];
-				pdfval_h=1;
-			}
-		
 			var formdata = new FormData();
 			formdata.append('type', "addNews");
-			formdata.append('date', $("#published_date").val());
-			formdata.append('heading', $("#heading").val());
-			
-			formdata.append('pdf', pdf);
-			formdata.append('pdfval', pdfval);
-			
-			formdata.append('pdf_h', pdf_h);
-			formdata.append('pdfval_h', pdfval_h);
-			
+			formdata.append('published_date', $("#published_date").val());
+			formdata.append('newstitle', $("#newstitle").val());			
+			formdata.append('file', $('input[id=fileupload]')[0].files[0]);			
 			formdata.append('desc', $("#desc").val());
-			formdata.append('h_heading', $("#h_heading").val());
-			formdata.append('h_desc', $("#h_desc").val());
 
 			$.ajax({
 			   type: "POST",
@@ -92,24 +60,24 @@ $(document).ready(function(){
 				   if(data==1)
 					{	
 						$( "#dialog1" ).dialog({
-								dialogClass: "alert",
-								buttons: {
-								 'Ok': function() {
-									window.location.replace("list.php");
-									}
+							dialogClass: "alert",
+							buttons: {
+							 'Ok': function() {
+								window.location.replace("list.php");
 								}
+							}
 						});
 					}
 					else
 					{
 					 			
 						$( "#dialog2" ).dialog({
-								dialogClass: "alert",
-								buttons: {
-								 'Ok': function() {
-									window.location.replace("index.php");
-									}
+							dialogClass: "alert",
+							buttons: {
+							 'Ok': function() {
+								window.location.replace("index.php");
 								}
+							}
 						});
 						
 					}
@@ -135,46 +103,29 @@ $(document).ready(function(){
 			$('#loading').show();
 			
 			///////////////////////////////////
-			//Check Tender PDF Uploaded or not
+			//Check News Image Uploaded or not
 			///////////////////////////////////
-			var pdf='';
-			var pdfval='';
-			
+			var image='';
+			var imageval='';
+						
 			if($("#fileupload").val().length>0)
 			{
-				pdf=$("#fileupload").prop('files')[0];
-				pdfval=1;
-			}
-			
-			///////////////////////////////////
-			//Check Tender PDF Uploaded or not
-			///////////////////////////////////
-			var pdf_h='';
-			var pdfval_h='';
-			
-			if($("#fileupload_h").val().length>0)
-			{
-				pdf_h=$("#fileupload_h").prop('files')[0];
-				pdfval_h=1;
+				image=$("#fileupload").prop('files')[0];
+				imageval=1;
 			}
 			
 			var formdata = new FormData();
 			formdata.append('type', "editNews");
 			formdata.append('id', $("#id").val());
 			
-			formdata.append('pdf', pdf);
-			formdata.append('pdfval', pdfval);
-			formdata.append('news-doc', $('#news-doc').val());
+			formdata.append('image', image);
+			formdata.append('imageval', imageval);
+			formdata.append('news-img', $('#news-img').val());
 			
-			formdata.append('pdf_h', pdf_h);
-			formdata.append('pdfval_h', pdfval_h);
-			formdata.append('news-doc_h', $('#news-doc_h').val());
-			
-			formdata.append('date', $("#published_date").val());
-			formdata.append('heading', $("#heading").val());
+			formdata.append('published_date', $("#published_date").val());
+			formdata.append('newstitle', $("#newstitle").val());			
+			formdata.append('file', $('input[id=fileupload]')[0].files[0]);			
 			formdata.append('desc', $("#desc").val());
-			formdata.append('h_heading', $("#h_heading").val());
-			formdata.append('h_desc', $("#h_desc").val());
 			
 			var x;
 			$.ajax({
@@ -204,15 +155,12 @@ $(document).ready(function(){
 			
 		}// eof if condition
 		
-	});
-	
-	
+	});	
 	
 	
 	//////////////////////////////////
 	// on click of delete button
-	//////////////////////////////////
-	
+	//////////////////////////////////	
 	$(document).on('click', '.delete', function() {
 		
 		var didConfirm = confirm("Are you sure?");

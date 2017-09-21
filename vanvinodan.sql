@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 16, 2017 at 04:49 PM
+-- Generation Time: Sep 22, 2017 at 12:16 AM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.6.24
 
@@ -38,6 +38,30 @@ CREATE TABLE `tbl_admin_login` (
 
 INSERT INTO `tbl_admin_login` (`Login_Id`, `Login_Name`, `Login_Password`) VALUES
 (1, 'admin', '123456');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_latest_news`
+--
+
+CREATE TABLE `tbl_latest_news` (
+  `Id` int(11) NOT NULL,
+  `Date` date NOT NULL,
+  `News_Title` varchar(200) NOT NULL,
+  `News_Image` varchar(100) NOT NULL,
+  `Description` mediumtext NOT NULL,
+  `Status` tinyint(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_latest_news`
+--
+
+INSERT INTO `tbl_latest_news` (`Id`, `Date`, `News_Title`, `News_Image`, `Description`, `Status`) VALUES
+(9, '2017-09-20', 'Jungle Safari will start from the next month.', '1505924359.jpg', 'testing 2 testing 2 testing 2 testing 2 testing 2 testing 2 testing 2 testing 2 testing 2 testing 2 testing 2 testing 2 testing 2 testing 2 testing 2 testing 2 testing 2 testing 2 testing 2 testing 2 ', 1),
+(10, '2017-09-20', 'Jungle Safari will start from the next month.', '1505925937.jpg', 'w awesf asdfasdfasdfasdf asdfadsfasdf asdf asdfasdf asdf', 1),
+(11, '2017-09-19', 'Jungle Safari will start from the next month.', '1505925965.jpg', 'dfasf asdfadsf asdf asdf adsfasd fasdf asdf asdf adsf asdfadsf asdfasdf asfasdf asfd', 1);
 
 -- --------------------------------------------------------
 
@@ -90,7 +114,8 @@ CREATE TABLE `tbl_reservation` (
 --
 
 INSERT INTO `tbl_reservation` (`Reservation_Id`, `Reservation_Ref_No`, `Check_In_Date`, `Check_Out_Date`, `Arrival_Time`, `Client_Name`, `Email`, `Phone`, `ID_Proof_Image`, `Total_Rooms_Amt`, `Total_Guests_Amt`, `Subtotal_Amt`, `SGST_Amt`, `CGST_Amt`, `Grand_Total_Amt`, `Reservation_Status`) VALUES
-(1, 'REF1505568460', '2017-09-16', '2017-09-17', '12:00:00', 'sudhir', 'sudhir5106@gmail.com', '9826396462', '1505568459.jpg', 1, 0, 1, 0.09, 0.09, 1.18, 1);
+(1, 'REF1505568460', '2017-09-16', '2017-09-17', '12:00:00', 'sudhir', 'sudhir5106@gmail.com', '9826396462', '1505568459.jpg', 1, 0, 1, 0.09, 0.09, 1.18, 1),
+(2, 'REF1506014181', '2017-09-21', '2017-09-22', '11:00:00', 'Rakesh Nair', 's@gmail.com', '9826396462', '1506014181.jpg', 1, 0, 1, 0.09, 0.09, 1.18, 5);
 
 -- --------------------------------------------------------
 
@@ -116,7 +141,8 @@ CREATE TABLE `tbl_reserved_rooms` (
 --
 
 INSERT INTO `tbl_reserved_rooms` (`RB_Id`, `Reservation_Id`, `Room_Id`, `Check_In_Date`, `Check_Out_Date`, `Adult`, `Children`, `Base_Fare`, `Extra_Guest_Amt`, `Reservation_Status`) VALUES
-(1, 1, 1, '2017-09-16', '2017-09-17', 1, 0, 0.5, 0, 1);
+(1, 1, 1, '2017-09-16', '2017-09-17', 1, 0, 0.5, 0, 1),
+(2, 2, 1, '2017-09-21', '2017-09-22', 1, 0, 0.5, 0, 5);
 
 -- --------------------------------------------------------
 
@@ -211,6 +237,12 @@ ALTER TABLE `tbl_admin_login`
   ADD PRIMARY KEY (`Login_Id`);
 
 --
+-- Indexes for table `tbl_latest_news`
+--
+ALTER TABLE `tbl_latest_news`
+  ADD PRIMARY KEY (`Id`);
+
+--
 -- Indexes for table `tbl_payment_gateway_detail`
 --
 ALTER TABLE `tbl_payment_gateway_detail`
@@ -254,6 +286,11 @@ ALTER TABLE `tbl_transactions`
 --
 
 --
+-- AUTO_INCREMENT for table `tbl_latest_news`
+--
+ALTER TABLE `tbl_latest_news`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+--
 -- AUTO_INCREMENT for table `tbl_payment_gateway_detail`
 --
 ALTER TABLE `tbl_payment_gateway_detail`
@@ -262,12 +299,12 @@ ALTER TABLE `tbl_payment_gateway_detail`
 -- AUTO_INCREMENT for table `tbl_reservation`
 --
 ALTER TABLE `tbl_reservation`
-  MODIFY `Reservation_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `Reservation_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `tbl_reserved_rooms`
 --
 ALTER TABLE `tbl_reserved_rooms`
-  MODIFY `RB_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `RB_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `tbl_rooms_category`
 --

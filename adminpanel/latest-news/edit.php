@@ -4,8 +4,8 @@ require_once(PATH_LIBRARIES.'/classes/DBConn.php');
 require_once(PATH_ADMIN_INCLUDE.'/header.php');
 $db = new DBConn();
 
-//Get Here Category List
-$getCategory=$db->ExecuteQuery("SELECT H_Description , H_Heading,Id, CASE WHEN Date=0 THEN '----' ELSE DATE_FORMAT(Date,'%d/%m/%Y') END  PDate, Description, Heading, Page_Link, H_Page_Link FROM tbl_latest_news WHERE Id='".$_REQUEST['id']."'");
+//Get Here News List
+$getNews=$db->ExecuteQuery("SELECT News_Title , News_Image, Description, CASE WHEN Date=0 THEN '----' ELSE DATE_FORMAT(Date,'%d/%m/%Y') END  PDate FROM tbl_latest_news WHERE Id='".$_REQUEST['id']."'");
 
 ?>
 <script type="text/javascript" src="news.js"></script>
@@ -35,85 +35,44 @@ $getCategory=$db->ExecuteQuery("SELECT H_Description , H_Heading,Id, CASE WHEN D
           <form class="form-horizontal form-label-left" action="" method="post" id="newsform">
           	
             <div class="col-sm-12"> 
-              <!---Write here English Content Here-->
-              <div class="col-sm-6">
+              <div>
                 <div class="item form-group">
-                  <center>
-                    <h4><strong>English Section</strong></h4>
-                  </center>
-                </div>
-                
-                <div class="item form-group">
-                  <label class="control-label col-md-5 col-sm-5 col-xs-12" for="published_date">Date <span class="required">*</span> </label>
-                  <div class="col-md-7 col-sm-7 col-xs-12">
-                    <input type="text" id="published_date" name="published_date" required="required" class="form-control col-md-7 col-xs-12 datetimepicker" placeholder="DD/MM/YYYY" value="<?php echo $getCategory[1]['PDate']?>">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="published_date">Date <span class="required">*</span> </label>
+                  <div class="col-md-3 col-sm-3 col-xs-12">
+                    <input type="text" id="published_date" name="published_date" required="required" class="form-control col-md-7 col-xs-12 datetimepicker" placeholder="DD/MM/YYYY" value="<?php echo $getNews[1]['PDate']?>">
                   </div>
                 </div>
                 
                 <div class="item form-group">
-                  <label class="control-label col-md-5 col-sm-5 col-xs-12" for="subcategory">News Title <span class="required">*</span> </label>
-                  <div class="col-md-7 col-sm-7 col-xs-12">
-                    <input type="text" id="heading" name="heading" required="required" class="form-control col-md-7 col-xs-12 " placeholder="Heading" value="<?php echo $getCategory[1]['Heading']?>">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="newstitle">News Title <span class="required">*</span> </label>
+                  <div class="col-md-5 col-sm-5 col-xs-12">
+                    <input type="text" id="newstitle" name="newstitle" required="required" class="form-control col-md-7 col-xs-12 " placeholder="Heading" value="<?php echo $getNews[1]['News_Title']?>">
                   </div>
                 </div>
                 
                 <div class="item form-group">
-                  <label class="control-label col-md-5 col-sm-5 col-xs-12" for="fileupload">Updoad News PDF</label>
-                  <div class="col-md-7 col-sm-7 col-xs-12">
-                    
-                    <input type="hidden" id="news-doc" name="news-doc" value="<?php echo $getCategory[1]['Page_Link']?>" />                  
-                    <?php if(!empty($getCategory[1]['Page_Link'])){ ?>
-                    <div><a target="_blank" class="btn btn-default btn-xs" style="color:#ff0000; font-size:18px;" href="<?php echo PATH_LATEST_NEWS_PDF."/english/".$getCategory[1]['Page_Link'];?>"><i class="fa fa-file-pdf-o"></i> News Document</a></div>
-                    <?php } ?>
-                    
-                    <input type="file" id="fileupload" name="fileupload" class="form-control col-md-7 col-xs-12" accept="pdf">
-                    <span id="errmsg"></span> (Note : Only PDF Document Can Upload.) </div>
-                    
-              	</div>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="fileupload">Updoad News Image</label>
+                  <div class="col-md-4 col-sm-4 col-xs-12">
+                    <input type="hidden" id="news-img" name="news-img" value="<?php echo $getNews[1]['News_Image']?>"/>
                 
+				<?php if(!empty($getNews[1]['News_Image']) && file_exists(ROOT."/images/latest-news/".$getNews[1]['News_Image']))
+                    { 
+                        echo '<div class="col-md-4"><img width="100%" src="'.PATH_IMAGE."/latest-news/thumb/".$getNews[1]['News_Image'].'"/></div>';
+                    } 
+                  else{
+                      echo '<label class="col-md-4 control-label" for="fileupload"><span class="glyphicon glyphicon-user" style="font-size:50pt;"></span></label>';
+                  } ?>
+                    
+                    <input class="col-md-8" type="file" id="fileupload" name="fileupload" accept="image/jpg,image/png,image/jpeg,image/gif"/>
+              	  </div>
+                </div>
                 <div class="item form-group">
-                  <label class="control-label col-md-5 col-sm-5 col-xs-12" for="description">Description <span class="required">*</span> </label>
-                  <div class="col-md-7 col-sm-7 col-xs-12">
-                    <textarea id="desc" name="desc" required="required" class="form-control col-md-7 col-xs-12 " placeholder="Write Here Something... "  rows="10"><?php echo $getCategory[1]['Description']?></textarea>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="desc">Description <span class="required">*</span></label>
+                  <div class="col-md-5 col-sm-5 col-xs-12">
+                    <textarea id="desc" name="desc" required="required" class="form-control col-md-7 col-xs-12 " placeholder="Write Here Something... "  rows="10"><?php echo $getNews[1]['Description']?></textarea>
                   </div>
                 </div>
-              </div>
-              <!---Close Here English --> 
-              <!---Write here Hindi Content Here-->
-              <div class="col-sm-6">
-                <div class="item form-group">
-                  <center>
-                    <h4><strong >Hindi Section</strong></h4>
-                  </center>
-                </div>
-              	<div class="item form-group">
-                  <label class="control-label col-md-5 col-sm-5 col-xs-12" for="h_heading">News Title <span class="required">*</span> </label>
-                  <div class="col-md-7 col-sm-7 col-xs-12">
-                    <input type="text" id="h_heading" name="h_heading"  class="form-control col-md-7 col-xs-12 " placeholder="शीर्षक" value="<?php echo $getCategory[1]['H_Heading']?>">
-                  </div>
-                </div>
-                
-                <div class="item form-group">
-                  <label class="control-label col-md-5 col-sm-5 col-xs-12" for="fileupload">Updoad News PDF</label>
-                  <div class="col-md-7 col-sm-7 col-xs-12">
-                    
-                    <input type="hidden" id="news-doc_h" name="news-doc_h" value="<?php echo $getCategory[1]['H_Page_Link']?>" />                  
-                    <?php if(!empty($getCategory[1]['H_Page_Link'])){ ?>
-                    <div><a target="_blank" class="btn btn-default btn-xs" style="color:#ff0000; font-size:18px;" href="<?php echo PATH_LATEST_NEWS_PDF."/hindi/".$getCategory[1]['H_Page_Link'];?>"><i class="fa fa-file-pdf-o"></i> News Document</a></div>
-                    <?php } ?>
-                    
-                    <input type="file" id="fileupload_h" name="fileupload_h" class="form-control col-md-7 col-xs-12" accept="pdf">
-                    <span id="errmsg"></span> (Note : Only PDF Document Can Upload.) </div>
-                    
-              	</div>
-                
-                <div class="item form-group">
-                  <label class="control-label col-md-5 col-sm-5 col-xs-12" for="hdescription">Description <span class="required">*</span> </label>
-                  <div class="col-md-7 col-sm-7 col-xs-12">
-                    <textarea id="h_desc" name="h_desc" class="form-control col-md-7 col-xs-12 " placeholder="कुछ लिखिए..... "  rows="10"><?php echo $getCategory[1]['H_Description']?></textarea>
-                  </div>
-                </div>
-              </div>
+              </div>              
             </div>
             <div class="clearfix"></div>
             <div class="ln_solid"></div>

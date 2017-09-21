@@ -43,9 +43,13 @@ $db = new DBConn();
                 </div>
                 
                 <div class="item form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="heading">News Title <span class="required">*</span> </label>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="newstitle">News Title <span class="required">*</span> </label>
                   <div class="col-md-5 col-sm-5 col-xs-12">
+<<<<<<< HEAD
                     <input type="text" id="heading" name="heading" required="required" class="form-control col-md-7 col-xs-12 " placeholder="News Title">
+=======
+                    <input type="text" id="newstitle" name="newstitle" required="required" class="form-control col-md-7 col-xs-12 " placeholder="Heading">
+>>>>>>> c708b5d2ca08a8cd4875b2448aef5ea6580f0646
                   </div>
                 </div>
                 
@@ -53,11 +57,11 @@ $db = new DBConn();
                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="fileupload">Updoad News Image</label>
                   <div class="col-md-3 col-sm-3 col-xs-12">
                     <input type="file" id="fileupload" name="fileupload" class="form-control col-md-7 col-xs-12" accept="pdf">
-                    <span id="errmsg"></span> (Note : Upload only samll than 1MB file.) </div>
+                    <span id="errmsg"></span> (Note : Upload Image not more than 1MB.) </div>
               	</div>
                 
                 <div class="item form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="description">Description <span class="required">*</span></label>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="desc">Description <span class="required">*</span></label>
                   <div class="col-md-5 col-sm-5 col-xs-12">
                     <textarea id="desc" name="desc" required="required" class="form-control col-md-7 col-xs-12 " placeholder="Write Here Something... "  rows="10"></textarea>
                   </div>
