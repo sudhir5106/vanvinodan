@@ -5,7 +5,7 @@ $db = new DBConn();
 $currentDate = date("Y-m-d");
 $getTdayCnfmedBkng = $db->ExecuteQuery("SELECT Reservation_Id, Client_Name, DATE_FORMAT(Check_In_Date,'%d-%m-%Y') AS Check_In_Date, DATE_FORMAT(Check_Out_Date,'%d-%m-%Y') AS Check_Out_Date, Arrival_Time FROM tbl_reservation WHERE Reservation_Status = 1 AND Check_In_Date = ".$currentDate." ORDER BY Arrival_Time ASC");
 
-$getPendingBkng = $db->ExecuteQuery("SELECT Reservation_Id, Client_Name, DATE_FORMAT(Check_In_Date,'%d-%m-%Y') AS Check_In_Date, DATE_FORMAT(Check_Out_Date,'%d-%m-%Y') AS Check_Out_Date, Arrival_Time FROM tbl_reservation WHERE Reservation_Status = 5 AND Check_In_Date <= '".$currentDate."' ORDER BY Arrival_Time ASC");
+$getPendingBkng = $db->ExecuteQuery("SELECT Reservation_Id, Client_Name, DATE_FORMAT(Check_In_Date,'%d-%m-%Y') AS Check_In_Date, DATE_FORMAT(Check_Out_Date,'%d-%m-%Y') AS Check_Out_Date, Arrival_Time FROM tbl_reservation WHERE Reservation_Status = 5 AND Check_In_Date >= '".$currentDate."' ORDER BY Check_In_Date ASC");
 
 
 
@@ -26,7 +26,7 @@ require_once(PATH_ADMIN_INCLUDE.'/header.php');
           <h2>Today's Confirmed Reservations <span class="badge"><?php echo count($getTdayCnfmedBkng); ?></span></h2>
           <ul class="nav navbar-right panel_toolbox">
             <li>
-              <button class="btn btn-sm btn-success" onclick="location.href='list.php';">View List</button>
+              <button class="btn btn-sm btn-success" onclick="location.href='list.php';">View All</button>
             </li>
           </ul>
           <div class="clearfix"></div>
@@ -73,7 +73,7 @@ require_once(PATH_ADMIN_INCLUDE.'/header.php');
           <h2>Pending Reservations <span class="badge"><?php echo count($getPendingBkng); ?></span></h2>
           <ul class="nav navbar-right panel_toolbox">
             <li>
-              <button class="btn btn-sm btn-success" onclick="location.href='list.php';">View List</button>
+              <button class="btn btn-sm btn-success" onclick="location.href='list.php';">View All</button>
             </li>
           </ul>
           <div class="clearfix"></div>
@@ -98,7 +98,7 @@ require_once(PATH_ADMIN_INCLUDE.'/header.php');
                     <td><?php echo $getPendingBkngVal['Check_In_Date'] ?></td>
                     <td><?php echo $getPendingBkngVal['Check_Out_Date'] ?></td>
                     <td><?php echo $getPendingBkngVal['Arrival_Time'] ?></td>
-                    <td><a class="btn btn-xs btn-info" href="">view details</a></td>
+                    <td><a class="btn btn-xs btn-info" href="reservation-info.php?rid=<?php echo $getPendingBkngVal['Reservation_Id'] ?>">view details</a></td>
                 </tr>
                 <?php }
 				}else{?>
