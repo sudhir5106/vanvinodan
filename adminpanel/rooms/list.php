@@ -21,7 +21,7 @@ $db = new DBConn();
 		
 	});//eof ready function
 </script>
-<div class="">
+<div>
   <div class="page-title">
     <div class="title_left">
       <h3>List of Rooms</h3>

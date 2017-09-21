@@ -1,6 +1,13 @@
 <?php
 require_once('config.php');
-include('header.php'); ?>
+require_once(PATH_LIBRARIES.'/classes/DBConn.php');
+$db = new DBConn();
+
+include('header.php'); 
+
+$getNews = $db->ExecuteQuery("SELECT DATE_FORMAT(Date,'%d %M, %Y') AS Date, News_Title, News_Image FROM tbl_latest_news");
+
+?>
 
 <main> 
         
@@ -195,7 +202,18 @@ include('header.php'); ?>
             </div>
             <div class="col-sm-4">
                 <h2>LATEST NEWS</h2>
+                
+                <?php foreach($getNews as $getNewsVal){ ?>
                 <div class="latestnews">
+                    <div class="col-sm-4 col-xs-4 padding-right-zero news-img"><img width="100%" src="<?php echo PATH_IMAGE."/latest-news/thumb/".$getNewsVal['News_Image'] ?>" alt=""></div>
+                    <div class="col-sm-8 col-xs-8 news-title">
+                        <div><?php echo $getNewsVal['News_Title'] ?></div>
+                        <p>Posted : <?php echo $getNewsVal['Date'] ?></p>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <?php } ?>
+                <!--<div class="latestnews">
                     <div class="col-sm-4 col-xs-4 padding-right-zero news-img"><img width="100%" src="images/about-mangatta-img.jpg" alt=""></div>
                     <div class="col-sm-8 col-xs-8 news-title">
                         <div>Jungle Safari will start from the next month.</div>
@@ -211,16 +229,7 @@ include('header.php'); ?>
                         <p>Posted : 14 Augest 2017</p>
                     </div>
                     <div class="clearfix"></div>
-                </div>
-                
-                <div class="latestnews">
-                    <div class="col-sm-4 col-xs-4 padding-right-zero news-img"><img width="100%" src="images/about-mangatta-img.jpg" alt=""></div>
-                    <div class="col-sm-8 col-xs-8 news-title">
-                        <div>Jungle Safari will start from the next month.</div>
-                        <p>Posted : 14 Augest 2017</p>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
+                </div>-->
             </div>
             <div class="clearfix"></div>
         </div>

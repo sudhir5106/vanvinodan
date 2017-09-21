@@ -20,11 +20,11 @@ if(!empty($_REQUEST['date']))
 //Check Here IF Langauge is Empty For Filter
 if(!empty($_REQUEST['heading']))
 {
-	$condition.=' AND Heading="'.$_REQUEST['heading'].'"';
+	$condition.=' AND News_Title="'.$_REQUEST['heading'].'"';
 }
 
 //Get Here News  List
-$sql="SELECT Id, CASE WHEN Date=0 THEN '----' ELSE DATE_FORMAT(Date,'%d-%m-%Y') END PDate, CASE WHEN Status=0 THEN 'Show' ELSE 'Hide' END Status, Description, Heading  FROM tbl_latest_news WHERE 1=1 ".$condition." ORDER BY Id DESC";
+$sql="SELECT Id, CASE WHEN Date=0 THEN '----' ELSE DATE_FORMAT(Date,'%d-%m-%Y') END PDate, CASE WHEN Status=0 THEN 'Show' ELSE 'Hide' END Status, Description, News_Title, News_Image FROM tbl_latest_news WHERE 1=1 ".$condition." ORDER BY Id DESC";
 $getCategory=$db->ExecuteQuery($sql);
 
 if(isset($_REQUEST['page']) && $_REQUEST['page']>1)
@@ -67,6 +67,7 @@ $(".pagination a").click( function(event)
             <tr>
               <th>No.</th>
               <th>Date</th>
+              <th>News Image</th>
               <th>News Title</th>
               <th>Description</th>
               <th>Action</th>
@@ -80,7 +81,8 @@ $(".pagination a").click( function(event)
             <tr>
               <td><?php echo $i;?></td>
               <td><?php echo $val['PDate'];?></td>
-              <td><?php echo $val['Heading'];?></td>
+              <td><img width="50" src="<?php echo PATH_IMAGE."/latest-news/thumb/".$val['News_Image'];?>" /></td>
+              <td><?php echo $val['News_Title'];?></td>
               <td><?php echo substr($val['Description'],0, 50)."..." ;?></td>
               
               <td>

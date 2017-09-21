@@ -1,6 +1,7 @@
 <?php 
 include('../../config.php'); 
 require_once(PATH_LIBRARIES.'/classes/DBConn.php');
+require_once(PATH_LIBRARIES.'/classes/resize.php');
 $db = new DBConn();
 
 ///*******************************************************
@@ -8,132 +9,41 @@ $db = new DBConn();
 ///*******************************************************
 if($_POST['type']=="addNews")
 {
-		$selecteddate = strtr($_REQUEST['date'], '/', '-');
-		$date=date('Y-m-d',strtotime($selecteddate));
-		$title = mysql_real_escape_string($_POST['heading']);
-		$desc = mysql_real_escape_string($_POST['desc']);
-		
-		//PDF File Path
-		$path = ROOT."/pdf/latest-news/english/";
-		$path_h = ROOT."/pdf/latest-news/hindi/";
-		
-		//Upload Here News Document	
-		if($_REQUEST['pdfval']==1)
-		{
-			$newsfile = $_FILES['pdf']['name'];		
-			$tmp = $_FILES['pdf']['tmp_name'];
-			$pdf = explode('.',$newsfile);
-			$news_doc = time().'.'.$pdf[1]; // rename the file name
-			move_uploaded_file($tmp, $path.$news_doc);	
-		}
-		else{
-			$news_doc = '';	
-		}
-		
-		if($_REQUEST['pdfval_h']==1)
-		{
-			$newsfile_h = $_FILES['pdf_h']['name'];		
-			$tmp_h = $_FILES['pdf_h']['tmp_name'];
-			$pdf_h = explode('.',$newsfile_h);
-			$news_doc_h = time().'.'.$pdf_h[1]; // rename the file name
-			move_uploaded_file($tmp_h, $path_h.$news_doc_h);
-		}
-		else{
-			$news_doc_h = '';	
-		}	
+	$selecteddate = strtr($_REQUEST['published_date'], '/', '-');
+	$date=date('Y-m-d',strtotime($selecteddate));
 	
-	    $tblname = "tbl_latest_news";
-		$tblfield=array('Date', 'Heading', 'Page_Link', 'Description', 'H_Heading', 'H_Page_Link', 'H_Description', 'Status');
-		$tblvalues=array($date, $title, $news_doc, $desc, $_POST['h_heading'], $news_doc_h, $_POST['h_desc'], 1);
+	$newstitle = mysql_real_escape_string($_POST['newstitle']);
+	$desc = mysql_real_escape_string($_POST['desc']);
+	
+	////////////////////////////////////////////
+	// Path for latest news photo //////////////
+	////////////////////////////////////////////
+	$path = ROOT."/images/latest-news/";
+	$path1 = ROOT."/images/latest-news/thumb/";	
+	
+	$name = $_FILES['file']['name'];
+	$image=explode('.',$name);
+	$actual_image_name = time().'.'.$image[1]; // rename the file name
+	$tmp = $_FILES['file']['tmp_name'];
+	
+	if(move_uploaded_file($tmp, $path.$actual_image_name)){
+		
+		///////////////////////////////////////////////////////////
+		// move the image in the data_images/student/thumb folder
+		///////////////////////////////////////////////////////////
+		$resizeObj1 = new resize($path.$actual_image_name);
+		$resizeObj1 -> resizeImage(200, 200, 'auto');
+		$resizeObj1 -> saveImage($path1.$actual_image_name, 100);
+		
+		//**************************************
+		// Code for insertion //////////////////
+		//**************************************
+		$tblname = "tbl_latest_news";
+		$tblfield=array('Date', 'News_Title', 'News_Image', 'Description', 'Status');
+		$tblvalues=array($date, $newstitle, $actual_image_name, $desc, 1);
 		$res=$db->valInsert($tblname, $tblfield, $tblvalues);
+		
 		if(empty($res))
-    	{
- 	  		echo 0;
-    	}
-     	else
-		{
-	  		echo 1;
-		}
-}
-
-///*******************************************************
-/// Edit News
-///*******************************************************
-if($_POST['type']=="editNews")
-{
-		
-		//PDF File Path
-		$path = ROOT."/pdf/latest-news/english/";
-		$path_h = ROOT."/pdf/latest-news/hindi/";
-		
-		//Upload Here Tender Document	
-		if($_REQUEST['pdfval']==1)
-		{
-			$newsfile = $_FILES['pdf']['name'];		
-			$tmp = $_FILES['pdf']['tmp_name'];
-			$pdf = explode('.',$newsfile);
-			$news_doc = time().'.'.$pdf[1]; // rename the file name
-			
-			move_uploaded_file($tmp, $path.$news_doc);
-			
-			 //Delete Old PDF from folder
-			 $remove = $db->ExecuteQuery("SELECT Page_Link FROM tbl_latest_news WHERE Id=".$_REQUEST['id']);
-			  
-			 if(count($remove)>0 )
-			 {
-				if(file_exists($path.$remove[1]['Page_Link']) && !empty($remove[1]['Page_Link']))
-				{
-					unlink($path.$remove[1]['Page_Link']);
-				}
-			 }
-		}
-		else
-		{
-			//if PDF Is Empty Then
-			$news_doc = $_REQUEST['news-doc'];
-		}
-		
-		
-		if($_REQUEST['pdfval_h']==1)
-		{
-			$newsfile_h = $_FILES['pdf_h']['name'];		
-			$tmp_h = $_FILES['pdf_h']['tmp_name'];
-			$pdf_h = explode('.',$newsfile_h);
-			$news_doc_h = time().'.'.$pdf_h[1]; // rename the file name
-			 
-			move_uploaded_file($tmp_h, $path_h.$news_doc_h);
-			
-			//Delete Old PDF from folder
-			 $remove = $db->ExecuteQuery("SELECT H_Page_Link FROM tbl_latest_news WHERE Id=".$_REQUEST['id']);
-			  
-			 if(count($remove)>0 )
-			 {
-				if(file_exists($path_h.$remove[1]['H_Page_Link']) && !empty($remove[1]['H_Page_Link']))
-				{
-					unlink($path_h.$remove[1]['H_Page_Link']);
-				}
-			 }
-		}
-		else
-		{
-			//if PDF Is Empty Then
-			$news_doc_h = $_REQUEST['news-doc_h'];
-		}
-		
-		
-		$selecteddate = strtr($_REQUEST['date'], '/', '-');
-		$date=date('Y-m-d',strtotime($selecteddate));
-		$title = mysql_real_escape_string($_POST['heading']);
-		$desc = mysql_real_escape_string($_POST['desc']);
-	
-	    $tblname = "tbl_latest_news";
-		$tblfield=array('Date', 'Heading', 'Page_Link', 'Description', 'H_Heading', 'H_Page_Link', 'H_Description');
-		$tblvalues=array($date, $title, $news_doc, $desc, $_POST['h_heading'], $news_doc_h, $_POST['h_desc'], 1);
-		$condition="Id=".$_POST['id'];
-		
-		$res=$db->updateValue($tblname,$tblfield,$tblvalues,$condition);
-		
-		if (empty($res))
 		{
 			echo 0;
 		}
@@ -141,7 +51,90 @@ if($_POST['type']=="editNews")
 		{
 			echo 1;
 		}
-}
+	}//eof if condition
+		
+}//eof if condition
+
+///*******************************************************
+/// Edit News ////////////////////////////////////////////
+///*******************************************************
+if($_POST['type']=="editNews")
+{
+	////////////////////////////////////////////
+	// Path for latest news photo //////////////
+	////////////////////////////////////////////
+	$path = ROOT."/images/latest-news/";
+	$path1 = ROOT."/images/latest-news/thumb/";
+	
+	$con= mysql_connect(SERVER,DBUSER,DBPASSWORD);
+	mysql_query('SET AUTOCOMMIT=0',$con);
+	mysql_query('START TRANSACTION',$con);
+	
+	try
+	{
+		//Upload Here News Image	
+		if($_REQUEST['imageval']==1)
+		{
+			$gallary = $_FILES['image']['name'];		
+			$tmp2 = $_FILES['image']['tmp_name'];
+			$image=explode('.',$gallary);
+			$gallary_image = time().'.'.$image[1]; // rename the file name
+			
+			if(move_uploaded_file($tmp2, $path.$gallary_image))
+			  {
+				// move the image in the thumb folder
+				$resizeObj1 = new resize($path.$gallary_image);
+				$resizeObj1 ->resizeImage(50,50,'auto');
+				$resizeObj1 -> saveImage($path1.$gallary_image, 100);
+				
+			  }
+			  
+			  //Delete Old Image from folder
+			  $remove=$db->ExecuteQuery("SELECT News_Image FROM tbl_latest_news WHERE Id=".$_REQUEST['id']);
+			  if(count($remove)>0 )
+			  {
+				  if(file_exists($path.$remove[1]['News_Image']) && $remove[1]['News_Image']!='')
+				  {
+						unlink($path.$remove[1]['News_Image']);
+						unlink($path1.$remove[1]['News_Image']);
+				  }
+			  }
+		}
+		else
+		{
+			//if Image Is Empty Than
+			$gallary_image = $_REQUEST['news-img'];
+		}
+		
+		$selecteddate = strtr($_REQUEST['published_date'], '/', '-');
+		$date=date('Y-m-d',strtotime($selecteddate));
+		$title = mysql_real_escape_string($_POST['newstitle']);
+		$desc = mysql_real_escape_string($_POST['desc']);
+		
+		//**********************************
+		// Update tbl_latest_News Table ////
+		//**********************************
+		$tblname="tbl_latest_news";		
+		$tblfield=array('Date','News_Title','News_Image','Description');		
+		$tblvalues=array($date, $title, $gallary_image, $desc);		
+		$condition="Id=".$_POST['id'];
+		$res=$db->updateValue($tblname,$tblfield,$tblvalues,$condition);
+		
+		if (empty($res)) 
+		{
+			throw new Exception('0');
+		}
+		
+		mysql_query("COMMIT",$con);
+		echo 1;
+	}
+	catch(Exception $e)
+	{
+		echo  $e->getMessage();
+		mysql_query('ROLLBACK',$con);
+		mysql_query('SET AUTOCOMMIT=1',$con);
+	}
+}//eof if condition
 
 
 ///*******************************************************
@@ -150,7 +143,13 @@ if($_POST['type']=="editNews")
 if($_POST['type']=="delete")
 {
 			
-	$newspdf=$db->ExecuteQuery("SELECT Page_Link, H_Page_Link FROM tbl_latest_news WHERE Id=".$_POST['id']);
+	////////////////////////////////////////////
+	// Path for latest news photo //////////////
+	////////////////////////////////////////////
+	$path = ROOT."/images/latest-news/";
+	$path1 = ROOT."/images/latest-news/thumb/";
+	
+	$newsimg=$db->ExecuteQuery("SELECT News_Image FROM tbl_latest_news WHERE Id=".$_POST['id']);
 		
 	$tblname="tbl_latest_news";
 	$condition="Id=".$_POST['id'];
@@ -158,11 +157,9 @@ if($_POST['type']=="delete")
 	
 	if($res)
 	{
-		if(!empty($newspdf[1]['Page_Link'])){
-			unlink(PATH_LATEST_NEWS_PDF."/english/".$newspdf[1]['Page_Link']);
-		}
-		if(!empty($newspdf[1]['H_Page_Link'])){
-			unlink(PATH_LATEST_NEWS_PDF."/hindi/".$newspdf[1]['H_Page_Link']);
+		if(!empty($newspdf[1]['News_Image'])){
+			unlink($path.$newsimg[1]['Page_Link']);
+			unlink($path1.$newsimg[1]['Page_Link']);
 		}
 		
 		echo 1;
