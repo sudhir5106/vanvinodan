@@ -422,7 +422,7 @@ $(document).ready(function(){
 			   type: "POST",
 			   url: "global_curd.php",
 			   data:formdata,
-			   success: function(data){ //alert(data);
+			   success: function(data){ alert(data);
 					
 					if(data!=0){
 						$('#loading').hide();
@@ -557,10 +557,35 @@ $(document).ready(function(){
 		   contentType: false,
 		   processData: false
 		});//eof ajax
-
-
 		
+	});//eof click event
+
+	//*************************************
+	// Open Modal onClick confirm view Btn
+	//*************************************
+	$(document).on("click", ".confirmViewBtn", function(){
+		var rid = $(this).attr('id');
+		var reservationId = rid.split("-");
 		
-	});
+		var formdata = new FormData();
+		formdata.append('type', "getReservationDetails");
+		formdata.append('rid', reservationId[1]);
+					
+		$.ajax({
+		   type: "POST",
+		   url: "../global_curd.php",
+		   data:formdata,
+		   success: function(data){ //alert(data);
+				
+				$(".modal-body").html(data);
+				$("#bookingInfo").modal('show');
+				
+		   },
+		   cache: false,
+		   contentType: false,
+		   processData: false
+		});//eof ajax
+		
+	});//eof click event
 	
 })//eof ready function

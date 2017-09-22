@@ -412,7 +412,7 @@ if($_POST['type']=="getReservationInfo"){
 	$numberOfNights= $date2->diff($date1)->format("%a"); 
 	
 	/////////////////////////////////////////////////////////////////////////////
-	// this calculates the diff between two dates, which is the number of nights
+	// Get the number of rooms of each category which is booked by customer /////
 	/////////////////////////////////////////////////////////////////////////////
 	$bookedRooms = $db->ExecuteQuery("SELECT COUNT( rc.R_Category_Id ) AS Room_Count, R_Category_Name, Adult, Children 
 	FROM tbl_reserved_rooms rr
@@ -521,15 +521,16 @@ echo $message;
 }
 
 
-///*******************************************************
-/// Get the Reservation Details //////////////////////////
-///*******************************************************
+///********************************************************
+/// Get the Reservation Details ///////////////////////////
+/// This result is using to display in pending reservations
+///********************************************************
 if($_POST['type']=="getReservationDetails"){
 	
 	//*********************************
 	// Get reservation details from DB
 	//*********************************
-	$bookingInfo = 	$db->ExecuteQuery("SELECT Reservation_Id, Reservation_Ref_No, Check_In_Date, Check_Out_Date, Arrival_Time, Client_Name, Email, Phone, Total_Rooms_Amt, Total_Guests_Amt, Subtotal_Amt, SGST_Amt, CGST_Amt, Grand_Total_Amt, CASE WHEN Reservation_Status=5 THEN 'Pending' END Reservation_Status
+	$bookingInfo = 	$db->ExecuteQuery("SELECT Reservation_Id, Reservation_Ref_No, Check_In_Date, Check_Out_Date, Arrival_Time, Client_Name, Email, Phone, Total_Rooms_Amt, Total_Guests_Amt, Subtotal_Amt, SGST_Amt, CGST_Amt, Grand_Total_Amt, CASE WHEN Reservation_Status=5 THEN 'Pending' WHEN Reservation_Status=1 THEN 'Confirmed' WHEN Reservation_Status=2 THEN 'Arrived' END Reservation_Status
 		FROM tbl_reservation 
 		WHERE Reservation_Id='".$_POST['rid']."'");
 	
@@ -550,7 +551,7 @@ if($_POST['type']=="getReservationDetails"){
 	$numberOfNights= $date2->diff($date1)->format("%a"); 
 	
 	/////////////////////////////////////////////////////////////////////////////
-	// this calculates the diff between two dates, which is the number of nights
+	// Get the number of rooms of each category which is booked by customer /////
 	/////////////////////////////////////////////////////////////////////////////
 	$bookedRooms = $db->ExecuteQuery("SELECT COUNT( rc.R_Category_Id ) AS Room_Count, R_Category_Name, Adult, Children 
 	FROM tbl_reserved_rooms rr
@@ -559,6 +560,14 @@ if($_POST['type']=="getReservationDetails"){
 	
 	WHERE Reservation_Id=".$bookingInfo[1]['Reservation_Id']." GROUP BY rc.R_Category_Id
 	");
+
+	////////////////////////////////////////////////////////////////
+	// Get all the booked rooms ////////////////////////////////////
+	////////////////////////////////////////////////////////////////
+	$getBookedRooms = $db->ExecuteQuery("SELECT Room_Name 
+	FROM tbl_reserved_rooms rr
+	LEFT JOIN tbl_room_master rm ON rr.Room_Id = rm.Room_Id
+	WHERE Reservation_Id =".$bookingInfo[1]['Reservation_Id']);
 	
 	//*********************************************************
 	// Message ////////////////////////////////////////////////
@@ -592,7 +601,14 @@ if($_POST['type']=="getReservationDetails"){
 				</div>';
 			}
 		$message .='
+			<div class="roomsName"><strong>Reserved Room(s):</strong> ';
+			foreach($getBookedRooms as $getBookedRoomsVal){
+				$message .='<span class="label label-info">'.$getBookedRoomsVal['Room_Name'].'</span> ';
+			}
+
+			$message .='</div>
 		</div>
+
 		<div class="clearfix"></div>
 		<div class="calculationBlock">
 			<table width="100%" border="0" cellspacing="0" cellpadding="5">

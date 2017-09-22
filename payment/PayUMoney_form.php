@@ -3,7 +3,7 @@ include('../config.php');
 require_once(PATH_LIBRARIES.'/classes/DBConn.php');
 $db = new DBConn();
 require_once('../header.php');
-$getid=$_REQUEST['id'];		
+$getid=$_REQUEST['id'];
 
 //*******************************************************************
 //Get Payment Gateway Details ///////////////////////////////////////

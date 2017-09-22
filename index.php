@@ -213,23 +213,7 @@ $getNews = $db->ExecuteQuery("SELECT DATE_FORMAT(Date,'%d %M, %Y') AS Date, News
                     <div class="clearfix"></div>
                 </div>
                 <?php } ?>
-                <!--<div class="latestnews">
-                    <div class="col-sm-4 col-xs-4 padding-right-zero news-img"><img width="100%" src="images/about-mangatta-img.jpg" alt=""></div>
-                    <div class="col-sm-8 col-xs-8 news-title">
-                        <div>Jungle Safari will start from the next month.</div>
-                        <p>Posted : 14 Augest 2017</p>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
                 
-                <div class="latestnews">
-                    <div class="col-sm-4 col-xs-4 padding-right-zero news-img"><img width="100%" src="images/about-mangatta-img.jpg" alt=""></div>
-                    <div class="col-sm-8 col-xs-8 news-title">
-                        <div>Jungle Safari will start from the next month.</div>
-                        <p>Posted : 14 Augest 2017</p>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>-->
             </div>
             <div class="clearfix"></div>
         </div>
@@ -259,7 +243,6 @@ $getNews = $db->ExecuteQuery("SELECT DATE_FORMAT(Date,'%d %M, %Y') AS Date, News
                                         <p class="testimonial-description">
                                             "This is my 2nd visit to Van Vinodan Resort and I think it was as good if not better than my 1st visit. I received a very warm welcome on my arrival and was shown to Room 112. which is a twin bedded airy room and very comfortable. They have ceiling fans and A/C which I hardly used. Although it was very hot when the sun was shining at night I was very comfortable with just the ceiling fan. The food was just as good as i remembered and the care and friendliness of Ranjit and Nandita along with their staff have made my stays here so memorable."
                                         </p>
-                                        
                                     </div>
                                 </div>
                                 
@@ -272,7 +255,6 @@ $getNews = $db->ExecuteQuery("SELECT DATE_FORMAT(Date,'%d %M, %Y') AS Date, News
                                         <p class="testimonial-description">
                                             "This is my 2nd visit to Van Vinodan Resort and I think it was as good if not better than my 1st visit. I received a very warm welcome on my arrival and was shown to Room 112. which is a twin bedded airy room and very comfortable. They have ceiling fans and A/C which I hardly used. Although it was very hot when the sun was shining at night I was very comfortable with just the ceiling fan. The food was just as good as i remembered and the care and friendliness of Ranjit and Nandita along with their staff have made my stays here so memorable."
                                         </p>
-                                        
                                     </div>
                                 </div>
                                 

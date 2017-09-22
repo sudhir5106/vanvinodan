@@ -202,7 +202,7 @@ body.nav-md .container.body .right_col {
 .modal-room-info{background:#e5e5e5; padding:15px 0;}
 .calculationBlock{padding:15px 20px; background:#F2F2F2;}
 .x_title h2 span{color:#fff;}
-
+.roomsName{padding-top:5px;}
 
 
 @media (max-width: 991px) {

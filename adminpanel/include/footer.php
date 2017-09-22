@@ -23,6 +23,7 @@
   <script src="<?php echo PATH_JS_LIBRARIES ?>/custom.js"></script>
   <script src="<?php echo PATH_JS_LIBRARIES ?>/jquery.validate.js"></script>
   <script src="<?php echo PATH_JS_LIBRARIES ?>/tiny_mce/tiny_mce.js"></script>
+  <script src="<?php echo PATH_JS_LIBRARIES ?>/van-vinodan.js"></script>
   <script type="text/javascript">
    <!--Time Picker Show here -->
 	$(function () {
