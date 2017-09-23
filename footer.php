@@ -9,7 +9,7 @@
         </footer>
         <script src="<?php echo PATH_JS_LIBRARIES ?>/multi-select-1.js"></script>
         <script src="<?php echo PATH_JS_LIBRARIES ?>/van-vinodan.js"></script>
-
+        
         <script type="text/javascript">
 			
 			// An array of dates
@@ -50,7 +50,7 @@
 			});
 			<!--Datepicker Show here-->
 			
-			
+
 			$(document).ready(function(){
 				
 				$('.searchRooms').hide();
@@ -87,9 +87,7 @@
 				
 			});//eof ready function
 			
-			
-			
-			$(".testimonial-slider").owlCarousel({
+			jQuery(".testimonial-slider").owlCarousel({
 				loop:true,
 				margin:10,
 				autoplay:true,
@@ -121,7 +119,7 @@
 				}
 			});
 		
-			$('.bottom-slider').owlCarousel({
+			jQuery('.bottom-slider').owlCarousel({
 					loop:true,
 					dots: false,
 					margin:10,
@@ -155,6 +153,6 @@
 				});
 		
 		</script>
-        
+		<script type="text/javascript" src="support/jquery.colorbox-min.js"></script>
 	</body>
 </html>

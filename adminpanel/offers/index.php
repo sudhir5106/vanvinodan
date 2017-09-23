@@ -4,7 +4,7 @@ require_once(PATH_LIBRARIES.'/classes/DBConn.php');
 require_once(PATH_ADMIN_INCLUDE.'/header.php');
 $db = new DBConn();
 ?>
-<script type="text/javascript" src="news.js"></script>
+<script type="text/javascript" src="offer.js"></script>
 
 <div id="loading">
     <div class="loader-block"><i class="fa-li fa fa-spinner fa-spin spinloader"></i></div>
@@ -13,7 +13,7 @@ $db = new DBConn();
 <div>
   <div class="page-title">
     <div class="title_left">
-      <h3>Latest News</h3>
+      <h3>Upload Offers</h3>
     </div>
   </div>
   
@@ -21,7 +21,7 @@ $db = new DBConn();
     <div class="col-md-12 col-sm-12 col-xs-12">
       <div class="x_panel">
         <div class="x_title">
-          <h2>Add New</h2>
+          <h2>Upload New</h2>
           <ul class="nav navbar-right panel_toolbox">
             <li>
               <button class="btn btn-round btn-success" onclick="location.href='list.php';">View List</button>
@@ -30,41 +30,40 @@ $db = new DBConn();
           <div class="clearfix"></div>
         </div>
         <div class="x_content">
-          <form class="form-horizontal form-label-left" action="" method="post" id="newsform">
+          <form class="form-horizontal form-label-left" action="" method="post" id="offerform">
           
             <div class="col-sm-12"> 
             
               <div>
                 <div class="item form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="published_date">Date <span class="required">*</span> </label>
-                  <div class="col-md-3 col-sm-3 col-xs-12">
-                    <input type="text" id="published_date" name="published_date" required="required" class="form-control col-md-7 col-xs-12 datetimepicker" placeholder="DD/MM/YYYY">
-                  </div>
-                </div>
-                
-                <div class="item form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="newstitle">News Title <span class="required">*</span> </label>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="offertitle">Offer Title <span class="required">*</span> </label>
                   <div class="col-md-5 col-sm-5 col-xs-12">
-                    <input type="text" id="newstitle" name="newstitle" required="required" class="form-control col-md-7 col-xs-12 " placeholder="News Title">
+                    <input type="text" id="offertitle" name="offertitle" required="required" class="form-control col-md-7 col-xs-12 " placeholder="Offer Title">
+                  </div>
+                </div>
+
+                <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="published_date">Publish Date <span class="required">*</span> </label>
+                  <div class="col-md-3 col-sm-3 col-xs-12">
+                    <input type="text" id="published_date" name="published_date" required="required" class="form-control col-md-7 col-xs-12 datetimepicker" placeholder="DD-MM-YYYY">
+                  </div>
+                </div>
+
+                <div class="item form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="expiry_date">Expiry Date <span class="required">*</span> </label>
+                  <div class="col-md-3 col-sm-3 col-xs-12">
+                    <input type="text" id="expiry_date" name="expiry_date" required="required" class="form-control col-md-7 col-xs-12 datetimepicker" placeholder="DD-MM-YYYY">
                   </div>
                 </div>
                 
                 <div class="item form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="fileupload">Updoad News Image</label>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="fileupload">Updoad News Image <span class="required">*</span></label>
                   <div class="col-md-3 col-sm-3 col-xs-12">
                     <input type="file" id="fileupload" name="fileupload" class="form-control col-md-7 col-xs-12" accept="pdf">
                     <span id="errmsg"></span> (Note : Upload Image not more than 1MB.) </div>
               	</div>
                 
-                <div class="item form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="desc">Description <span class="required">*</span></label>
-                  <div class="col-md-5 col-sm-5 col-xs-12">
-                    <textarea id="desc" name="desc" required="required" class="form-control col-md-7 col-xs-12 " placeholder="Write Here Something... "  rows="10"></textarea>
-                  </div>
-                </div>
               </div>
-              
-              
               
             </div>
             <div class="clearfix"></div>
@@ -78,7 +77,7 @@ $db = new DBConn();
           </form>
         </div>
         <div id="dialog1" title="Message" style="display:none; text-align:left;">
-          <p>Successfully Added News</p>
+          <p>Offer Successfully Added</p>
         </div>
         <div id="dialog2" title="Message" style="display:none; text-align:left;">
           <p>Something is Wrong</p>

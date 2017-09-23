@@ -7,19 +7,22 @@ $db = new DBConn();
 ///*******************************************************
 /// To Insert Latest News ////////////////////////////////
 ///*******************************************************
-if($_POST['type']=="addNews")
+if($_POST['type']=="addOffer")
 {
-	$selecteddate = strtr($_REQUEST['published_date'], '/', '-');
-	$date=date('Y-m-d',strtotime($selecteddate));
+	$date1 = strtr($_REQUEST['published_date'], '/', '-');
+	$publishedDate=date('Y-m-d',strtotime($date1));
+
+	$date2 = strtr($_REQUEST['expiry_date'], '/', '-');
+	$expiryDate=date('Y-m-d',strtotime($date2));
 	
-	$newstitle = mysql_real_escape_string($_POST['newstitle']);
-	$desc = mysql_real_escape_string($_POST['desc']);
+	$offertitle = mysql_real_escape_string($_POST['offertitle']);
+	
 	
 	////////////////////////////////////////////
 	// Path for latest news photo //////////////
 	////////////////////////////////////////////
-	$path = ROOT."/images/latest-news/";
-	$path1 = ROOT."/images/latest-news/thumb/";	
+	$path = ROOT."/images/offers/";
+	$path1 = ROOT."/images/offers/thumb/";	
 	
 	$name = $_FILES['file']['name'];
 	$image=explode('.',$name);
@@ -29,7 +32,7 @@ if($_POST['type']=="addNews")
 	if(move_uploaded_file($tmp, $path.$actual_image_name)){
 		
 		///////////////////////////////////////////////////////////
-		// move the image in the data_images/student/thumb folder
+		// move the image into the offers/thumb folder ////////////
 		///////////////////////////////////////////////////////////
 		$resizeObj1 = new resize($path.$actual_image_name);
 		$resizeObj1 -> resizeImage(200, 200, 'auto');
@@ -38,9 +41,9 @@ if($_POST['type']=="addNews")
 		//**************************************
 		// Code for insertion //////////////////
 		//**************************************
-		$tblname = "tbl_latest_news";
-		$tblfield=array('Date', 'News_Title', 'News_Image', 'Description', 'Status');
-		$tblvalues=array($date, $newstitle, $actual_image_name, $desc, 1);
+		$tblname = "tbl_offers";
+		$tblfield=array('Offer_Name', 'Published_Date', 'Expired_Date', 'Offer_Image', 'Status');
+		$tblvalues=array($offertitle , $publishedDate, $expiryDate, $actual_image_name, 1);
 		$res=$db->valInsert($tblname, $tblfield, $tblvalues);
 		
 		if(empty($res))
@@ -58,13 +61,13 @@ if($_POST['type']=="addNews")
 ///*******************************************************
 /// Edit News ////////////////////////////////////////////
 ///*******************************************************
-if($_POST['type']=="editNews")
+if($_POST['type']=="editOffer")
 {
 	////////////////////////////////////////////
-	// Path for latest news photo //////////////
+	// Path for Offer Image ////////////////////
 	////////////////////////////////////////////
-	$path = ROOT."/images/latest-news/";
-	$path1 = ROOT."/images/latest-news/thumb/";
+	$path = ROOT."/images/offers/";
+	$path1 = ROOT."/images/offers/thumb/";
 	
 	$con= mysql_connect(SERVER,DBUSER,DBPASSWORD);
 	mysql_query('SET AUTOCOMMIT=0',$con);
@@ -72,7 +75,9 @@ if($_POST['type']=="editNews")
 	
 	try
 	{
-		//Upload Here News Image	
+		//*****************************************
+		//Upload Offer Image //////////////////////
+		//*****************************************
 		if($_REQUEST['imageval']==1)
 		{
 			$gallary = $_FILES['image']['name'];		
@@ -90,39 +95,43 @@ if($_POST['type']=="editNews")
 			  }
 			  
 			  //Delete Old Image from folder
-			  $remove=$db->ExecuteQuery("SELECT News_Image FROM tbl_latest_news WHERE Id=".$_REQUEST['id']);
+			  $remove=$db->ExecuteQuery("SELECT Offer_Image FROM tbl_offers WHERE Offer_Id=".$_REQUEST['id']);
 			  if(count($remove)>0 )
 			  {
-				  if(file_exists($path.$remove[1]['News_Image']) && $remove[1]['News_Image']!='')
+				  if(file_exists($path.$remove[1]['Offer_Image']) && $remove[1]['Offer_Image']!='')
 				  {
-						unlink($path.$remove[1]['News_Image']);
-						unlink($path1.$remove[1]['News_Image']);
+						unlink($path.$remove[1]['Offer_Image']);
+						unlink($path1.$remove[1]['Offer_Image']);
 				  }
 			  }
 		}
 		else
 		{
 			//if Image Is Empty Than
-			$gallary_image = $_REQUEST['news-img'];
+			$gallary_image = $_REQUEST['offer-img'];
 		}
 		
-		$selecteddate = strtr($_REQUEST['published_date'], '/', '-');
-		$date=date('Y-m-d',strtotime($selecteddate));
-		$title = mysql_real_escape_string($_POST['newstitle']);
-		$desc = mysql_real_escape_string($_POST['desc']);
+		$date1 = strtr($_REQUEST['published_date'], '/', '-');
+		$publishedDate=date('Y-m-d',strtotime($date1));
+
+		$date2 = strtr($_REQUEST['expiry_date'], '/', '-');
+		$expiryDate=date('Y-m-d',strtotime($date2));
+		
+		$title = mysql_real_escape_string($_POST['offertitle']);
+		
 		
 		//**********************************
-		// Update tbl_latest_News Table ////
+		// Update tbl_offers Table /////////
 		//**********************************
-		$tblname="tbl_latest_news";		
-		$tblfield=array('Date','News_Title','News_Image','Description');		
-		$tblvalues=array($date, $title, $gallary_image, $desc);		
-		$condition="Id=".$_POST['id'];
+		$tblname="tbl_offers";		
+		$tblfield=array('Offer_Name','Published_Date','Expired_Date','Offer_Image');		
+		$tblvalues=array($title, $publishedDate, $expiryDate, $gallary_image);		
+		$condition="Offer_Id=".$_POST['id'];
 		$res=$db->updateValue($tblname,$tblfield,$tblvalues,$condition);
 		
 		if (empty($res)) 
 		{
-			throw new Exception('0');
+			throw new Exception('a');
 		}
 		
 		mysql_query("COMMIT",$con);
@@ -138,7 +147,7 @@ if($_POST['type']=="editNews")
 
 
 ///*******************************************************
-/// Delete row from tbl_latest_news table
+/// Delete row from tbl_offers table /////////////////////
 ///*******************************************************
 if($_POST['type']=="delete")
 {
@@ -146,20 +155,20 @@ if($_POST['type']=="delete")
 	////////////////////////////////////////////
 	// Path for latest news photo //////////////
 	////////////////////////////////////////////
-	$path = ROOT."/images/latest-news/";
-	$path1 = ROOT."/images/latest-news/thumb/";
+	$path = ROOT."/images/offers/";
+	$path1 = ROOT."/images/offers/thumb/";
 	
-	$newsimg=$db->ExecuteQuery("SELECT News_Image FROM tbl_latest_news WHERE Id=".$_POST['id']);
+	$newsimg=$db->ExecuteQuery("SELECT Offer_Image FROM tbl_offers WHERE Offer_Id=".$_POST['id']);
 		
-	$tblname="tbl_latest_news";
-	$condition="Id=".$_POST['id'];
+	$tblname="tbl_offers";
+	$condition="Offer_Id=".$_POST['id'];
 	$res=$db->deleteRecords($tblname,$condition);
 	
 	if($res)
 	{
-		if(!empty($newspdf[1]['News_Image'])){
-			unlink($path.$newsimg[1]['News_Image']);
-			unlink($path1.$newsimg[1]['News_Image']);
+		if(!empty($newspdf[1]['Offer_Image'])){
+			unlink($path.$newsimg[1]['Offer_Image']);
+			unlink($path1.$newsimg[1]['Offer_Image']);
 		}
 		
 		echo 1;
@@ -176,10 +185,9 @@ if($_POST['type']=="delete")
 if($_POST['type']=="changeStatus")
 {	
 	$id = explode("-", $_POST['id']);
-	$tblName = "tbl_latest_news";
+	$tblName = "tbl_offers";
 	$tablField = "Status";
-	$conditionField = "Id";
+	$conditionField = "Offer_Id";
 	
-	$db->Status($id[1], $tblName, $tablField, $conditionField);	
-	
+	$db->Status($id[1], $tblName, $tablField, $conditionField);		
 }

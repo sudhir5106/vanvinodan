@@ -1,13 +1,26 @@
 <?php
+
+//****************************************************************
+/// Set Cookie for display offers ////////////////////////////////
+//****************************************************************
+//setcookie("offer", "", time()-3600);
+$cookie_name = "offer6";
+$cookie_value = "ad";
+setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // 86400 = 1 day
+//****************************************************************
 require_once('config.php');
 require_once(PATH_LIBRARIES.'/classes/DBConn.php');
 $db = new DBConn();
-
 include('header.php'); 
-
+//****************************************************************
 $getNews = $db->ExecuteQuery("SELECT DATE_FORMAT(Date,'%d %M, %Y') AS Date, News_Title, News_Image FROM tbl_latest_news");
-
+//****************************************************************
+$currentDate = date("Y-m-d");
+$getOffer = $db->ExecuteQuery("SELECT Offer_Image FROM tbl_offers WHERE Status=1 AND Expired_Date>=".$currentDate." LIMIT 1");
+//****************************************************************
 ?>
+
+<link rel="stylesheet" href="support/popup.css" />
 
 <main> 
         
@@ -208,7 +221,7 @@ $getNews = $db->ExecuteQuery("SELECT DATE_FORMAT(Date,'%d %M, %Y') AS Date, News
                     <div class="col-sm-4 col-xs-4 padding-right-zero news-img"><img width="100%" src="<?php echo PATH_IMAGE."/latest-news/thumb/".$getNewsVal['News_Image'] ?>" alt=""></div>
                     <div class="col-sm-8 col-xs-8 news-title">
                         <div><?php echo $getNewsVal['News_Title'] ?></div>
-                        <p>Posted : <?php echo $getNewsVal['Date'] ?></p>
+                        <p>Posted on : <?php echo $getNewsVal['Date'] ?></p>
                     </div>
                     <div class="clearfix"></div>
                 </div>
@@ -351,4 +364,17 @@ $getNews = $db->ExecuteQuery("SELECT DATE_FORMAT(Date,'%d %M, %Y') AS Date, News
             });
 
 </script>
+
 <?php include('footer.php'); ?>
+
+<?php
+if(!isset($_COOKIE[$cookie_name])) {
+?>
+<script type="text/javascript">  
+    $(document).ready(function(){
+        setTimeout(function() {
+            $.fn.colorbox({href:"images/offers/<?php echo $getOffer[1]['Offer_Image'] ?>", open:true});  
+        }, 15);
+    });  
+</script>
+<?php } ?>

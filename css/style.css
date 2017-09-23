@@ -779,6 +779,54 @@ thumbnail .image {
 .pr-block{margin:20px 0; padding:15px;}
 #reservation-details{border-top: 1px solid #eee; padding:20px 0;}
 
+.contact-blocks section{border:1px solid #e6e7e8; padding:30px; text-align:center;}
+.contact-blocks section i{font-size:50px; color:#ffc65a; margin-bottom: 20px;}
+.contact-blocks section p{line-height:1.5em; font-size:1em;}
+.contact-blocks section:nth-child(even){background:#f1f2f2; border-left:none; border-right:none;}
+.support{color:#333;}
+
+.contact-form{margin:20px 0;}
+.contact-form h2{font-size:2em; margin:50px 0 20px 0;}
+
+.contact-form .form-group input, .contact-form .form-group textarea {
+    border-radius: 0px;
+    box-shadow: none;
+    background: #f3f4f4;
+    border-color: #e6e7e8;
+    text-transform: uppercase;
+    font-size: 14px;
+    margin-bottom: 30px;
+    padding-left: 20px;
+}
+.contact-form .form-group input {
+    height: 53px;
+}
+.contact-form .form-group textarea {
+    height: 219px;
+    padding-top: 16px;
+}
+.contact-form .btn {
+    width: 218px;
+    padding: 12px 0px;
+    margin-top: 30px;
+}
+.btn-g-border, .btn-g-border:focus {
+    border: 1px solid #939598;
+    color: #565656;
+    transition: background-color 0.2s ease-out;
+}
+.contact-form .btn-g-border:hover {
+    background: #ffcb05;
+    transition: background-color 0.2s ease-in;
+    color: black;
+    border-color: #ffcb05;
+}
+.btn {
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+#recaptcha_area{margin:0 auto;}
 
 @media (min-width: 768px) {
 	

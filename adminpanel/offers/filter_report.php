@@ -10,21 +10,25 @@ $rows_per_page=ROWS_PER_PAGE;
 $totpagelink=PAGELINK_PER_PAGE;
 
 $condition='';
-
+//******************************************
 //Check Here IF Date is not Empty For Filter
+//******************************************
 if(!empty($_REQUEST['date']))
 {
 	$date = strtr($_REQUEST['date'], '/', '-');
-	$condition.=' AND Date="'.date('Y-m-d',strtotime($date)).'"';
+	$condition.=' AND Published_Date="'.date('Y-m-d',strtotime($date)).'"';
 }
+//******************************************
 //Check Here IF Langauge is Empty For Filter
+//******************************************
 if(!empty($_REQUEST['heading']))
 {
-	$condition.=' AND News_Title="'.$_REQUEST['heading'].'"';
+	$condition.=' AND Offer_Name="'.$_REQUEST['heading'].'"';
 }
-
-//Get Here News  List
-$sql="SELECT Id, CASE WHEN Date=0 THEN '----' ELSE DATE_FORMAT(Date,'%d-%m-%Y') END PDate, CASE WHEN Status=0 THEN 'Show' ELSE 'Hide' END Status, Description, News_Title, News_Image FROM tbl_latest_news WHERE 1=1 ".$condition." ORDER BY Id DESC";
+//***********************************
+//Get Offers List ///////////////////
+//***********************************
+$sql="SELECT Offer_Id, Offer_Name, Offer_Image, CASE WHEN Published_Date=0 THEN '----' ELSE DATE_FORMAT(Published_Date,'%d-%m-%Y') END PDate, DATE_FORMAT(Expired_Date,'%d-%m-%Y') AS EDate, CASE WHEN Status=0 THEN 'Show' ELSE 'Hide' END Status FROM tbl_offers WHERE 1=1 ".$condition." ORDER BY Published_Date DESC";
 $getCategory=$db->ExecuteQuery($sql);
 
 if(isset($_REQUEST['page']) && $_REQUEST['page']>1)
@@ -52,11 +56,10 @@ $(".pagination a").click( function(event)
 				$.ajax({  
     					type: "GET",  
    						url: "filter_report.php",  
-    					data: str,  
-						async: false,
+    					data: str, 
     					success: function(value) {  $("#add").html(value);}
 						});//eof ajax
-	});
+	  });
 	});
 </script>
 
@@ -66,10 +69,10 @@ $(".pagination a").click( function(event)
           <thead>
             <tr>
               <th>No.</th>
-              <th>Date</th>
               <th>News Image</th>
               <th>News Title</th>
-              <th>Description</th>
+              <th>Publish Date</th>
+              <th>Expiry Date</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -80,16 +83,15 @@ $(".pagination a").click( function(event)
 		while($val=mysql_fetch_array($rs)){ ?>
             <tr>
               <td><?php echo $i;?></td>
+              <td><img width="50" src="<?php echo PATH_IMAGE."/offers/thumb/".$val['Offer_Image'];?>" /></td>
+              <td><?php echo $val['Offer_Name'];?></td>
               <td><?php echo $val['PDate'];?></td>
-              <td><img width="50" src="<?php echo PATH_IMAGE."/latest-news/thumb/".$val['News_Image'];?>" /></td>
-              <td><?php echo $val['News_Title'];?></td>
-              <td><?php echo substr($val['Description'],0, 40)."..." ;?></td>
-              
+              <td><?php echo $val['EDate'];?></td>
               <td>
-              	<a class="btn btn-success btn-xs" href="edit.php?id=<?php echo $val['Id'];?>">Edit</a>
-                <a class="btn btn-danger btn-xs delete" href="#" id="<?php echo $val['Id'];?>">Delete</a>
+              	<a class="btn btn-success btn-xs" href="edit.php?id=<?php echo $val['Offer_Id'];?>">Edit</a>
+                <a class="btn btn-danger btn-xs delete" href="#" id="<?php echo $val['Offer_Id'];?>">Delete</a>
                 
-                <button id="status-<?php echo $val['Id'];?>" type="button" class="status btn btn-xs <?php echo $val['Status']=='Hide'?"btn-warning":"btn-primary";?>"><?php echo $val['Status']; ?></button>
+                <button id="status-<?php echo $val['Offer_Id'];?>" type="button" class="status btn btn-xs <?php echo $val['Status']=='Hide'?"btn-warning":"btn-primary";?>"><?php echo $val['Status']; ?></button>
                 
                 </td>
             </tr>
@@ -104,7 +106,6 @@ $(".pagination a").click( function(event)
      		 <?php echo $pager->renderFullNav() ?>
      	</div> 
         <input type="hidden" name="page" id="page" value="1"/>
-        <input type="hidden" name="langauge" id="langauge" value="<?php echo @$_REQUEST['langauge']; ?>" />
         <input type="hidden" name="category" id="category" value="<?php echo @$_REQUEST['category']; ?>" />
 
 </form>

@@ -21,7 +21,7 @@ $baseurl = basename($_SERVER['PHP_SELF']);
         <link rel="stylesheet" href="<?php echo PATH_CSS_LIBRARIES ?>/bootstrap.min.css">
         <link rel="stylesheet" href="<?php echo PATH_CSS_LIBRARIES ?>/style.css">
         <link rel="stylesheet" href="<?php echo PATH_CSS_LIBRARIES ?>/owl.carousel.css" type="text/css">
-    	<link rel="stylesheet" href="<?php echo PATH_CSS_LIBRARIES ?>/owl.theme.default.min.css"  type="text/css" />
+    	  <link rel="stylesheet" href="<?php echo PATH_CSS_LIBRARIES ?>/owl.theme.default.min.css"  type="text/css" />
         <link rel="stylesheet" href="<?php echo PATH_CSS_LIBRARIES ?>/animate.min.css"  type="text/css" />
         <link rel="stylesheet" href="<?php echo PATH_CSS_LIBRARIES ?>/jquery-ui.css">
 
@@ -39,7 +39,7 @@ $baseurl = basename($_SERVER['PHP_SELF']);
 				$('.innerPageTxt').addClass("fadeIn").addClass("animated");
 	
 			});
-        </script>
+     </script>
 		
     </head>
     <body <?php if($baseurl=='PayUMoney_form.php'){ ?> onLoad="submitPayuForm()" <?php } ?>>
@@ -161,7 +161,7 @@ $baseurl = basename($_SERVER['PHP_SELF']);
                                         <li><a href="<?php echo LINK_ROOT ?>/reservation.php"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Online Reservation</a></li>
                                      </ul>
                                   </li>
-                                  <li><a href="#">Contact us</a></li>
+                                  <li><a href="<?php echo LINK_ROOT ?>/contact-us.php">Contact us</a></li>
                                 </ul>
                             </div>
                             </nav>
