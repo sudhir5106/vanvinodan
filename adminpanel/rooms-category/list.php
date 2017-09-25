@@ -26,25 +26,27 @@ $db = new DBConn();
       <h3>List of Rooms Category</h3>
     </div>
   </div>
-  <div class="clearfix"></div>
-  <div class="col-md-12 col-sm-12 col-xs-12">
-    <div class="x_panel">
-      <div class="x_title">
-        <h2>View List </h2>
-        <ul class="nav navbar-right panel_toolbox">
-         <li><button class="btn btn-round btn-success" onclick="location.href='index.php';">Add New</button></li>
-        </ul>
-        <div class="clearfix"></div>
-      </div>
-      <div class="x_content" id="add">
-        
-        <!-- Get ?here Al The List data-->
-      </div>
-      <div id="deletemsg" title="Message" style="display:none; text-align:left;">
-          <p>Room Category Deleted Successfully!</p>
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="x_panel">
+        <div class="x_title">
+          <h2>View List </h2>
+          <ul class="nav navbar-right panel_toolbox">
+           <li><button class="btn btn-round btn-success" onclick="location.href='index.php';">Add New</button></li>
+          </ul>
+          <div class="clearfix"></div>
+        </div>
+        <div class="x_content" id="add">
+          
+          <!-- Get ?here Al The List data-->
+        </div>
+        <div id="deletemsg" title="Message" style="display:none; text-align:left;">
+            <p>Room Category Deleted Successfully!</p>
+        </div>
       </div>
     </div>
   </div>
+  
 </div>
 <?php 
 require_once(PATH_ADMIN_INCLUDE.'/footer.php');
