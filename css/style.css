@@ -809,6 +809,9 @@ thumbnail .image {
     width: 218px;
     padding: 12px 0px;
     margin-top: 30px;
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: bold;
 }
 .btn-g-border, .btn-g-border:focus {
     border: 1px solid #939598;
@@ -821,12 +824,66 @@ thumbnail .image {
     color: black;
     border-color: #ffcb05;
 }
-.btn {
-    font-size: 16px;
-    text-transform: uppercase;
-    font-weight: bold;
-}
 #recaptcha_area{margin:0 auto;}
+
+.category-grid{margin-top:50px;}
+.img-holder{height:245px; position: relative; display: block;  overflow: hidden;}
+.img-holder2{height:200px; position: relative; display: block;  overflow: hidden;}
+.img-holder img, .img-holder2 img{
+    -webkit-transform: scale();
+    -ms-transform: scale();
+    transform: scale();
+
+    transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+}
+.photo-caption{
+    
+    background-color:rgba(0, 0, 0, 0); position:absolute; z-index:99; top:100px; bottom:100px;; left:100px; right:100px; opacity:0;
+    border: 1px dashed rgba(236, 236, 236, 0.5); color:#fff; font-size:2em; font-family: 'Gabriola'; 
+
+    transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+}
+.img-holder:hover img, .img-holder2:hover img{
+
+    -webkit-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    transform: scale(1.2);
+
+    transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+}
+.img-holder:hover .photo-caption, .img-holder2:hover .photo-caption{
+
+    background-color:rgba(0, 0, 0, 0.7);
+    top:10px; bottom:10px; left:10px; right:10px; opacity:1;
+
+    transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+}
+.media-center, .media-bottom{position:absolute;}
+.media-center{left:10%; right:10%; top:45%; text-align:center;}
+.media-bottom{left:10%; right:10%; bottom:30px; text-align:center;}
+.media-center a, .media-bottom a{color:#fff; transition: color 0.3s ease-out;}
+.media-center a:hover, .media-bottom a:hover{color:#ff891e; 
+    transition: color 0.3s ease-out;}
+
+
+
 
 @media (min-width: 768px) {
 	

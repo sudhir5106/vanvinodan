@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 24, 2017 at 10:14 AM
+-- Generation Time: Sep 25, 2017 at 05:44 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.6.24
 
@@ -38,6 +38,51 @@ CREATE TABLE `tbl_admin_login` (
 
 INSERT INTO `tbl_admin_login` (`Login_Id`, `Login_Name`, `Login_Password`) VALUES
 (1, 'admin', '123456');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_category`
+--
+
+CREATE TABLE `tbl_category` (
+  `Category_Id` smallint(11) NOT NULL,
+  `Category_Name` varchar(200) NOT NULL COMMENT 'English Category Name'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_category`
+--
+
+INSERT INTO `tbl_category` (`Category_Id`, `Category_Name`) VALUES
+(6, 'Roof Design'),
+(7, 'Dining Area'),
+(8, 'Jungle Safari');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_image_upload`
+--
+
+CREATE TABLE `tbl_image_upload` (
+  `Image_Id` int(11) NOT NULL,
+  `Image_Path` varchar(200) NOT NULL,
+  `MainImage` tinyint(2) NOT NULL,
+  `Category_Id` smallint(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_image_upload`
+--
+
+INSERT INTO `tbl_image_upload` (`Image_Id`, `Image_Path`, `MainImage`, `Category_Id`) VALUES
+(19, '15063392000.jpg', 1, 6),
+(20, '15063392011.jpg', 0, 6),
+(23, '15063492470.jpg', 0, 7),
+(24, '15063492530.jpg', 0, 8),
+(25, '15063493020.jpg', 1, 7),
+(26, '15063498000.jpg', 1, 8);
 
 -- --------------------------------------------------------
 
@@ -263,6 +308,18 @@ CREATE TABLE `tbl_transactions` (
 INSERT INTO `tbl_transactions` (`Transaction_Id`, `Transaction_Date`, `Transaction_No`, `Reservation_Id`, `Paid_Amt`, `Payment_Mode`, `Pay_Status`, `Payment_Id`) VALUES
 (1, '2017-09-16 19:04:21', 'MQ==', 1, 1.18, 'DC', 'success', '163407227');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_video_gallery`
+--
+
+CREATE TABLE `tbl_video_gallery` (
+  `Video_Id` smallint(11) NOT NULL,
+  `Video_Caption` varchar(200) NOT NULL COMMENT 'English Caption Name',
+  `Video_Link` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 --
 -- Indexes for dumped tables
 --
@@ -272,6 +329,19 @@ INSERT INTO `tbl_transactions` (`Transaction_Id`, `Transaction_Date`, `Transacti
 --
 ALTER TABLE `tbl_admin_login`
   ADD PRIMARY KEY (`Login_Id`);
+
+--
+-- Indexes for table `tbl_category`
+--
+ALTER TABLE `tbl_category`
+  ADD PRIMARY KEY (`Category_Id`);
+
+--
+-- Indexes for table `tbl_image_upload`
+--
+ALTER TABLE `tbl_image_upload`
+  ADD PRIMARY KEY (`Image_Id`),
+  ADD KEY `Category_Id` (`Category_Id`);
 
 --
 -- Indexes for table `tbl_latest_news`
@@ -325,9 +395,25 @@ ALTER TABLE `tbl_transactions`
   ADD PRIMARY KEY (`Transaction_Id`);
 
 --
+-- Indexes for table `tbl_video_gallery`
+--
+ALTER TABLE `tbl_video_gallery`
+  ADD PRIMARY KEY (`Video_Id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
+--
+-- AUTO_INCREMENT for table `tbl_category`
+--
+ALTER TABLE `tbl_category`
+  MODIFY `Category_Id` smallint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+--
+-- AUTO_INCREMENT for table `tbl_image_upload`
+--
+ALTER TABLE `tbl_image_upload`
+  MODIFY `Image_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 --
 -- AUTO_INCREMENT for table `tbl_latest_news`
 --
@@ -369,8 +455,19 @@ ALTER TABLE `tbl_room_master`
 ALTER TABLE `tbl_transactions`
   MODIFY `Transaction_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
+-- AUTO_INCREMENT for table `tbl_video_gallery`
+--
+ALTER TABLE `tbl_video_gallery`
+  MODIFY `Video_Id` smallint(11) NOT NULL AUTO_INCREMENT;
+--
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `tbl_image_upload`
+--
+ALTER TABLE `tbl_image_upload`
+  ADD CONSTRAINT `image_uplaod_fg_1` FOREIGN KEY (`Category_Id`) REFERENCES `tbl_category` (`Category_Id`);
 
 --
 -- Constraints for table `tbl_reserved_rooms`

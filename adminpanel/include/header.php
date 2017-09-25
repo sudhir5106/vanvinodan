@@ -79,6 +79,14 @@
               <li><a href="<?php echo LINK_CONTROL?>/offers/list.php">View List</a> </li>
             </ul>
           </li>
+
+          <li><a><i class="fa fa-picture-o"></i>Gallery<span class="fa fa-chevron-down"></span></a>
+             <ul class="nav child_menu" style="display: none">
+                  <li><a href="<?php echo LINK_CONTROL?>/gallery/category/list.php">Category</a></li>
+                  <li><a href="<?php echo LINK_CONTROL?>/gallery/image-upload">Image Gallery</a></li>
+                  <li><a href="<?php echo LINK_CONTROL?>/gallery/video-gallery">Video Gallery</a></li>
+             </ul>
+          </li>
           
         </ul>
       </div>

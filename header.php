@@ -148,7 +148,7 @@ $baseurl = basename($_SERVER['PHP_SELF']);
                                   <li><a href="#" class="dropdown-toggle" data-toggle="dropdown">Media <b class="caret"></b></a>
                                   	
                                     <ul class="dropdown-menu">
-                                        <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Photo Gallery</a></li>
+                                        <li><a href="<?php echo LINK_ROOT ?>/gallery-category.php"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Photo Gallery</a></li>
                                         <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Video Gallery</a></li>
                                         <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Press Release</a></li>
                                      </ul>

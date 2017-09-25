@@ -22,12 +22,11 @@ define("PATH_ADMIN", ROOT.'/adminpanel');
 define("PATH_ADMIN_INCLUDE",PATH_ADMIN.'/include');
 define("PATH_UPLOAD_IMAGE",'/vanvinodan/images/img-gallery');
 
-
 define("LINK_ROOT",'/vanvinodan'); //For HTML LINK
 define("ROWS_PER_PAGE",10);
 define("PAGELINK_PER_PAGE",10);
 
-//define("SERVERNAME",'http://futechbuild.com/');
+
 /*__________________________________*/
 
 ?>
