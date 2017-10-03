@@ -332,7 +332,7 @@ $(document).ready(function(){
 	/////////////////////////////////////////
 	//validation for booking contact details
 	/////////////////////////////////////////
-	$("#contactFrm ").validate({
+	$("#contactFrm").validate({
 	  rules: 
 		{   
 		  	fullname: 
@@ -350,10 +350,6 @@ $(document).ready(function(){
 				number:true,
 				minlength: 10,
 				maxlength: 11
-			},
-			idprof:
-			{
-				required: true,
 			},
 			iagree:
 			{

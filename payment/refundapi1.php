@@ -1,8 +1,8 @@
 <?php
 
 ini_set('display_errors',1);
-$PayuMoney_BASE_URL = "https://test.payumoney.com/payment/merchant/refundPayment?";         /* This is for test mode
-                                                                   For live mode use https://www.payumoney.com/payment/merchant/refundPayment?     */
+$PayuMoney_BASE_URL = "https://test.payumoney.com/payment/merchant/refundPayment?"; // This is for test mode
+//$PayuMoney_BASE_URL = "https://www.payumoney.com/payment/merchant/refundPayment?"; //For live mode use
 
 $action = '';
 $posted = array();
@@ -40,7 +40,7 @@ $formError = 0;
 function curlCall($postUrl, $toSend) {
    
   $ch = curl_init();
-   curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+  curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
   curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
   curl_setopt($ch, CURLOPT_POST, 1);
   curl_setopt($ch, CURLOPT_POSTFIELDS, $toSend);

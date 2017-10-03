@@ -215,9 +215,9 @@ WHERE R_Category_Id=".$val['R_Category_Id']." AND Room_id NOT IN (SELECT Room_Id
                               </div>
                             </div>
                             <div class="item col-md-6 col-sm-6 col-xs-12">
-                              <label class="control-label" for="idprof">Id Proof <span class="required">*</span></label>
+                              <label class="control-label" for="idprof">Id Proof</label>
                               <div>
-                                <input type="file" id="idprof" name="idprof" required="required" class="form-control col-md-7 col-xs-12 " placeholder="Enter Your Name"> (Ex: Aadhaar Card, Voter Id, Passport etc.)
+                                <input type="file" id="idprof" name="idprof" class="form-control col-md-7 col-xs-12 " placeholder="Enter Your Name"> (Ex: Aadhaar Card, Voter Id, Passport etc.)
                               </div>
                             </div>
                             <div class="clearfix"></div>
