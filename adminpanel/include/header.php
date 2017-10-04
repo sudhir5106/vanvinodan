@@ -65,6 +65,7 @@
             <ul class="nav child_menu" style="display: none">
               <li><a href="<?php echo LINK_CONTROL?>/rooms-category/index.php">Add Category</a> </li>
               <li><a href="<?php echo LINK_CONTROL?>/rooms/index.php">Add Room</a> </li>
+              <li><a href="<?php echo LINK_CONTROL?>/rooms-gallery/index.php">Add Room Gallery</a></li>
             </ul>
           </li>
           

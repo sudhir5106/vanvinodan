@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 25, 2017 at 05:44 PM
+-- Generation Time: Oct 04, 2017 at 05:48 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.6.24
 
@@ -254,6 +254,27 @@ INSERT INTO `tbl_rooms_category` (`R_Category_Id`, `R_Category_Name`, `R_Capacit
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbl_rooms_gallery`
+--
+
+CREATE TABLE `tbl_rooms_gallery` (
+  `Gallery_Id` int(11) NOT NULL,
+  `Image_Path` varchar(200) NOT NULL,
+  `MainImage` tinyint(4) NOT NULL,
+  `R_Category_Id` tinyint(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_rooms_gallery`
+--
+
+INSERT INTO `tbl_rooms_gallery` (`Gallery_Id`, `Image_Path`, `MainImage`, `R_Category_Id`) VALUES
+(5, '15071308920.jpg', 1, 1),
+(7, '15071308922.jpg', 0, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tbl_room_master`
 --
 
@@ -382,6 +403,13 @@ ALTER TABLE `tbl_rooms_category`
   ADD PRIMARY KEY (`R_Category_Id`);
 
 --
+-- Indexes for table `tbl_rooms_gallery`
+--
+ALTER TABLE `tbl_rooms_gallery`
+  ADD PRIMARY KEY (`Gallery_Id`),
+  ADD KEY `R_Category_Id` (`R_Category_Id`);
+
+--
 -- Indexes for table `tbl_room_master`
 --
 ALTER TABLE `tbl_room_master`
@@ -445,6 +473,11 @@ ALTER TABLE `tbl_reserved_rooms`
 ALTER TABLE `tbl_rooms_category`
   MODIFY `R_Category_Id` tinyint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
+-- AUTO_INCREMENT for table `tbl_rooms_gallery`
+--
+ALTER TABLE `tbl_rooms_gallery`
+  MODIFY `Gallery_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+--
 -- AUTO_INCREMENT for table `tbl_room_master`
 --
 ALTER TABLE `tbl_room_master`
@@ -475,6 +508,12 @@ ALTER TABLE `tbl_image_upload`
 ALTER TABLE `tbl_reserved_rooms`
   ADD CONSTRAINT `tbl_reserved_rooms_ibfk_1` FOREIGN KEY (`Reservation_Id`) REFERENCES `tbl_reservation` (`Reservation_Id`),
   ADD CONSTRAINT `tbl_reserved_rooms_ibfk_2` FOREIGN KEY (`Room_Id`) REFERENCES `tbl_room_master` (`Room_Id`);
+
+--
+-- Constraints for table `tbl_rooms_gallery`
+--
+ALTER TABLE `tbl_rooms_gallery`
+  ADD CONSTRAINT `tbl_rooms_gallery_ibfk_1` FOREIGN KEY (`R_Category_Id`) REFERENCES `tbl_rooms_category` (`R_Category_Id`);
 
 --
 -- Constraints for table `tbl_room_master`
