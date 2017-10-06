@@ -31,7 +31,7 @@ $date2 = new DateTime($checkoutdate);
 // this calculates the diff between two dates, which is the number of nights
 ///////////////////////////////////////////////////////////////////////////////////////
 $numberOfNights= $date2->diff($date1)->format("%a"); 
-/////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////
 
 $res = $db->ExecuteQuery("SELECT R_Category_Id, R_Category_Name, R_Capacity, Base_Fare, Room_Info, Amenities FROM tbl_rooms_category
 
@@ -118,7 +118,7 @@ WHERE Room_id NOT IN (SELECT Room_Id FROM tbl_reserved_rooms WHERE Check_In_Date
                             	<input type="hidden" id="capacity-<?php echo $val['R_Category_Id']; ?>" value="<?php echo $val['R_Capacity']; ?>" />
                             </td>
                             <td class="ddbtn">
-                                <select id="adult-<?php echo $val['R_Category_Id']; ?>" type="text" class="form-control adultdd">          
+                                <select id="adult-<?php echo $val['R_Category_Id']; ?>" class="form-control adultdd">          
                                   <?php 
 								  $i=1;
 								  while($i<=$val['R_Capacity']){ ?>
@@ -128,7 +128,7 @@ WHERE Room_id NOT IN (SELECT Room_Id FROM tbl_reserved_rooms WHERE Check_In_Date
                                 </select>
                             </td>
                             <td class="ddbtn">
-                                <select id="child-<?php echo $val['R_Category_Id']; ?>" type="text" class="form-control childdd">          
+                                <select id="child-<?php echo $val['R_Category_Id']; ?>" class="form-control childdd">          
                                   <?php 
 								  $i=0;
 								  while($i<$val['R_Capacity']){ ?>

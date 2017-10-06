@@ -921,6 +921,11 @@ legend {
   padding: 9px 0;
   border-top: 1px solid #E6E9ED;
 }
+.well.profile_view .bottom-btn{
+  background: #F2F5F7;
+  padding: 9px 0;
+  border-top: 1px solid #E6E9ED;
+}
 .well.profile_view .left {
   margin-top: 20px;
 }
@@ -5425,3 +5430,4 @@ ul.notifications {
 .imgBlck{margin-bottom:10px;}
 .galleryImg{height:130px; overflow:hidden;}
 .bg-success{padding:5px;}
+.room-price{font-size:1.5em; color:#DD2024;}

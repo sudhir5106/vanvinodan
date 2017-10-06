@@ -59,6 +59,13 @@
         <ul class="nav side-menu">
           <li><a href="<?php echo LINK_CONTROL?>"><i class="fa fa-home"></i>Dashboard</a></li>
 
+          <li><a><i class="fa fa-bed" aria-hidden="true"></i>Reservation<span class="fa fa-chevron-down"></span></a>
+            <ul class="nav child_menu" style="display: none">
+              <li><a href="<?php echo LINK_CONTROL?>/reservation"><i class="fa fa-calendar" aria-hidden="true"></i>New Reservation</a></li>
+              <li><a href="<?php echo LINK_CONTROL?>/reservation/history.php"><i class="fa fa-history" aria-hidden="true"></i>Reservation History</a></li>
+            </ul>
+          </li>
+
           <li><a href="<?php echo LINK_CONTROL?>/payments/"><i class="fa fa-inr" aria-hidden="true"></i>Payments</a></li>
           
           <li><a><i class="fa fa-bed" aria-hidden="true"></i>Rooms<span class="fa fa-chevron-down"></span></a>
