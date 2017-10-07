@@ -5431,3 +5431,6 @@ ul.notifications {
 .galleryImg{height:130px; overflow:hidden;}
 .bg-success{padding:5px;}
 .room-price{font-size:1.5em; color:#DD2024;}
+.room-price span{color:#666; font-size:10px;}
+.tbFootLabel label{padding-top:12px; padding-right:10px; font-weight:normal;}
+.table>tfoot.tbFootLabel>tr>td{padding:0!important;}

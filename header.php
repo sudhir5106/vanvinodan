@@ -137,14 +137,7 @@ $baseurl = basename($_SERVER['PHP_SELF']);
                                         <li><a href="<?php echo LINK_ROOT ?>/tent.php"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Tent Room</a></li>
                                      </ul>
                                   </li>
-                                  <li><a href="#" class="dropdown-toggle" data-toggle="dropdown">Places to visit <b class="caret"></b></a>
-                                  	<ul class="dropdown-menu">
-                                        <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Dongargarh</a></li>
-                                        <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Gandai</a></li>
-                                        <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Khairagarh</a></li>
-                                        <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Ambagarh</a></li>
-                                     </ul>
-                                  </li>
+                                  <li><a href="">Places to visit</a></li>
                                   <li><a href="<?php echo LINK_ROOT ?>/gallery-category.php">Photo Gallery</a></li>
                                   <li><a href="#" class="dropdown-toggle" data-toggle="dropdown">Reservation <b class="caret"></b></a>
                                   

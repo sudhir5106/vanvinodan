@@ -101,7 +101,7 @@ require_once(PATH_ADMIN_INCLUDE.'/header.php');
 WHERE R_Category_Id=".$val['R_Category_Id']." AND Room_id NOT IN (SELECT Room_Id FROM tbl_reserved_rooms WHERE Check_In_Date <= '".$checkindate."' AND Check_Out_Date > '".$checkindate."' AND Reservation_Status<>3 AND Reservation_Status<>4 AND Reservation_Status<>5)"); ?>
 
                     <p><strong>Rooms Left:</strong> <span class="badge"><?php echo $roomCount[1]['RID']; ?></span></p>
-                    <p class="room-price"><i class="fa fa-inr" aria-hidden="true"></i> <?php echo $val['Base_Fare']; ?></p>
+                    <p class="room-price"><i class="fa fa-inr" aria-hidden="true"></i> <?php echo $val['Base_Fare']; ?> <span>/ Night</span></p>
                   </div>
                   
                 </div>
@@ -123,16 +123,39 @@ WHERE R_Category_Id=".$val['R_Category_Id']." AND Room_id NOT IN (SELECT Room_Id
             <table class="table table-hover table-stripped">
               <thead>
                 <tr class="bg-info">
-                  <th>Room No.</th>
-                  <th>Adult</th>
-                  <th>Child</th>
-                  <th>Extra Guest</th>
-                  <th>Base Fare</th>
+                  <th width="120">Room No.</th>
+                  <th width="50">Adult</th>
+                  <th width="50">Child</th>
+                  <th width="70">Extra Guest</th>
+                  <th width="100">Base Fare</th>
+                  <th width="100"><span id="guestCount" class="badge"></span> Guest(s) Fare</th>
+                  <th width="120">Total</th>
                 </tr>
               </thead>
-              <tbody>
 
+              <tfoot class="tbFootLabel">
+                <tr>
+                  <td align="right" colspan="6"><label><strong>Subtotal</strong></label></td>
+                  <td><input id="subtotal" type="text" value="" class="form-control input-sm" disabled ></td>
+                </tr>
+                <tr>
+                  <td align="right" colspan="6"><label>SGST(9%)</label></td>
+                  <td><input id="sgst" type="text" value="" class="form-control input-sm" disabled ></td>
+                </tr>
+                <tr>
+                  <td align="right" colspan="6"><label>CGST(9%)</label></td>
+                  <td><input id="cgst" type="text" value="" class="form-control input-sm" disabled ></td>
+                </tr>
+                <tr>
+                  <td align="right" colspan="6"><label><strong>GRAND TOTAL</strong></label></td>
+                  <td><input id="grand-total" type="text" value="" class="form-control input-sm" disabled ></td>
+                </tr>
+              </tfoot>
+
+              <tbody>
+                
               </tbody>
+              
             </table>
           </div>
 

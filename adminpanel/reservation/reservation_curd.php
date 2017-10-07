@@ -10,7 +10,7 @@ if($_POST['type']=="getRoomsFrm")
 {
 	$room = $db->ExecuteQuery("SELECT Room_Name FROM tbl_room_master WHERE Room_Id=".$_REQUEST['roomId']);
 	
-	$specification = $db->ExecuteQuery("SELECT R_Capacity, Base_Fare FROM tbl_rooms_category WHERE R_Category_Id=(SELECT R_Category_Id FROM tbl_room_master WHERE Room_Id=".$_REQUEST['roomId'].")");
+	$specification = $db->ExecuteQuery("SELECT R_Capacity, Base_Fare, Extra_Guest_Fare FROM tbl_rooms_category WHERE R_Category_Id=(SELECT R_Category_Id FROM tbl_room_master WHERE Room_Id=".$_REQUEST['roomId'].")");
 
 	?>
 
@@ -36,8 +36,14 @@ if($_POST['type']=="getRoomsFrm")
               
             </select>
 		</td>
-		<td><input id="extra-<?php echo $_REQUEST['roomId']; ?>" type="text" class="form-control extraGuest" value="0"></td>
-		<td><?php echo $specification[1]['Base_Fare']; ?></td>
+		<td><input id="extra-<?php echo $_REQUEST['roomId']; ?>" type="text" class="form-control extraGuest" value=""></td>
+		<td><input id="baseFare-<?php echo $_REQUEST['roomId']; ?>" type="text" value="<?php echo $specification[1]['Base_Fare']; ?>" class="form-control" disabled ></td>
+		<td><input id="extraFare-<?php echo $_REQUEST['roomId']; ?>" type="text" value="0" class="form-control" disabled ></td>
+		<td><input id="total-<?php echo $_REQUEST['roomId']; ?>" type="text" value="<?php echo $specification[1]['Base_Fare']; ?>" class="form-control total" disabled ></td>
+		
+		<input id="extraGuestFare-<?php echo $_REQUEST['roomId']; ?>" type="hidden" class="form-control" value="<?php echo $specification[1]['Extra_Guest_Fare']; ?>">
+		<input id="capacity-<?php echo $_REQUEST['roomId']; ?>" type="hidden" class="form-control" value="<?php echo $specification[1]['R_Capacity']; ?>">
+
 	</tr>
 
 <?php
