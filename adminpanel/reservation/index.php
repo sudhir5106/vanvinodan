@@ -128,6 +128,7 @@ WHERE R_Category_Id=".$val['R_Category_Id']." AND Room_id NOT IN (SELECT Room_Id
                   <th width="50">Child</th>
                   <th width="70">Extra Guest</th>
                   <th width="100">Base Fare</th>
+                  <th width="100"><span id="Nightscount" class="badge"><?php echo $numberOfNights; ?></span> Night(s) Fare</th>
                   <th width="100"><span id="guestCount" class="badge"></span> Guest(s) Fare</th>
                   <th width="120">Total</th>
                 </tr>
@@ -135,21 +136,27 @@ WHERE R_Category_Id=".$val['R_Category_Id']." AND Room_id NOT IN (SELECT Room_Id
 
               <tfoot class="tbFootLabel">
                 <tr>
-                  <td align="right" colspan="6"><label><strong>Subtotal</strong></label></td>
+                  <td align="right" colspan="7"><label><strong>Subtotal</strong></label></td>
                   <td><input id="subtotal" type="text" value="" class="form-control input-sm" disabled ></td>
                 </tr>
                 <tr>
-                  <td align="right" colspan="6"><label>SGST(9%)</label></td>
+                  <td align="right" colspan="7"><label>SGST(9%)</label></td>
                   <td><input id="sgst" type="text" value="" class="form-control input-sm" disabled ></td>
                 </tr>
                 <tr>
-                  <td align="right" colspan="6"><label>CGST(9%)</label></td>
+                  <td align="right" colspan="7"><label>CGST(9%)</label></td>
                   <td><input id="cgst" type="text" value="" class="form-control input-sm" disabled ></td>
                 </tr>
                 <tr>
-                  <td align="right" colspan="6"><label><strong>GRAND TOTAL</strong></label></td>
+                  <td align="right" colspan="7"><label><strong>GRAND TOTAL</strong></label></td>
                   <td><input id="grand-total" type="text" value="" class="form-control input-sm" disabled ></td>
                 </tr>
+                <tr>
+                  <td align="right" colspan="7"><label><strong>Paid Amount</strong></label></td>
+                  <td><input id="paidAmt" type="text" value="" class="form-control input-sm" ></td>
+                </tr>
+                <input id="nightsCount" type="hidden" value="<?php echo $numberOfNights; ?>" class="form-control input-sm" >
+                
               </tfoot>
 
               <tbody>
