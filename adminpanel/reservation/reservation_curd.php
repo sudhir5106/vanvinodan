@@ -40,6 +40,7 @@ if($_POST['type']=="getRoomsFrm")
 		<td><input id="baseFare-<?php echo $_REQUEST['roomId']; ?>" type="text" value="<?php echo $specification[1]['Base_Fare']; ?>" class="form-control" disabled ></td>
 		<td><input id="extraFare-<?php echo $_REQUEST['roomId']; ?>" type="text" value="0" class="form-control" disabled ></td>
 		<td><input id="total-<?php echo $_REQUEST['roomId']; ?>" type="text" value="<?php echo $specification[1]['Base_Fare']; ?>" class="form-control total" disabled ></td>
+        <td><input id="totalFare-<?php echo $_REQUEST['roomId']; ?>" type="text" value="<?php echo ($_REQUEST['nightsCount'] * $specification[1]['Base_Fare']); ?>" class="form-control total" disabled ></td>
 		
 		<input id="extraGuestFare-<?php echo $_REQUEST['roomId']; ?>" type="hidden" class="form-control" value="<?php echo $specification[1]['Extra_Guest_Fare']; ?>">
 		<input id="capacity-<?php echo $_REQUEST['roomId']; ?>" type="hidden" class="form-control" value="<?php echo $specification[1]['R_Capacity']; ?>">

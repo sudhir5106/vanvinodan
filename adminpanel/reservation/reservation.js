@@ -23,6 +23,7 @@ $(document).ready(function(){
 			var formdata = new FormData();
 			formdata.append('type', "getRoomsFrm");
 			formdata.append('roomId', roomId);
+			formdata.append('nightsCount',$("#nightsCount").val())
 			
 			$.ajax({
 			   type: "POST",
@@ -200,7 +201,14 @@ $(document).ready(function(){
 			totalAmt = totalAmt + parseFloat($(this).val());
 		});//eof each function
 
-		$("#subtotal").val(totalAmt)
+		$("#subtotal").val(totalAmt);
+		
+		var gst = (totalAmt * 9) / 100;
+		$("#sgst").val(gst);
+		$("#cgst").val(gst);
+		
+		var grandTotal = totalAmt + (gst*2);
+		$("#grand-total").val(grandTotal);
 
 	}//eof function
 
