@@ -4,7 +4,7 @@ require_once(PATH_LIBRARIES.'/classes/DBConn.php');
 $db = new DBConn();
 
 ///*******************************************************
-/// To Insert Room ////////////////////////////////
+/// To Insert Room ///////////////////////////////////////
 ///*******************************************************
 if($_POST['type']=="getRoomsFrm")
 {
@@ -15,9 +15,10 @@ if($_POST['type']=="getRoomsFrm")
 	?>
 
 	<tr id="row-<?php echo $_REQUEST['roomId']; ?>">
-		<td><?php echo $room[1]['Room_Name']; ?></td>
+		<td class="bookingCol crossBtnCol"><a id="deleteRow-<?php echo $_REQUEST['roomId']; ?>" class="drow text-danger"><i class="fa fa-times-circle" aria-hidden="true"></i></a></td>
+		<td class="bookingCol"><?php echo $room[1]['Room_Name']; ?></td>
 		<td>
-			<select id="adult-<?php echo $_REQUEST['roomId']; ?>" class="form-control adultdd">          
+			<select id="adult-<?php echo $_REQUEST['roomId']; ?>" class="form-control adultdd" style="width:55px;">
               <?php 
 			  $i=1;
 			  while($i<=$specification[1]['R_Capacity']){ ?>
@@ -26,8 +27,8 @@ if($_POST['type']=="getRoomsFrm")
               
             </select>
 		</td>
-		<td>
-			<select id="child-<?php echo $_REQUEST['roomId']; ?>" class="form-control childdd">          
+		<td width="50">
+			<select id="child-<?php echo $_REQUEST['roomId']; ?>" class="form-control childdd" style="width:55px;">          
               <?php 
 			  $i=0;
 			  while($i<$specification[1]['R_Capacity']){ ?>
@@ -38,12 +39,13 @@ if($_POST['type']=="getRoomsFrm")
 		</td>
 		<td><input id="extra-<?php echo $_REQUEST['roomId']; ?>" type="text" class="form-control extraGuest" value=""></td>
 		<td><input id="baseFare-<?php echo $_REQUEST['roomId']; ?>" type="text" value="<?php echo $specification[1]['Base_Fare']; ?>" class="form-control" disabled ></td>
+		<td><input id="total-<?php echo $_REQUEST['roomId']; ?>" type="text" value="<?php echo ($_REQUEST['nightsCount'] * $specification[1]['Base_Fare']); ?>" class="form-control" disabled ></td>
 		<td><input id="extraFare-<?php echo $_REQUEST['roomId']; ?>" type="text" value="0" class="form-control" disabled ></td>
-		<td><input id="total-<?php echo $_REQUEST['roomId']; ?>" type="text" value="<?php echo $specification[1]['Base_Fare']; ?>" class="form-control total" disabled ></td>
         <td><input id="totalFare-<?php echo $_REQUEST['roomId']; ?>" type="text" value="<?php echo ($_REQUEST['nightsCount'] * $specification[1]['Base_Fare']); ?>" class="form-control total" disabled ></td>
 		
 		<input id="extraGuestFare-<?php echo $_REQUEST['roomId']; ?>" type="hidden" class="form-control" value="<?php echo $specification[1]['Extra_Guest_Fare']; ?>">
 		<input id="capacity-<?php echo $_REQUEST['roomId']; ?>" type="hidden" class="form-control" value="<?php echo $specification[1]['R_Capacity']; ?>">
+
 
 	</tr>
 

@@ -5434,3 +5434,8 @@ ul.notifications {
 .room-price span{color:#666; font-size:10px;}
 .tbFootLabel label{padding-top:12px; padding-right:10px; font-weight:normal;}
 .table>tfoot.tbFootLabel>tr>td{padding:0!important;}
+.bookingCol{padding-top: 17px!important;}
+.crossBtnCol a{cursor:pointer;}
+.crossBtnCol a i{font-size: 1.3em;}
+
+.modal-popup ul li{list-style:none;}

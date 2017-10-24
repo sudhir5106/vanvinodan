@@ -173,7 +173,7 @@ $(document).ready(function(){
  			$("#extraFare-"+uniqueId[1]).val(totalGuestFare);
 
  			var total = parseFloat($("#baseFare-"+uniqueId[1]).val()) + parseFloat(totalGuestFare);
- 			$("#total-"+uniqueId[1]).val(total);
+ 			$("#totalFare-"+uniqueId[1]).val(total);
 
  			calculate();
 
@@ -181,14 +181,26 @@ $(document).ready(function(){
  		else{
  			$("#guestCount").html("");
  			$("#extraFare-"+uniqueId[1]).val("0");
- 			$("#total-"+uniqueId[1]).val($("#baseFare-"+uniqueId[1]).val());
+ 			$("#totalFare-"+uniqueId[1]).val($("#baseFare-"+uniqueId[1]).val());
 
  			calculate();
  		}
- 		
-
 
  	});//eof keyup event
+
+ 	//////////////////////////////////
+	// on click of delete icon ///////
+	//////////////////////////////////
+ 	$(document).on("click", ".drow", function(){
+ 		var Id = $(this).attr('id');
+ 		var rowid = Id.split("-");
+
+ 		$("#row-"+rowid[1]).remove();
+ 		$("#rmid-"+rowid[1]).attr('checked', false);
+
+ 		calculate();
+
+ 	});
 	
 	//************************************
 	//Function for calculate subtotal,

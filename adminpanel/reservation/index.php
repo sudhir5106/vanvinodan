@@ -123,6 +123,7 @@ WHERE R_Category_Id=".$val['R_Category_Id']." AND Room_id NOT IN (SELECT Room_Id
             <table class="table table-hover table-stripped">
               <thead>
                 <tr class="bg-info">
+                  <th width="30"></th>
                   <th width="120">Room No.</th>
                   <th width="50">Adult</th>
                   <th width="50">Child</th>
@@ -130,29 +131,29 @@ WHERE R_Category_Id=".$val['R_Category_Id']." AND Room_id NOT IN (SELECT Room_Id
                   <th width="100">Base Fare</th>
                   <th width="100"><span id="Nightscount" class="badge"><?php echo $numberOfNights; ?></span> Night(s) Fare</th>
                   <th width="100"><span id="guestCount" class="badge"></span> Guest(s) Fare</th>
-                  <th width="120">Total</th>
+                  <th width="120">Total</th>                  
                 </tr>
               </thead>
 
               <tfoot class="tbFootLabel">
                 <tr>
-                  <td align="right" colspan="7"><label><strong>Subtotal</strong></label></td>
+                  <td align="right" colspan="8"><label><strong>Subtotal</strong></label></td>
                   <td><input id="subtotal" type="text" value="" class="form-control input-sm" disabled ></td>
                 </tr>
                 <tr>
-                  <td align="right" colspan="7"><label>SGST(9%)</label></td>
+                  <td align="right" colspan="8"><label>SGST(9%)</label></td>
                   <td><input id="sgst" type="text" value="" class="form-control input-sm" disabled ></td>
                 </tr>
                 <tr>
-                  <td align="right" colspan="7"><label>CGST(9%)</label></td>
+                  <td align="right" colspan="8"><label>CGST(9%)</label></td>
                   <td><input id="cgst" type="text" value="" class="form-control input-sm" disabled ></td>
                 </tr>
                 <tr>
-                  <td align="right" colspan="7"><label><strong>GRAND TOTAL</strong></label></td>
+                  <td align="right" colspan="8"><label><strong>GRAND TOTAL</strong></label></td>
                   <td><input id="grand-total" type="text" value="" class="form-control input-sm" disabled ></td>
                 </tr>
                 <tr>
-                  <td align="right" colspan="7"><label><strong>Paid Amount</strong></label></td>
+                  <td align="right" colspan="8"><label><strong>Paid Amount</strong></label></td>
                   <td><input id="paidAmt" type="text" value="" class="form-control input-sm" ></td>
                 </tr>
                 <input id="nightsCount" type="hidden" value="<?php echo $numberOfNights; ?>" class="form-control input-sm" >
@@ -175,7 +176,7 @@ WHERE R_Category_Id=".$val['R_Category_Id']." AND Room_id NOT IN (SELECT Room_Id
     
     <?php foreach($res as $value){ ?>
     <!-- Modal POPUP -->
-    <div id="roomInfo-<?php echo $value['R_Category_Id']; ?>" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="gridModalLabel" style="display: none;" aria-hidden="false">
+    <div id="roomInfo-<?php echo $value['R_Category_Id']; ?>" class="modal-popup modal fade in" tabindex="-1" role="dialog" aria-labelledby="gridModalLabel" style="display: none;" aria-hidden="false">
         <div class="modal-dialog modal-sm" role="document">
           
           <div class="modal-content" id="usersignin">
@@ -191,7 +192,8 @@ WHERE R_Category_Id=".$val['R_Category_Id']." AND Room_id NOT IN (SELECT Room_Id
 WHERE R_Category_Id=".$value['R_Category_Id']." AND Room_id NOT IN (SELECT Room_Id FROM tbl_reserved_rooms WHERE Check_In_Date <= '".$checkindate."' AND Check_Out_Date > '".$checkindate."' AND Reservation_Status<>3 AND Reservation_Status<>4 AND Reservation_Status<>5)"); 
                 
                 foreach($rooms as $roomsVal){ ?>
-                  <li><input class="roomid" type="checkbox" value="<?php echo $roomsVal['Room_Id']; ?>"><?php echo $roomsVal['Room_Name']; ?></li>
+                  <li class="ckeckbox checkbox-danger"><input id="rmid-<?php echo $roomsVal['Room_Id']; ?>" class="roomid" type="checkbox" value="<?php echo $roomsVal['Room_Id']; ?>">
+                  <label><?php echo $roomsVal['Room_Name']; ?></label></li>
                 <?php }
 ?>
                 </ul>
