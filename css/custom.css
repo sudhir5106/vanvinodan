@@ -5438,4 +5438,6 @@ ul.notifications {
 .crossBtnCol a{cursor:pointer;}
 .crossBtnCol a i{font-size: 1.3em;}
 
-.modal-popup ul li{list-style:none;}
+.modal-popup ul{padding-left: 0;}
+.modal-popup ul li{list-style:none; float:left; width:33.33333333%; text-align:center;}
+.reservationBtn{margin-top:30px;}

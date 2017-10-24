@@ -119,54 +119,98 @@ WHERE R_Category_Id=".$val['R_Category_Id']." AND Room_id NOT IN (SELECT Room_Id
           </div>
           <hr>
 
-          <div id="roomData">
-            <table class="table table-hover table-stripped">
-              <thead>
-                <tr class="bg-info">
-                  <th width="30"></th>
-                  <th width="120">Room No.</th>
-                  <th width="50">Adult</th>
-                  <th width="50">Child</th>
-                  <th width="70">Extra Guest</th>
-                  <th width="100">Base Fare</th>
-                  <th width="100"><span id="Nightscount" class="badge"><?php echo $numberOfNights; ?></span> Night(s) Fare</th>
-                  <th width="100"><span id="guestCount" class="badge"></span> Guest(s) Fare</th>
-                  <th width="120">Total</th>                  
-                </tr>
-              </thead>
+          <form class="form-horizontal" role="form" id="bookingFrm" method="post">
 
-              <tfoot class="tbFootLabel">
-                <tr>
-                  <td align="right" colspan="8"><label><strong>Subtotal</strong></label></td>
-                  <td><input id="subtotal" type="text" value="" class="form-control input-sm" disabled ></td>
-                </tr>
-                <tr>
-                  <td align="right" colspan="8"><label>SGST(9%)</label></td>
-                  <td><input id="sgst" type="text" value="" class="form-control input-sm" disabled ></td>
-                </tr>
-                <tr>
-                  <td align="right" colspan="8"><label>CGST(9%)</label></td>
-                  <td><input id="cgst" type="text" value="" class="form-control input-sm" disabled ></td>
-                </tr>
-                <tr>
-                  <td align="right" colspan="8"><label><strong>GRAND TOTAL</strong></label></td>
-                  <td><input id="grand-total" type="text" value="" class="form-control input-sm" disabled ></td>
-                </tr>
-                <tr>
-                  <td align="right" colspan="8"><label><strong>Paid Amount</strong></label></td>
-                  <td><input id="paidAmt" type="text" value="" class="form-control input-sm" ></td>
-                </tr>
-                <input id="nightsCount" type="hidden" value="<?php echo $numberOfNights; ?>" class="form-control input-sm" >
-                
-              </tfoot>
+            <div id="roomData">
+              <table class="table table-hover table-stripped">
+                <thead>
+                  <tr class="bg-info">
+                    <th width="30"></th>
+                    <th width="120">Room No.</th>
+                    <th width="50">Adult</th>
+                    <th width="50">Child</th>
+                    <th width="70">Extra Guest</th>
+                    <th width="100">Base Fare</th>
+                    <th width="100"><span id="Nightscount" class="badge"><?php echo $numberOfNights; ?></span> Night(s) Fare</th>
+                    <th width="100"><span id="guestCount" class="badge"></span> Guest(s) Fare</th>
+                    <th width="120">Total</th>                  
+                  </tr>
+                </thead>
 
-              <tbody>
+                <tfoot class="tbFootLabel">
+                  <tr>
+                    <td align="right" colspan="8"><label><strong>Subtotal</strong></label></td>
+                    <td><input id="subtotal" type="text" value="" class="form-control input-sm" disabled ></td>
+                  </tr>
+                  <tr>
+                    <td align="right" colspan="8"><label>SGST(9%)</label></td>
+                    <td><input id="sgst" type="text" value="" class="form-control input-sm" disabled ></td>
+                  </tr>
+                  <tr>
+                    <td align="right" colspan="8"><label>CGST(9%)</label></td>
+                    <td><input id="cgst" type="text" value="" class="form-control input-sm" disabled ></td>
+                  </tr>
+                  <tr>
+                    <td align="right" colspan="8"><label><strong>GRAND TOTAL</strong></label></td>
+                    <td><input id="grand-total" type="text" value="" class="form-control input-sm" disabled ></td>
+                  </tr>
+                  <tr>
+                    <td align="right" colspan="8"><label><strong>Paid Amount <span class="required">*</span></strong></label></td>
+                    <td><input id="paidAmt" type="text" value="" class="form-control input-sm" ></td>
+                  </tr>
+                  <input id="nightsCount" type="hidden" value="<?php echo $numberOfNights; ?>" class="form-control input-sm" >
+                  
+                </tfoot>
+
+                <tbody>
+                  
+                </tbody>
                 
-              </tbody>
+              </table>
+            </div>
+            <hr>
+
+            <div>
+              <h2>CUSTOMER DETAILS</h2>
+              <div>
+                <div class="item form-group col-md-6 col-sm-6 col-xs-12">
+                    <label class="control-label" for="fullname">Full Name <span class="required">*</span> </label>
+                    <div>
+                      <input type="text" id="fullname" name="fullname" required="required" class="form-control col-md-7 col-xs-12 " placeholder="Enter Your Name">
+                    </div>
+                  </div>
+                  <div class="item col-md-6 col-sm-6 col-xs-12">
+                    <label class="control-label" for="email">Email <span class="required">*</span> </label>
+                    <div>
+                      <input type="email" id="email" name="email" required="required" class="form-control col-md-7 col-xs-12 " placeholder="Enter Your Email Id">
+                    </div>
+                  </div>
+                  <div class="clearfix"></div>
+              </div>
               
-            </table>
-          </div>
+              <div>
+                 <div class="item form-group col-md-6 col-sm-6 col-xs-12">
+                    <label class="control-label" for="phone">Phone <span class="required">*</span> </label>
+                    <div>
+                      <input type="text" id="phone" name="phone" required="required" class="form-control col-md-7 col-xs-12 " placeholder="Enter Your Phone No.">
+                    </div>
+                  </div>
+                  <div class="item col-md-6 col-sm-6 col-xs-12">
+                    <label class="control-label" for="idprof">Id Proof</label>
+                    <div>
+                      <input type="file" id="idprof" name="idprof" class="form-control col-md-7 col-xs-12 " placeholder="Enter Your Name"> (Ex: Aadhaar Card, Voter Id, Passport etc.)
+                    </div>
+                  </div>
+                  <div class="clearfix"></div>
+              </div>
 
+              <div class="text-center reservationBtn">
+                <button id="completeReservBtn" type="button" class="btn btn-danger btn-lg">COMPLETE RESERVATION</button>
+              </div>
+
+            </div>
+
+          </form>
 
           
         </div>
@@ -197,6 +241,8 @@ WHERE R_Category_Id=".$value['R_Category_Id']." AND Room_id NOT IN (SELECT Room_
                 <?php }
 ?>
                 </ul>
+                <div class="clearfix"></div>
+                <div class="text-center"><button type="button" class="btn btn-info btn-sm" data-dismiss="modal" aria-label="Close">Ok</button></div>
               </div>
               <div class="clearfix"></div>
           </div>
