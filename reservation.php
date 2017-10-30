@@ -172,7 +172,7 @@ WHERE R_Category_Id=".$val['R_Category_Id']." AND Room_id NOT IN (SELECT Room_Id
                 	<h5><span id="noOfRooms">0</span> Accommodation(s) for</h5>
                 	<div class="Totalprice"><i class="fa fa-inr" aria-hidden="true"></i> <span id="displayTotalAmt">0.00</span></div>
                     <div>
-                    	<input type="hidden" id="TotalAmt" value="0.00" />
+                    	  <input type="hidden" id="TotalAmt" value="0.00" />
                         <button type="button" id="bookRoomBtn" class="btn btn-lg btn-danger" disabled="disabled">BOOK NOW</button>
                     </div>
                 </div>

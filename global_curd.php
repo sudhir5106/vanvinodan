@@ -221,7 +221,7 @@ if($_POST['type']=="getCheckoutDisplay"){
 }
 
 ///*******************************************************
-/// Get the selected rooms detail to display items ///////
+/// Insert The New Reservation Info in the database //////
 ///*******************************************************
 if($_POST['type']=="insertReservationInfo"){ 
 

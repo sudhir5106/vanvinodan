@@ -139,8 +139,8 @@ WHERE R_Category_Id=".$val['R_Category_Id']." AND Room_id NOT IN (SELECT Room_Id
 
                 <tfoot class="tbFootLabel">
                   <tr>
-                    <td align="right" colspan="8"><label><strong>Subtotal</strong></label></td>
-                    <td><input id="subtotal" type="text" value="" class="form-control input-sm" disabled ></td>
+                    <td align="right" colspan="8"><label><strong>Subtotal <span class="required">*</span></strong></label></td>
+                    <td><input id="subtotal" name="subtotal" type="text" value="" class="form-control input-sm" readonly="readonly" ></td>
                   </tr>
                   <tr>
                     <td align="right" colspan="8"><label>SGST(9%)</label></td>
@@ -152,11 +152,11 @@ WHERE R_Category_Id=".$val['R_Category_Id']." AND Room_id NOT IN (SELECT Room_Id
                   </tr>
                   <tr>
                     <td align="right" colspan="8"><label><strong>GRAND TOTAL</strong></label></td>
-                    <td><input id="grand-total" type="text" value="" class="form-control input-sm" disabled ></td>
+                    <td><input id="grand-total" type="text" value="" class="form-control input-sm" readonly="readonly" ></td>
                   </tr>
                   <tr>
-                    <td align="right" colspan="8"><label><strong>Paid Amount <span class="required">*</span></strong></label></td>
-                    <td><input id="paidAmt" type="text" value="" class="form-control input-sm" ></td>
+                    <td align="right" colspan="8"><label class="control-label"><strong>Paid Amount <span class="required">*</span></strong></label></td>
+                    <td><input id="paidAmt" name="paidAmt" type="text" value="" class="form-control input-sm checkZero"></td>
                   </tr>
                   <input id="nightsCount" type="hidden" value="<?php echo $numberOfNights; ?>" class="form-control input-sm" >
                   
@@ -196,7 +196,7 @@ WHERE R_Category_Id=".$val['R_Category_Id']." AND Room_id NOT IN (SELECT Room_Id
                     </div>
                   </div>
                   <div class="item col-md-6 col-sm-6 col-xs-12">
-                    <label class="control-label" for="idprof">Id Proof</label>
+                    <label class="control-label" for="idprof">Id Proof <span class="required">*</span></label>
                     <div>
                       <input type="file" id="idprof" name="idprof" class="form-control col-md-7 col-xs-12 " placeholder="Enter Your Name"> (Ex: Aadhaar Card, Voter Id, Passport etc.)
                     </div>
@@ -205,7 +205,7 @@ WHERE R_Category_Id=".$val['R_Category_Id']." AND Room_id NOT IN (SELECT Room_Id
               </div>
 
               <div class="text-center reservationBtn">
-                <button id="completeReservBtn" type="button" class="btn btn-danger btn-lg">COMPLETE RESERVATION</button>
+                <button id="completeBtn" type="button" class="btn btn-danger btn-lg">COMPLETE RESERVATION</button>
               </div>
 
             </div>
