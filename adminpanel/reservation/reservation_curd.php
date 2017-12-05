@@ -5,7 +5,9 @@ $db = new DBConn();
 
 require_once(PATH_LIBRARIES.'/classes/resize.php');
 
-
+///*******************************************************
+/// Check the Paid amount is not greater than grand total 
+///*******************************************************
 if($_POST['type']=='paidAmtIsNotGreater'){
 	
 	$GT = $_REQUEST['GT'];
@@ -28,7 +30,7 @@ if($_POST['type']=="getRoomsFrm")
 	
 	$specification = $db->ExecuteQuery("SELECT R_Capacity, Base_Fare, Extra_Guest_Fare FROM tbl_rooms_category WHERE R_Category_Id=(SELECT R_Category_Id FROM tbl_room_master WHERE Room_Id=".$_REQUEST['roomId'].")");
 
-	?>
+?>
 
 	<tr id="row-<?php echo $_REQUEST['roomId']; ?>">
 		<td class="bookingCol crossBtnCol"><a id="deleteRow-<?php echo $_REQUEST['roomId']; ?>" class="drow text-danger"><i class="fa fa-times-circle" aria-hidden="true"></i></a></td>
@@ -64,8 +66,6 @@ if($_POST['type']=="getRoomsFrm")
 		
 		<input id="extraGuestFare-<?php echo $_REQUEST['roomId']; ?>" type="hidden" class="form-control" value="<?php echo $specification[1]['Extra_Guest_Fare']; ?>">
 		<input id="capacity-<?php echo $_REQUEST['roomId']; ?>" type="hidden" class="form-control" value="<?php echo $specification[1]['R_Capacity']; ?>">
-
-
 	</tr>
 
 <?php
@@ -90,6 +90,7 @@ if($_POST['type']=="insertReservationInfo"){
 		$childArray = explode(',',$_POST['childArray']);
 		$basefareArray = explode(',',$_POST['basefareArray']);
 		$extraGuestArray = explode(',',$_POST['extraGuestArray']);
+		$extraFareArray = explode(',',$_POST['extraFareArray']);
 		$totalRoomFareArray = explode(',',$_POST['totalRoomFareArray']);
 		
 		$name = $_FILES['file']['name'];
@@ -138,6 +139,7 @@ if($_POST['type']=="insertReservationInfo"){
 			//*************************
 	 		$last_Id=mysql_insert_id();
 			//*************************
+			$transaction_no = base64_encode($last_Id);
 			////////////////////////////////////////////////
 			// SQL Query to get the remain unreserved rooms 
 			////////////////////////////////////////////////
@@ -149,9 +151,9 @@ if($_POST['type']=="insertReservationInfo"){
 				/////////////////////////////////////////////////////////////
 				// SQL Query to insert the data into tbl_reserved_rooms table
 				/////////////////////////////////////////////////////////////
-				$tblfield=array('Reservation_Id','Room_Id','Check_In_Date','Check_Out_Date','Adult','Children','Base_Fare','Extra_Guest_Amt','Reservation_Status');
+				$tblfield=array('Reservation_Id','Room_Id','Check_In_Date','Check_Out_Date','Adult','Children','Total_Extra_Guests','Base_Fare','Extra_Guest_Amt','Reservation_Status');
 				
-				$tblvalues=array($last_Id,$roomsIdArray[$i],$checkindate,$checkoutdate,$adultArray[$i],$childArray[$i],$basefareArray[$i],$extraGuestArray[$i],1);
+				$tblvalues=array($last_Id,$roomsIdArray[$i],$checkindate,$checkoutdate,$adultArray[$i],$childArray[$i],$extraGuestArray[$i],$basefareArray[$i],$extraFareArray[$i],1);
 				
 				$res=$db->valInsert("tbl_reserved_rooms",$tblfield,$tblvalues);
 				
@@ -162,6 +164,17 @@ if($_POST['type']=="insertReservationInfo"){
 
 				$i++;								
 			}//eof while loop
+
+
+			////////////////////////////////////////////////////
+			///// insert transaction detail in tbl_transactions
+			////////////////////////////////////////////////////			
+			$date = date('Y-m-d H:i:s');
+			//************************************************
+			$tblname = "tbl_transactions";
+			$tblfield=array('Transaction_Date', 'Transaction_No', 'Reservation_Id', 'Paid_Amt', 'Payment_Mode', 'Pay_Status', 'Payment_Id');
+			$tblvalues=array($date, $transaction_no, $last_Id, $_POST['PaidAmt'], 'Desk Payment', 'success', '');
+			$res=$db->valInsert($tblname, $tblfield, $tblvalues);
 			
 			//**************************************************
 			// Call a class to send a mail to the user regarding 
@@ -177,7 +190,7 @@ if($_POST['type']=="insertReservationInfo"){
 		
 		mysql_query("COMMIT",$con);
 		
-		echo base64_encode($last_Id);
+		echo $transaction_no;
 		
 	}
 	catch(Exception $e)
@@ -188,5 +201,26 @@ if($_POST['type']=="insertReservationInfo"){
 	}
 
 }//eof if condition
+
+
+///*******************************************************
+/// insert transaction detail in tbl_transactions ////////
+///*******************************************************
+if($_POST['type']=="doPayment"){ 
+
+	//************************************************
+	$date = date('Y-m-d H:i:s');
+	//************************************************
+	$transaction_no = base64_encode($_POST['rid']);
+	//************************************************
+	// Query for Insert in tbl_transactions table
+	//************************************************
+	$tblname = "tbl_transactions";
+	$tblfield=array('Transaction_Date', 'Transaction_No', 'Reservation_Id', 'Paid_Amt', 'Payment_Mode', 'Pay_Status', 'Payment_Id');
+	$tblvalues=array($date, $transaction_no, $_POST['rid'], $_POST['payment'], 'Desk Payment', 'success', '');
+	$res=$db->valInsert($tblname, $tblfield, $tblvalues);
+
+}
+
 
 ?>

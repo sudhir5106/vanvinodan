@@ -307,6 +307,7 @@ $(document).ready(function(){
 			var childArray = new Array();
 			var basefareArray = new Array();
 			var extraGuestArray = new Array();
+			var extraFareArray = new Array();
 			var totalRoomFareArray = new Array();
 			
 			var TotalGuestAmt = 0;
@@ -320,7 +321,8 @@ $(document).ready(function(){
 					adultArray.push( $("#adult-"+uniqueId[1]).val() );
 					childArray.push( $("#child-"+uniqueId[1]).val() );
 					basefareArray.push( $("#baseFare-"+uniqueId[1]).val() );
-					extraGuestArray.push( $("#extraFare-"+uniqueId[1]).val() );
+					extraGuestArray.push( $("#extra-"+uniqueId[1]).val() );
+					extraFareArray.push( $("#extraFare-"+uniqueId[1]).val() );
 					totalRoomFareArray.push( $("#totalFare-"+uniqueId[1]).val() );
 
 					TotalGuestAmt=parseFloat(TotalGuestAmt)+parseFloat($("#extraFare-"+uniqueId[1]).val());
@@ -338,6 +340,7 @@ $(document).ready(function(){
 			formdata.append('childArray', childArray);
 			formdata.append('basefareArray', basefareArray);
 			formdata.append('extraGuestArray', extraGuestArray);
+			formdata.append('extraFareArray', extraFareArray);
 			formdata.append('totalRoomFareArray', totalRoomFareArray);
 
 			formdata.append('TotalGuestAmt', TotalGuestAmt);
@@ -357,7 +360,7 @@ $(document).ready(function(){
 			   type: "POST",
 			   url: "reservation_curd.php",
 			   data:formdata,
-			   success: function(data){ alert(data);
+			   success: function(data){ //alert(data);
 					
 					if(data!=0){
 						$('#loading').hide();
@@ -377,6 +380,169 @@ $(document).ready(function(){
 		}
 
 	});// eof completeReservBtn
+
+	///////////////////////////////////////////////
+	//click on pay button in history page /////////
+	///////////////////////////////////////////////
+	$(document).on("click", ".pay", function(){
+		
+		var rid = [];
+		rid = $(this).attr("id").split("-"); //get reservation id
+		
+		var reservationData = [];
+		reservationData = $(this).attr("data").split("-"); //get [reservation ref no, grand total amt, paid amt]
+		var balanceAmt = parseFloat(reservationData[1])-parseFloat(reservationData[2]);
+		
+		$("#resNo").html(reservationData[0]);
+		$("#resAmt").val(reservationData[1]);
+		$("#paidAmt").val(reservationData[2]);
+		$("#BalAmt").val(balanceAmt.toFixed(2));
+		$("#submitpayment").val(rid[1]);
+
+		$("#paymentInfo").modal('show');
+
+	});
+
+	/////////////////////////////////////////
+	//validation for Room Booking details
+	/////////////////////////////////////////
+	$("#paymentFrm").validate({
+	  rules: 
+		{   
+		  	payment:{
+		  		required: true,	
+		  		paymentIsZero: true,
+		  		paymentIsNotGreater: true,
+		  	}
+		   
+		},
+		messages:
+		{
+			payment:{required:"Please Enter Some Amount"}
+		}
+	});// eof validation
+
+	///////////////////////////////////////////////////
+	// Method to check the data is equals to 0 or not
+	///////////////////////////////////////////////////
+	$.validator.addMethod('paymentIsZero', function(val, element)
+	{		
+		
+		if($("#payment").val()!=0){
+			data = 1;
+			var isSuccess=(data==1)?true:false;
+		}
+		return isSuccess ;				
+	}, 'Please Pay Some Amount');
+
+	//////////////////////////////////////////////////////////////
+	// Method to check the data is greater than GRAND TOTAL or not
+	//////////////////////////////////////////////////////////////
+	$.validator.addMethod('paymentIsNotGreater', function(val, element)
+	{		
+		var isSuccess;
+		var GT = $("#BalAmt").val();
+		var PA = $("#payment").val(); 
+
+		$.ajax({
+			 url:"reservation_curd.php",
+			 type: "POST",
+			 data: {type:"paidAmtIsNotGreater", GT:GT, PA:PA},
+			 async:false,
+			 success:function(data){ //alert(data);
+				 isSuccess=(data==1)?true:false;
+			 }
+			 
+		});//eof ajax
+		return isSuccess ;
+
+	}, 'Please Do Not Enter The Amount More Than Balance Amount');
+
+	//////////////////////////////////////////////////////////////
+	//click on submitpayment button of modal popup in history page /////////
+	//////////////////////////////////////////////////////////////
+	$(document).on("click", "#submitpayment", function(){
+
+		if($("#paymentFrm").valid())
+		{
+			var formdata = new FormData();
+			formdata.append('type', "doPayment");
+			formdata.append('rid', $(this).val());
+			formdata.append('payment', $("#payment").val());
+						
+			//Ajax start from here
+			$.ajax({
+			   type: "POST",
+			   url: "reservation_curd.php",
+			   data:formdata,
+			   success: function(data){ //alert(data);
+					
+					window.location.replace("history.php");
+					
+			   },
+			   cache: false,
+			   contentType: false,
+			   processData: false
+			});//eof Ajax
+
+		}
+
+	});
+
+	///////////////////////////////////////////////
+	//click on edit button in history page /////////
+	///////////////////////////////////////////////
+	$(document).on("click", ".edit", function(){
+		
+		var rid = [];
+		rid = $(this).attr("id").split("-"); //get reservation id
+		
+		var formdata = new FormData();
+			formdata.append('type', "editBooking");
+			formdata.append('rid', rid[1]);
+						
+			//Ajax start from here
+			$.ajax({
+			   type: "POST",
+			   url: "reservation_curd.php",
+			   data:formdata,
+			   success: function(data){ //alert(data);
+					
+					$(".modal-body").html(data);
+					$("#bookingInfo").modal('show');
+
+
+					$(function () {
+				        $(".datetimepicker2").datepicker({
+				          orientation: "top auto",
+				          //forceParse: false,
+				          showOnFocus:true,
+				          autoclose: true,
+				          dateFormat: "dd-mm-yy",
+				          minDate: 0,
+				        });
+				      });
+
+				    $(function () {
+				        $(".datetimepicker3").datepicker({
+				          orientation: "top auto",     
+				          showOnFocus:true,     
+				          //forceParse: false,
+				          autoclose: true,
+				          dateFormat: "dd-mm-yy",
+				          minDate: 1,
+				        });
+				      });
+					
+			   },
+			   cache: false,
+			   contentType: false,
+			   processData: false
+			});//eof Ajax
+
+		
+
+	});
 
 
 

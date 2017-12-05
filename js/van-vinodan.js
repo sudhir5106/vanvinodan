@@ -245,6 +245,7 @@ $(document).ready(function(){
 		$("#Tab1").show();
 		$("#Tab2").hide();
 		$("#backBtn").hide();
+		$("#loading").show();
 		
 		var formdata = new FormData();
 		formdata.append('type', "getRooms");
@@ -256,7 +257,7 @@ $(document).ready(function(){
 		   url: "global_curd.php",
 		   data:formdata,
 		   success: function(data){ //alert(data);
-		   		
+		   		$("#loading").hide();
 				$(".page-content").html(data);
 		   },
 		   cache: false,
@@ -448,7 +449,8 @@ $(document).ready(function(){
 			{ 
 				required: true,
 				RnoExist:true,
-				ConfirmedRno:true
+				ConfirmedRno:true,
+				ExpiredRno:true
 			}
 		},
 		messages:
@@ -492,6 +494,25 @@ $(document).ready(function(){
 		});//eof ajax
 		return isSuccess ;				
 	}, 'Please Enter Pending Reservation Ref. No. Only');
+
+	//////////////////////////////////////////////////////////////////
+	// Method to check the Reservation Ref no is confirmed or pending
+	//////////////////////////////////////////////////////////////////
+	$.validator.addMethod('ExpiredRno', function(val, element)
+	{		
+		$('#loading').show();
+		$.ajax({
+			 url:"global_curd.php",
+			 type: "POST",
+			 data: {type:"ExpiredRno",rno: $('#rno').val()},
+			 async:false,
+			 success:function(data){//alert(data);
+				 isSuccess=(data!=1)?true:false;
+				 $('#loading').hide();
+			 }
+		});//eof ajax
+		return isSuccess ;				
+	}, 'Reservation Ref. No. is Expired, Please Book Again');
 	
 	///////////////////////////////////////
 	//click on findReservationBtn button //

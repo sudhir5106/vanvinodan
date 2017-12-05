@@ -9,6 +9,7 @@ $db = new DBConn();
 $report = $db->ExecuteQuery("SELECT Transaction_Id, DATE_FORMAT(Transaction_Date,'%d-%m-%Y <mark>%h:%i:%s</mark>') AS Transaction_Date, Transaction_No, Paid_Amt, Payment_Mode, Pay_Status, Payment_Id, Reservation_Ref_No, Client_Name
 FROM tbl_transactions t
 LEFT JOIN tbl_reservation r ON t.Reservation_Id = r.Reservation_Id
+ORDER BY t.Transaction_Date DESC
 ");
 //***************************************************
 
@@ -32,19 +33,23 @@ LEFT JOIN tbl_reservation r ON t.Reservation_Id = r.Reservation_Id
           <table class="table table-bordered table-stripped paymentTbl">
             <thead>
               <tr class="bg-info">
+                <th>Sno.</th>
                 <th>Date &amp; Time</th>
                 <th>Customer</th>
                 <th>Reservation Ref. No</th>
                 <th>Amount(<i class="fa fa-inr" aria-hidden="true"></i>)</th>
-                <th>Transaction_No</th>
+                <th>Transaction Code</th>
                 <th>Payment Id</th>
                 <th>Payment Mode</th>
                 <th>Payment Status</th>
               </tr>
             </thead>
             <tbody>
-              <?php foreach($report as $reportVal){ ?>
+              <?php 
+              $i = 1;
+              foreach($report as $reportVal){ ?>
               <tr>
+                <td><?php echo $i; ?></td>
                 <td><?php echo $reportVal['Transaction_Date']; ?></td>
                 <td><?php echo $reportVal['Client_Name']; ?></td>
                 <td><?php echo $reportVal['Reservation_Ref_No']; ?></td>
@@ -52,9 +57,9 @@ LEFT JOIN tbl_reservation r ON t.Reservation_Id = r.Reservation_Id
                 <td><?php echo $reportVal['Transaction_No']; ?></td>
                 <td><?php echo $reportVal['Payment_Id']; ?></td>
                 <td><?php echo $reportVal['Payment_Mode']; ?></td>
-                <td><?php echo $reportVal['Pay_Status']; ?></td>
+                <td><label class="label <?php echo $reportVal['Pay_Status']=='success'?'label-success':'label-danger' ?> label-xs"><?php echo $reportVal['Pay_Status']; ?></label></td>
               </tr>
-              <?php } ?>
+              <?php $i++;} ?>
             </tbody>
           </table>
         </div>

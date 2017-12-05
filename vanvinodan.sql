@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 04, 2017 at 05:48 PM
+-- Generation Time: Dec 05, 2017 at 12:02 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.6.24
 
@@ -181,14 +181,7 @@ CREATE TABLE `tbl_reservation` (
 --
 
 INSERT INTO `tbl_reservation` (`Reservation_Id`, `Reservation_Ref_No`, `Check_In_Date`, `Check_Out_Date`, `Arrival_Time`, `Client_Name`, `Email`, `Phone`, `ID_Proof_Image`, `Total_Rooms_Amt`, `Total_Guests_Amt`, `Subtotal_Amt`, `SGST_Amt`, `CGST_Amt`, `Grand_Total_Amt`, `Reservation_Status`) VALUES
-(1, 'REF1505568460', '2017-09-22', '2017-09-23', '12:00:00', 'sudhir', 'sudhir5106@gmail.com', '9826396462', '1505568459.jpg', 1, 0, 1, 0.09, 0.09, 1.18, 1),
-(2, 'REF1505575137', '2017-09-22', '2017-09-23', '12:00:00', 'vaindham sudhir', 'sudhir5106@gmail.com', '9826396462', '1505575137.jpg', 1, 0, 1, 0.09, 0.09, 1.18, 5),
-(3, 'REF1505575858', '2017-09-16', '2017-09-17', '14:00:00', 'sudhir', 'sudhir5106@gmail.com', '9826396462', '1505575858.jpg', 1, 0, 1, 0.09, 0.09, 1.18, 5),
-(4, 'REF1505988884', '2017-09-21', '2017-09-22', '12:00:00', 'wea', 'sudhir5106@gmail.com', '1231231232', '1505988884.jpg', 1, 0, 1, 0.09, 0.09, 1.18, 5),
-(5, 'REF1506089763', '2017-09-22', '2017-09-23', '12:00:00', 'Rakesh Nair', 'rakesh@gmail.com', '9826138203', '1506089763.jpg', 8001, 0, 8001, 720.09, 720.09, 9441.18, 1),
-(6, 'REF1506092193', '2017-09-22', '2017-09-23', '12:00:00', 'sdf', 'admin@suncrossonline.com', '1231231232', '1506092193.jpg', 1, 0, 1, 0.09, 0.09, 1.18, 5),
-(7, 'REF1506092261', '2017-09-22', '2017-09-23', '14:00:00', 'sdf', 'sudhir5106@gmail.com', '1331231232', '1506092261.jpg', 1, 0, 1, 0.09, 0.09, 1.18, 5),
-(8, 'REF1506092324', '2017-09-22', '2017-09-23', '13:00:00', 'sdf', 'sudhir5106@gmail.com', '1231232321', '1506092323.jpg', 1, 0, 1, 0.09, 0.09, 1.18, 5);
+(1, 'REF1505568460', '2017-09-22', '2017-09-23', '12:00:00', 'sudhir', 'sudhir5106@gmail.com', '9826396462', '1505568459.jpg', 1, 0, 1, 0.09, 0.09, 1.18, 4);
 
 -- --------------------------------------------------------
 
@@ -204,6 +197,7 @@ CREATE TABLE `tbl_reserved_rooms` (
   `Check_Out_Date` date NOT NULL,
   `Adult` tinyint(4) NOT NULL,
   `Children` tinyint(4) NOT NULL,
+  `Total_Extra_Guests` tinyint(4) NOT NULL,
   `Base_Fare` float NOT NULL,
   `Extra_Guest_Amt` float NOT NULL,
   `Reservation_Status` tinyint(4) NOT NULL COMMENT '1 confirmed, 2 arrived, 3 checked-out, 4 cancelled, 5 pending'
@@ -213,18 +207,8 @@ CREATE TABLE `tbl_reserved_rooms` (
 -- Dumping data for table `tbl_reserved_rooms`
 --
 
-INSERT INTO `tbl_reserved_rooms` (`RB_Id`, `Reservation_Id`, `Room_Id`, `Check_In_Date`, `Check_Out_Date`, `Adult`, `Children`, `Base_Fare`, `Extra_Guest_Amt`, `Reservation_Status`) VALUES
-(1, 1, 1, '2017-09-22', '2017-09-23', 1, 0, 0.5, 0, 1),
-(2, 2, 2, '2017-09-22', '2017-09-23', 1, 0, 0.5, 0, 5),
-(3, 3, 2, '2017-09-16', '2017-09-17', 1, 0, 0.5, 0, 5),
-(4, 4, 1, '2017-09-21', '2017-09-22', 1, 0, 0.5, 0, 5),
-(5, 5, 2, '2017-09-22', '2017-09-23', 1, 0, 0.5, 0, 1),
-(6, 5, 6, '2017-09-22', '2017-09-23', 1, 0, 4000, 0, 1),
-(7, 5, 7, '2017-09-22', '2017-09-23', 1, 0, 4000, 0, 1),
-(8, 6, 3, '2017-09-22', '2017-09-23', 1, 0, 0.5, 0, 5),
-(9, 7, 3, '2017-09-22', '2017-09-23', 1, 0, 0.5, 0, 5),
-(10, 7, 4, '2017-09-22', '2017-09-23', 1, 0, 0.5, 0, 5),
-(11, 8, 3, '2017-09-22', '2017-09-23', 1, 1, 0.5, 0, 5);
+INSERT INTO `tbl_reserved_rooms` (`RB_Id`, `Reservation_Id`, `Room_Id`, `Check_In_Date`, `Check_Out_Date`, `Adult`, `Children`, `Total_Extra_Guests`, `Base_Fare`, `Extra_Guest_Amt`, `Reservation_Status`) VALUES
+(1, 1, 1, '2017-09-22', '2017-09-23', 1, 0, 0, 0.5, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -248,8 +232,8 @@ CREATE TABLE `tbl_rooms_category` (
 
 INSERT INTO `tbl_rooms_category` (`R_Category_Id`, `R_Category_Name`, `R_Capacity`, `Base_Fare`, `Extra_Guest_Fare`, `Room_Info`, `Amenities`) VALUES
 (1, 'Deluxe', 2, 0.5, 1000, 'These Cottage Rooms Epitomize The Mark Of Grandeur . Every Cottage Is Encircled By A Private Patch Of Garden With Umbrella Shade Generating A Cozy Nook. The Cottage Encompasses An Exclusive Royal Bed, Accommodating 2 Adult Persons. Amidst The Stretch Of Timeless Idleness The Guests Can Experience The Visual Pleasure Of Viewing And Dynamic Sea-Waves Breaking Upon The Golden Sea-Beach, Through The Huge Fenesta Window . The Cottages Are Adorned With Sophisticated Furniture, Picturesque Wall-Papers, And Traditional Art Frames. A Concoction Of Tradition And Modernity --- Providing The Opportunity Of Living In A Luxurious Style.', 'LCD TV | H/C Water Supply | Tea/Coffee Maker | Wifi | Electronic Safe | EPABX | Toiletries | Mini Refrigerator | Packaged Drinking Water | English Newspaper | Digital Locker | Patio |'),
-(2, 'Super Deluxe', 4, 4000, 1000, 'These Cottage Rooms Epitomize The Mark Of Grandeur . Every Cottage Is Encircled By A Private Patch Of Garden With Umbrella Shade Generating A Cozy Nook. The Cottage Encompasses An Exclusive Royal Bed, Accommodating 2 Adult Persons. Amidst The Stretch Of Timeless Idleness The Guests Can Experience The Visual Pleasure Of Viewing And Dynamic Sea-Waves Breaking Upon The Golden Sea-Beach, Through The Huge Fenesta Window . The Cottages Are Adorned With Sophisticated Furniture, Picturesque Wall-Papers, And Traditional Art Frames. A Concoction Of Tradition And Modernity --- Providing The Opportunity Of Living In A Luxurious Style.', 'LCD TV | H/C Water Supply | Tea/Coffee Maker | Wifi | Electronic Safe | EPABX | Toiletries | Mini Refrigerator | Packaged Drinking Water | English Newspaper | Digital Locker | Patio'),
-(4, 'Tent', 6, 5000, 1000, 'Most Of These Rooms Are In The 2nd , 3rd And 4th Floor Of The Hotel Building. These Rooms Encapsulate 2 Royal Beds Marked By Their Exclusivity. The Exclusivity Can Not Be Enunciated. It Can Only Be Perceived When You Stretch Yourselves Upon Them And Experience An Ineffable Pleasure. The Beds Are Capacious Enough To Accommodate 4 Adults . Through The Crystal Clear Fenesta Windows , Marked By Their Optimum Transparency, The Guests Can Enjoy The Panoramic View Of The Sea Extending Up To The Horizon. The Room Is Adorned By Classical Furniture , Artistic Frames And Exquisite Wall-Papers All Of Which Reflect The Glow Of Aristocratic Sophistication.', 'LCD TV | H/C Water Supply | Tea/Coffee Maker | Wireless Broadband Internet Access | Electronic Safe | EPABX | Toiletries | Mini Refrigerator | Packaged Drinking Water | English Newspaper | Digital Locker');
+(2, 'Super Deluxe', 4, 4000, 1500, 'These Cottage Rooms Epitomize The Mark Of Grandeur . Every Cottage Is Encircled By A Private Patch Of Garden With Umbrella Shade Generating A Cozy Nook. The Cottage Encompasses An Exclusive Royal Bed, Accommodating 2 Adult Persons. Amidst The Stretch Of Timeless Idleness The Guests Can Experience The Visual Pleasure Of Viewing And Dynamic Sea-Waves Breaking Upon The Golden Sea-Beach, Through The Huge Fenesta Window . The Cottages Are Adorned With Sophisticated Furniture, Picturesque Wall-Papers, And Traditional Art Frames. A Concoction Of Tradition And Modernity --- Providing The Opportunity Of Living In A Luxurious Style.', 'LCD TV | H/C Water Supply | Tea/Coffee Maker | Wifi | Electronic Safe | EPABX | Toiletries | Mini Refrigerator | Packaged Drinking Water | English Newspaper | Digital Locker | Patio'),
+(4, 'Tent', 6, 5000, 2000, 'Most Of These Rooms Are In The 2nd , 3rd And 4th Floor Of The Hotel Building. These Rooms Encapsulate 2 Royal Beds Marked By Their Exclusivity. The Exclusivity Can Not Be Enunciated. It Can Only Be Perceived When You Stretch Yourselves Upon Them And Experience An Ineffable Pleasure. The Beds Are Capacious Enough To Accommodate 4 Adults . Through The Crystal Clear Fenesta Windows , Marked By Their Optimum Transparency, The Guests Can Enjoy The Panoramic View Of The Sea Extending Up To The Horizon. The Room Is Adorned By Classical Furniture , Artistic Frames And Exquisite Wall-Papers All Of Which Reflect The Glow Of Aristocratic Sophistication.', 'LCD TV | H/C Water Supply | Tea/Coffee Maker | Wireless Broadband Internet Access | Electronic Safe | EPABX | Toiletries | Mini Refrigerator | Packaged Drinking Water | English Newspaper | Digital Locker');
 
 -- --------------------------------------------------------
 
@@ -461,12 +445,12 @@ ALTER TABLE `tbl_payment_gateway_detail`
 -- AUTO_INCREMENT for table `tbl_reservation`
 --
 ALTER TABLE `tbl_reservation`
-  MODIFY `Reservation_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `Reservation_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT for table `tbl_reserved_rooms`
 --
 ALTER TABLE `tbl_reserved_rooms`
-  MODIFY `RB_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `RB_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 --
 -- AUTO_INCREMENT for table `tbl_rooms_category`
 --
@@ -486,7 +470,7 @@ ALTER TABLE `tbl_room_master`
 -- AUTO_INCREMENT for table `tbl_transactions`
 --
 ALTER TABLE `tbl_transactions`
-  MODIFY `Transaction_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `Transaction_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 --
 -- AUTO_INCREMENT for table `tbl_video_gallery`
 --

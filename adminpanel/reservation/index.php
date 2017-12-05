@@ -32,7 +32,7 @@ $numberOfNights= $date2->diff($date1)->format("%a");
 $res = $db->ExecuteQuery("SELECT R_Category_Id, R_Category_Name, R_Capacity, Base_Fare FROM tbl_rooms_category
 
 WHERE R_Category_Id IN (SELECT R_Category_Id FROM tbl_room_master 
-WHERE Room_id NOT IN (SELECT Room_Id FROM tbl_reserved_rooms WHERE Check_In_Date <= '".$checkindate."' AND Check_Out_Date > '".$checkindate."' AND Reservation_Status<>3 AND Reservation_Status<>4 AND Reservation_Status<>5 ))");
+WHERE Room_id NOT IN (SELECT Room_Id FROM tbl_reserved_rooms WHERE Check_In_Date <= '".$checkindate."' AND Check_Out_Date >= '".$checkindate."' AND Reservation_Status<>3 AND Reservation_Status<>4 AND Reservation_Status<>5 ))");
 ////////////////////////////////////////////////////////////////////////////////////
 
 require_once(PATH_ADMIN_INCLUDE.'/header.php');
@@ -98,7 +98,7 @@ require_once(PATH_ADMIN_INCLUDE.'/header.php');
                     <p><strong>Capacity: </strong> <?php echo $val['R_Capacity']; ?></p>
 
                     <?php $roomCount = $db->ExecuteQuery("SELECT COUNT(Room_Id) AS RID FROM tbl_room_master 
-WHERE R_Category_Id=".$val['R_Category_Id']." AND Room_id NOT IN (SELECT Room_Id FROM tbl_reserved_rooms WHERE Check_In_Date <= '".$checkindate."' AND Check_Out_Date > '".$checkindate."' AND Reservation_Status<>3 AND Reservation_Status<>4 AND Reservation_Status<>5)"); ?>
+WHERE R_Category_Id=".$val['R_Category_Id']." AND Room_id NOT IN (SELECT Room_Id FROM tbl_reserved_rooms WHERE Check_In_Date <= '".$checkindate."' AND Check_Out_Date >= '".$checkindate."' AND Reservation_Status<>3 AND Reservation_Status<>4 AND Reservation_Status<>5)"); ?>
 
                     <p><strong>Rooms Left:</strong> <span class="badge"><?php echo $roomCount[1]['RID']; ?></span></p>
                     <p class="room-price"><i class="fa fa-inr" aria-hidden="true"></i> <?php echo $val['Base_Fare']; ?> <span>/ Night</span></p>
@@ -233,7 +233,7 @@ WHERE R_Category_Id=".$val['R_Category_Id']." AND Room_id NOT IN (SELECT Room_Id
               <div class="modal-body">
                 <ul>          
                 <?php $rooms = $db->ExecuteQuery("SELECT Room_Id, Room_Name FROM tbl_room_master 
-WHERE R_Category_Id=".$value['R_Category_Id']." AND Room_id NOT IN (SELECT Room_Id FROM tbl_reserved_rooms WHERE Check_In_Date <= '".$checkindate."' AND Check_Out_Date > '".$checkindate."' AND Reservation_Status<>3 AND Reservation_Status<>4 AND Reservation_Status<>5)"); 
+WHERE R_Category_Id=".$value['R_Category_Id']." AND Room_id NOT IN (SELECT Room_Id FROM tbl_reserved_rooms WHERE Check_In_Date <= '".$checkindate."' AND Check_Out_Date >= '".$checkindate."' AND Reservation_Status<>3 AND Reservation_Status<>4 AND Reservation_Status<>5)"); 
                 
                 foreach($rooms as $roomsVal){ ?>
                   <li class="ckeckbox checkbox-danger"><input id="rmid-<?php echo $roomsVal['Room_Id']; ?>" class="roomid" type="checkbox" value="<?php echo $roomsVal['Room_Id']; ?>">

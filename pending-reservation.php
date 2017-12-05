@@ -18,35 +18,12 @@ $checkout = date("d-m-Y",strtotime($checkin.'+1 day'));//It will add 1 day
     	
         <div class="container">
             <div class="searchFrm padding-left-zero padding-right-zero">
-                <form class="form-horizontal" role="form" id="searchRoomsFrm" method="post">
-            
-                <div class="col-sm-2 col-xs-6 padding-left-zero">
-                    <div class="input-group date" data-provide="datepicker">
-                        <input type="text" id="chckin" name="chckin" class="form-control input-sm datetimepicker" placeholder="check-in" value="<?php echo $checkin; ?>">
-                        <div class="input-group-addon">
-                            <i class="fa fa-calendar" aria-hidden="true"></i>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-sm-2 col-xs-6">
-                    <div class="input-group date" data-provide="datepicker">
-                        <input type="text" id="chckout" name="chckout" class="form-control input-sm datetimepicker2" placeholder="check-out" value="<?php echo $checkout; ?>">
-                        <div class="input-group-addon">
-                            <i class="fa fa-calendar" aria-hidden="true"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-2 col-xs-12 text-left text-center-xs"><button type="button" id="searchRoomsBtn" class="btn btn-sm btn-info"><i class="fa fa-search" aria-hidden="true"></i> SEARCH</button></div>
-                
-                <div class="col-sm-6 col-xs-12 text-right backbtnblk padding-right-zero">
-                    <a id="cancelBtn" class="btn btn-sm btn-danger"><i class="fa fa-times" aria-hidden="true"></i> CANCEL RESERVATION</a>
+                <div class="col-sm-12 col-xs-12 text-right backbtnblk padding-right-zero">
+                    <!--<a id="cancelBtn" class="btn btn-sm btn-danger"><i class="fa fa-times" aria-hidden="true"></i> CANCEL RESERVATION</a>-->
                     <a id="cancelBtn" class="btn btn-sm btn-info"><i class="fa fa-spinner" aria-hidden="true"></i> PENDING RESERVATION</a>
                     <button type="button" id="backBtn" class="btn btn-sm btn-success"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> BACK</button>
                 </div>
                 <div class="clearfix"></div>
-            
-            </form>
             </div>
             
             <div class="innerPageTxt pr-block">
@@ -69,8 +46,7 @@ $checkout = date("d-m-Y",strtotime($checkin.'+1 day'));//It will add 1 day
                 	
                 </div>
             </div>
-        </div>
-        
+        </div>        
         
     </div>  	
 </main>

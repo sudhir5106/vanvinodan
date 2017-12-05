@@ -176,7 +176,7 @@ require_once(PATH_ADMIN_INCLUDE.'/header.php');
                 <td><?php 
                 foreach($cuurentBookedRooms as $cuurentBookedRoomsVal){
                   if($cuurentBookedRoomsVal['Room_Id']==$getRoomsMasterVal['Room_Id']){
-                    echo "<span class='label ".($cuurentBookedRoomsVal['Reservation_Status']=='Confirmed'?'label-warning':'label-success')."'>".$cuurentBookedRoomsVal['Reservation_Status']."</span>";
+                    echo "<span class='label ".($cuurentBookedRoomsVal['Reservation_Status']=='Confirmed'?'label-success':'label-warning')."'>".$cuurentBookedRoomsVal['Reservation_Status']."</span>";
                   }                  
                 }
                 ?></td>

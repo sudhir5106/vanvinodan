@@ -88,17 +88,7 @@ $(window).load(function() {
 	$('.try').show();
 })
 </script>
-<!--<style type="text/css">
-.loader {
-	position: fixed;
-	left: 0px;
-	top: 0px;
-	width: 100%;
-	height: 100%;
-	z-index: 9999;
-	background: url('<?php echo PATH_IMAGE?>/loading.gif') 50% 50% no-repeat rgb(249,249,249);
-}
-</style>-->
+
 <body style="background:#fff;">
 <?php //$_SESSION['CustomerId']=$Id[1];?>
 <div style="margin:50px auto; width:150px; padding-bottom:30px;"> <a class="navbar-brand"  style="padding-top:4px" href='<?php echo LINK_ROOT."/index.php"?>'>Van Vinodan<!--<img src="<?php //echo PATH_IMAGE ?>/logo.png"  />--></a></div>

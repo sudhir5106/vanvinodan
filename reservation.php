@@ -36,22 +36,22 @@ $numberOfNights= $date2->diff($date1)->format("%a");
 $res = $db->ExecuteQuery("SELECT R_Category_Id, R_Category_Name, R_Capacity, Base_Fare, Room_Info, Amenities FROM tbl_rooms_category
 
 WHERE R_Category_Id IN (SELECT R_Category_Id FROM tbl_room_master 
-WHERE Room_id NOT IN (SELECT Room_Id FROM tbl_reserved_rooms WHERE Check_In_Date <= '".$checkindate."' AND Check_Out_Date > '".$checkindate."' AND Reservation_Status<>3 AND Reservation_Status<>4 AND Reservation_Status<>5 ))");
+WHERE Room_id NOT IN (SELECT Room_Id FROM tbl_reserved_rooms WHERE Check_In_Date <= '".$checkindate."' AND Check_Out_Date >= '".$checkindate."' AND Reservation_Status<>3 AND Reservation_Status<>4 AND Reservation_Status<>5 ))");
 ?>
 
 
 <main>
 	
     <div id="loading">
-        <div class="loader-block"><i class="fa-li fa fa-spinner fa-spin spinloader"></i> <span>On Process...</span></div>
+        <div class="loader-block"><i class="fa-li fa fa-spinner fa-spin spinloader"></i><span>Loading...</span></div>
     </div> 
     
     <div class="middle-container">
     	
         <div class="container searchFrm padding-left-zero padding-right-zero">
-        <form class="form-horizontal" role="form" id="searchRoomsFrm" method="post">
+          <form class="form-horizontal" role="form" id="searchRoomsFrm" method="post">
         
-        	<div class="col-sm-2 col-xs-6 padding-left-zero">
+        	  <div class="col-sm-2 col-xs-6 padding-left-zero">
                 <div class="input-group date" data-provide="datepicker">
                     <input type="text" id="chckin" name="chckin" class="form-control input-sm datetimepicker" placeholder="check-in" value="<?php echo $checkin; ?>">
                     <div class="input-group-addon">
@@ -71,117 +71,117 @@ WHERE Room_id NOT IN (SELECT Room_Id FROM tbl_reserved_rooms WHERE Check_In_Date
             <div class="col-sm-2 col-xs-12 text-left text-center-xs"><button type="button" id="searchRoomsBtn" class="btn btn-sm btn-info"><i class="fa fa-search" aria-hidden="true"></i> SEARCH</button></div>
             
             <div class="col-sm-6 col-xs-12 text-right backbtnblk padding-right-zero">
-            	<a id="cancelBtn" class="btn btn-sm btn-danger"><i class="fa fa-times" aria-hidden="true"></i> CANCEL RESERVATION</a>
+            	  <!--<a id="cancelBtn" class="btn btn-sm btn-danger"><i class="fa fa-times" aria-hidden="true"></i> CANCEL RESERVATION</a>-->
                 <a href="pending-reservation.php" id="cancelBtn" class="btn btn-sm btn-info"><i class="fa fa-spinner" aria-hidden="true"></i> PENDING RESERVATION</a>
                 <button type="button" id="backBtn" class="btn btn-sm btn-success"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> BACK</button>
             </div>
             <div class="clearfix"></div>
         
-    	</form>
+    	   </form>
         </div>
         
         <div id="Tab1">
-        <form class="form-horizontal" role="form" id="reservationFrm" method="post">
+          <form class="form-horizontal" role="form" id="reservationFrm" method="post">
             	<input type="hidden" id="checkindate" value="<?php echo $checkindate; ?>" />
-                <input type="hidden" id="checkoutdate" value="<?php echo $checkoutdate; ?>" />
-                <input type="hidden" id="totalNights" value="<?php echo $numberOfNights; ?>" />
-        <div class="container page-content">
-                
-        	<div class="col-sm-9 table-responsive">
-            	<table class="table table-hover roomTypeList">
-                	<thead>
-                        <tr class="bg-default">
-                            <th>Room Photo</th>
-                            <th>Room Type</th>
-                            <th>Price/Night</th>
-                            <th>Price for <?php echo $numberOfNights;?> Night(s)</th>
-                            <th>Max</th>
-                            <th>Adults</th>
-                            <th>Children</th>
-                            <th>Rooms</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+              <input type="hidden" id="checkoutdate" value="<?php echo $checkoutdate; ?>" />
+              <input type="hidden" id="totalNights" value="<?php echo $numberOfNights; ?>" />
+            <div class="container page-content">
                     
-					<?php foreach($res as $val){ ?>
-                        <tr>
-                            <td><img src="images/room-img.jpg" alt="" /></td>
-                            <td class="text-info">
-								<?php echo $val['R_Category_Name']; ?>
-                                <input type="hidden" id="room-name-<?php echo $val['R_Category_Id']; ?>" value="<?php echo $val['R_Category_Name']; ?>" />
-                                <input type="hidden" id="roomType-<?php echo $val['R_Category_Id']; ?>" value="<?php echo $val['R_Category_Id']; ?>" />
-                            </td>
-                            <td><i class="fa fa-inr" aria-hidden="true"></i> <?php echo sprintf('%0.2f', $val['Base_Fare']);?></td>
-                            <td><i class="fa fa-inr" aria-hidden="true"></i> <?php echo sprintf('%0.2f', ($numberOfNights * $val['Base_Fare'])); ?></td>
-                            <td>
-                            	<span class="glyphicon glyphicon-user"></span> <?php echo $val['R_Capacity']; ?>
-                            	<input type="hidden" id="capacity-<?php echo $val['R_Category_Id']; ?>" value="<?php echo $val['R_Capacity']; ?>" />
-                            </td>
-                            <td class="ddbtn">
-                                <select id="adult-<?php echo $val['R_Category_Id']; ?>" class="form-control adultdd">          
-                                  <?php 
-								  $i=1;
-								  while($i<=$val['R_Capacity']){ ?>
-                                  <option value="<?php echo $i ?>"><?php echo $i ?></option>
-                                  <?php $i++; } ?>
-                                  
-                                </select>
-                            </td>
-                            <td class="ddbtn">
-                                <select id="child-<?php echo $val['R_Category_Id']; ?>" class="form-control childdd">          
-                                  <?php 
-								  $i=0;
-								  while($i<$val['R_Capacity']){ ?>
-                                  <option value="<?php echo $i ?>"><?php echo $i ?></option>
-                                  <?php $i++; } ?>
-                                  
-                                </select>
-                            </td>
-                            <td class="rooms">
-                            <?php $roomCount = $db->ExecuteQuery("SELECT COUNT(Room_Id) AS RID FROM tbl_room_master 
-WHERE R_Category_Id=".$val['R_Category_Id']." AND Room_id NOT IN (SELECT Room_Id FROM tbl_reserved_rooms WHERE Check_In_Date <= '".$checkindate."' AND Check_Out_Date > '".$checkindate."' AND Reservation_Status<>3 AND Reservation_Status<>4 AND Reservation_Status<>5)"); 
+            	<div class="col-sm-9 table-responsive">
+                	<table class="table table-hover roomTypeList">
+                    	<thead>
+                            <tr class="bg-default">
+                                <th>Room Photo</th>
+                                <th>Room Type</th>
+                                <th>Price/Night</th>
+                                <th>Price for <?php echo $numberOfNights;?> Night(s)</th>
+                                <th>Max</th>
+                                <th>Adults</th>
+                                <th>Children</th>
+                                <th>Rooms</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        
+    					<?php foreach($res as $val){ ?>
+                            <tr>
+                                <td><img src="images/room-img.jpg" alt="" /></td>
+                                <td class="text-info">
+    								<?php echo $val['R_Category_Name']; ?>
+                                    <input type="hidden" id="room-name-<?php echo $val['R_Category_Id']; ?>" value="<?php echo $val['R_Category_Name']; ?>" />
+                                    <input type="hidden" id="roomType-<?php echo $val['R_Category_Id']; ?>" value="<?php echo $val['R_Category_Id']; ?>" />
+                                </td>
+                                <td><i class="fa fa-inr" aria-hidden="true"></i> <?php echo sprintf('%0.2f', $val['Base_Fare']);?></td>
+                                <td><i class="fa fa-inr" aria-hidden="true"></i> <?php echo sprintf('%0.2f', ($numberOfNights * $val['Base_Fare'])); ?></td>
+                                <td>
+                                	<span class="glyphicon glyphicon-user"></span> <?php echo $val['R_Capacity']; ?>
+                                	<input type="hidden" id="capacity-<?php echo $val['R_Category_Id']; ?>" value="<?php echo $val['R_Capacity']; ?>" />
+                                </td>
+                                <td class="ddbtn">
+                                    <select id="adult-<?php echo $val['R_Category_Id']; ?>" class="form-control adultdd">          
+                                      <?php 
+    								  $i=1;
+    								  while($i<=$val['R_Capacity']){ ?>
+                                      <option value="<?php echo $i ?>"><?php echo $i ?></option>
+                                      <?php $i++; } ?>
+                                      
+                                    </select>
+                                </td>
+                                <td class="ddbtn">
+                                    <select id="child-<?php echo $val['R_Category_Id']; ?>" class="form-control childdd">          
+                                      <?php 
+    								  $i=0;
+    								  while($i<$val['R_Capacity']){ ?>
+                                      <option value="<?php echo $i ?>"><?php echo $i ?></option>
+                                      <?php $i++; } ?>
+                                      
+                                    </select>
+                                </td>
+                                <td class="rooms">
+                                <?php $roomCount = $db->ExecuteQuery("SELECT COUNT(Room_Id) AS RID FROM tbl_room_master 
+    WHERE R_Category_Id=".$val['R_Category_Id']." AND Room_id NOT IN (SELECT Room_Id FROM tbl_reserved_rooms WHERE Check_In_Date <= '".$checkindate."' AND Check_Out_Date >= '".$checkindate."' AND Reservation_Status<>3 AND Reservation_Status<>4 AND Reservation_Status<>5)"); 
 
-?>
-                            	<select id="room-<?php echo $val['R_Category_Id']; ?>" type="text" class="form-control totalRooms">          
-                                  <option value="0" selected="selected">0</option>          
-                                  <?php 
-								  $i=1;
-								  while($i<=$roomCount[1]['RID']){ ?>
-                                  <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                                  <?php $i++;} ?>
-                                  
-                                </select>
+    ?>
+                                	<select id="room-<?php echo $val['R_Category_Id']; ?>" type="text" class="form-control totalRooms">          
+                                      <option value="0" selected="selected">0</option>          
+                                      <?php 
+    								  $i=1;
+    								  while($i<=$roomCount[1]['RID']){ ?>
+                                      <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+                                      <?php $i++;} ?>
+                                      
+                                    </select>
+                                    
+                                    <input type="hidden" class="subtotal" id="subTotal-<?php echo $val['R_Category_Id']; ?>" value="0.00" />
+                                    
+                                </td>
                                 
-                                <input type="hidden" class="subtotal" id="subTotal-<?php echo $val['R_Category_Id']; ?>" value="0.00" />
-                                
-                            </td>
-                            
-                        </tr>
-                        <tr class="roomInfo">
-                        	<td colspan="8">
-                            	<?php echo $val['Room_Info'] ?>
-                            </td>
-                        </tr>
-                    <?php } ?>
-                	</tbody>
-                    
-                </table>
-            </div>
-            <div class="col-sm-3 text-center">
-            	<div class="bg-info calculationBox">
-                	<h5><span id="noOfRooms">0</span> Accommodation(s) for</h5>
-                	<div class="Totalprice"><i class="fa fa-inr" aria-hidden="true"></i> <span id="displayTotalAmt">0.00</span></div>
-                    <div>
-                    	  <input type="hidden" id="TotalAmt" value="0.00" />
-                        <button type="button" id="bookRoomBtn" class="btn btn-lg btn-danger" disabled="disabled">BOOK NOW</button>
+                            </tr>
+                            <tr class="roomInfo">
+                            	<td colspan="8">
+                                	<?php echo $val['Room_Info'] ?>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                    	</tbody>
+                        
+                    </table>
+                </div>
+                <div class="col-sm-3 text-center">
+                	<div class="bg-info calculationBox">
+                    	<h5><span id="noOfRooms">0</span> Accommodation(s) for</h5>
+                    	<div class="Totalprice"><i class="fa fa-inr" aria-hidden="true"></i> <span id="displayTotalAmt">0.00</span></div>
+                        <div>
+                        	  <input type="hidden" id="TotalAmt" value="0.00" />
+                            <button type="button" id="bookRoomBtn" class="btn btn-lg btn-danger" disabled="disabled">BOOK NOW</button>
+                        </div>
                     </div>
                 </div>
+                
+                <div class="clearfix"></div>
+            	
             </div>
-            
-            <div class="clearfix"></div>
-        	
-        </div>
-        </form>
+          </form>
         </div>
         
         <div id="Tab2" class="container checkout-tab" style="display:none;">

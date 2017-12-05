@@ -60,7 +60,7 @@ if($_POST['type']=="getRooms"){
 	$res = $db->ExecuteQuery("SELECT R_Category_Id, R_Category_Name, R_Capacity, Base_Fare, Room_Info, Amenities FROM tbl_rooms_category
 	
 	WHERE R_Category_Id IN (SELECT R_Category_Id FROM tbl_room_master 
-	WHERE Room_id NOT IN (SELECT Room_Id FROM tbl_reserved_rooms WHERE Check_In_Date <= '".$checkinDate."' AND Check_Out_Date > '".$checkinDate."' AND Reservation_Status<>3 AND Reservation_Status<>4 AND Reservation_Status<>5 ))");?>
+	WHERE Room_id NOT IN (SELECT Room_Id FROM tbl_reserved_rooms WHERE Check_In_Date <= '".$checkinDate."' AND Check_Out_Date >= '".$checkinDate."' AND Reservation_Status<>3 AND Reservation_Status<>4 AND Reservation_Status<>5 ))");?>
 	
     <div class="col-sm-9 table-responsive">
         <table class="table table-hover roomTypeList">
@@ -114,7 +114,7 @@ if($_POST['type']=="getRooms"){
                     </td>
                     <td class="rooms">
                     <?php $roomCount = $db->ExecuteQuery("SELECT COUNT(Room_Id) AS RID FROM tbl_room_master 
-WHERE R_Category_Id=".$val['R_Category_Id']." AND Room_id NOT IN (SELECT Room_Id FROM tbl_reserved_rooms WHERE Check_In_Date <= '".$checkinDate."' AND Check_Out_Date > '".$checkinDate."' AND Reservation_Status<>3 AND Reservation_Status<>4 AND Reservation_Status<>5)"); 
+WHERE R_Category_Id=".$val['R_Category_Id']." AND Room_id NOT IN (SELECT Room_Id FROM tbl_reserved_rooms WHERE Check_In_Date <= '".$checkinDate."' AND Check_Out_Date >= '".$checkinDate."' AND Reservation_Status<>3 AND Reservation_Status<>4 AND Reservation_Status<>5)"); 
 
 ?>
                         <select id="room-<?php echo $val['R_Category_Id']; ?>" type="text" class="form-control totalRooms">          
@@ -126,9 +126,7 @@ WHERE R_Category_Id=".$val['R_Category_Id']." AND Room_id NOT IN (SELECT Room_Id
                           <?php $i++;} ?>
                           
                         </select>
-                        
-                    </td>
-                    <td class="extraItems">
+
                         <input type="hidden" class="subtotal" id="subTotal-<?php echo $val['R_Category_Id']; ?>" value="0.00" />
                         
                     </td>
@@ -384,6 +382,37 @@ if($_POST['type']=="ConfirmedRno"){
 }
 
 ///*******************************************************
+/// check the Reservation Ref no is confirmed or pending 
+///*******************************************************
+if($_POST['type']=="ExpiredRno"){
+	
+	$todaydate=date('Y-m-d');
+	//////////////////////////////////////////////
+	// SELECT Query to Get the Reservation status
+	//////////////////////////////////////////////
+	$res = $db->ExecuteQuery("SELECT Check_In_Date, Check_Out_Date FROM tbl_reservation WHERE Reservation_Ref_No='".$_POST['rno']."'");
+	
+	if($res[1]['Check_In_Date']<=$todaydate){
+
+		if($todaydate<=$res[1]['Check_Out_Date']){
+			echo 0;	
+		}
+		else{
+			echo 1;
+		}		
+	}
+	else{
+		
+		if($todaydate<=$res[1]['Check_Out_Date']){
+			echo 0;	
+		}
+		else{
+			echo 1;
+		}
+	}
+}//eof if condition
+
+///*******************************************************
 /// Find the Reservation Details /////////////////////////
 ///*******************************************************
 if($_POST['type']=="getReservationInfo"){
@@ -582,7 +611,7 @@ if($_POST['type']=="getReservationDetails"){
 			</div>
 			<div class="col-sm-7">
 				<strong>Reservation Ref. No.:</strong> '.$bookingInfo[1]['Reservation_Ref_No'].'<br>
-				<strong>Reservation Status:</strong> <span class="label label-danger">'.$bookingInfo[1]['Reservation_Status'].'</span>
+				<strong>Reservation Status:</strong> <span class="label '.($bookingInfo[1]['Reservation_Status']=='Confirmed'?'label-success':'label-warning').'">'.$bookingInfo[1]['Reservation_Status'].'</span>
 			</div>
 			<div class="clearfix"></div>
 		</div>
@@ -618,7 +647,11 @@ if($_POST['type']=="getReservationDetails"){
 				</tr>
 				<tr>
 					<td>Extra Guest Amt:</td>
-					<td>0.00</td>
+					<td>'.$bookingInfo[1]['Total_Guests_Amt'].'</td>
+				</tr>
+				<tr>
+					<td style="border-top:solid 1px #CCC;"><strong>Subtotal:</strong></td>
+					<td style="border-top:solid 1px #CCC;">'.($bookingInfo[1]['Total_Rooms_Amt']+$bookingInfo[1]['Total_Guests_Amt']).'</td>
 				</tr>
 				<tr>
 					<td>SGST(9%):</td>
@@ -629,8 +662,8 @@ if($_POST['type']=="getReservationDetails"){
 					<td>'.$bookingInfo[1]['CGST_Amt'].'</td>
 				</tr>
 				<tr>
-					<td style="border-top:solid 1px #CCC; border-bottom:solid 1px #CCC;"><strong>GRAND TOTAL:</strong></td>
-					<td style="border-top:solid 1px #CCC; border-bottom:solid 1px #CCC;"><strong>'.$bookingInfo[1]['Grand_Total_Amt'].'</strong></td>
+					<td class="text-danger" style="border-top:solid 1px #CCC; border-bottom:solid 1px #CCC;"><strong>GRAND TOTAL:</strong></td>
+					<td class="text-danger" style="border-top:solid 1px #CCC; border-bottom:solid 1px #CCC;"><strong>'.$bookingInfo[1]['Grand_Total_Amt'].'</strong></td>
 				</tr>
 				
 			</table>
